@@ -1,0 +1,32 @@
+# Logs
+*.log
+bot_*.txt
+bot_*.log
+*.dump
+*.png
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Tests (unnecessary in production)
+**/test/
+**/tests/
+**/fixtures/
+**/browser/
+**/coverage/
+**/docs/
+**/examples/
+**/benchmark/
+
+# TypeScript types (not needed at runtime)
+**/@types/
+
+# Source maps
+**/*.map
+
+# Dev-only
+.env
+.git/
+.github/
+.gitignore

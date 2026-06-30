@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Elekro">
+<meta name="theme-color" content="#030305">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<title>Elektro Lig - Gelişmiş Discord Botu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#030305;color:#fff;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#030305}::-webkit-scrollbar-thumb{background:#1a1a2e;border-radius:3px}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,3,5,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.04)}
+nav .brand{display:flex;align-items:center;gap:10px}
+nav .brand h2{font-size:18px;font-weight:800;letter-spacing:-0.5px}
+nav .brand h2 span{background:linear-gradient(135deg,#a855f7,#d946ef);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .brand .prefix{font-size:9px;color:#4b5563;background:rgba(255,255,255,0.04);padding:2px 8px;border-radius:4px;letter-spacing:1px;text-transform:uppercase}
+nav .links{display:flex;align-items:center;gap:24px}
+nav .links a{color:#6b7280;font-size:13px;font-weight:500;transition:color .2s}
+nav .links a:hover{color:#fff}
+nav .links .invite-btn{padding:8px 18px;background:linear-gradient(135deg,#a855f7,#d946ef);border-radius:8px;color:#fff!important;font-weight:600;font-size:12px;transition:all .3s}
+nav .links .invite-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(168,85,247,0.3)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 20px 60px;position:relative;text-align:center}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(168,85,247,0.06),transparent 70%);pointer-events:none}
+.hero .avatar{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,#a855f7,#d946ef);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:24px;box-shadow:0 0 40px rgba(168,85,247,0.2);position:relative}
+.hero .online-dot{position:absolute;bottom:2px;right:2px;width:16px;height:16px;background:#10b981;border-radius:50%;border:3px solid #030305;box-shadow:0 0 10px rgba(16,185,129,0.5)}
+.hero h1{font-size:52px;font-weight:900;line-height:1.1;margin-bottom:12px;letter-spacing:-1.5px}
+.hero h1 span{background:linear-gradient(135deg,#a855f7,#d946ef,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradientShift 4s ease infinite}
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero p{color:#6b7280;font-size:17px;max-width:520px;line-height:1.7;margin-bottom:28px}
+.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-buttons .primary{padding:14px 32px;background:linear-gradient(135deg,#a855f7,#d946ef);border-radius:12px;color:#fff;font-weight:600;font-size:14px;transition:all .3s}
+.hero-buttons .primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(168,85,247,0.3)}
+.hero-buttons .secondary{padding:14px 32px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#d1d5db;font-weight:500;font-size:14px;transition:all .3s}
+.hero-buttons .secondary:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12)}
+
+/* STATS BANNER */
+.stats-banner{display:flex;gap:48px;margin-top:40px;padding:24px 48px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:16px;flex-wrap:wrap;justify-content:center}
+.stats-banner .item{text-align:center}
+.stats-banner .item .num{font-size:26px;font-weight:800;letter-spacing:-1px}
+.stats-banner .item .lbl{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.c-purple .num{color:#a78bfa}.c-pink .num{color:#f472b6}.c-green .num{color:#34d399}.c-amber .num{color:#fbbf24}
+
+/* SECTION */
+.section{padding:80px 20px;max-width:1100px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:48px}
+.section-header h2{font-size:32px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px}
+.section-header .sub{color:#6b7280;font-size:14px}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.feature-card{padding:28px;background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);border-radius:16px;transition:all .3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.2),transparent);opacity:0;transition:opacity .3s}
+.feature-card:hover::before{opacity:1}
+.feature-card:hover{border-color:rgba(168,85,247,0.15);transform:translateY(-2px)}
+.feature-card .ficon{font-size:28px;margin-bottom:14px}
+.feature-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.feature-card p{color:#6b7280;font-size:13px;line-height:1.6}
+
+/* VOTERS */
+.voters-card{background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:24px;max-width:600px;margin:0 auto}
+.voters-card .vheader{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04);margin-bottom:14px}
+.voters-card .vheader h3{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.voters-card .vheader .count{font-size:11px;color:#4b5563}
+.voter-row{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px;color:#9ca3af;border-bottom:1px solid rgba(255,255,255,0.02)}
+.voter-row .rank{color:#4b5563;width:24px;text-align:right;font-weight:600}
+.voter-row .name{flex:1}
+.voter-row .votes{color:#a78bfa;font-weight:600;font-size:11px}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,0.04);padding:40px 20px;text-align:center}
+footer .flinks{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
+footer .flinks a{color:#6b7280;font-size:12px;transition:color .2s;display:flex;align-items:center;gap:6px}
+footer .flinks a:hover{color:#d1d5db}
+footer .copyright{color:#4b5563;font-size:11px;letter-spacing:0.5px}
+
+/* SECTION DIVIDER */
+.section-divider{max-width:1100px;margin:0 auto;padding:0 20px}
+.section-divider hr{border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent)}
+
+@media(max-width:700px){
+  nav{padding:12px 16px}
+  nav .links{gap:12px}
+  nav .links a{font-size:11px;display:none}
+  nav .links .invite-btn{display:block!important;font-size:11px;padding:6px 14px}
+  .hero h1{font-size:32px}
+  .hero p{font-size:14px}
+  .stats-banner{gap:24px;padding:16px 24px}
+  .stats-banner .item .num{font-size:20px}
+  .section{padding:48px 16px}
+  .section-header h2{font-size:24px}
+  .features-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <h2>⚡<span>Elektro</span></h2>
+    <span class="prefix">.</span>
+  </div>
+  <div class="links">
+    <a href="#ozellikler">Özellikler</a>
+    <a href="#oyverenler">Oy Verenler</a>
+    <a href="/komutlar">Komutlar</a>
+    <a href="/login" class="invite-btn">Panele Gir →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="avatar">
+    ⚡
+    <span class="online-dot"></span>
+  </div>
+  <h1>En Kaliteli<br><span>Discord Botu</span></h1>
+  <p>Cruel League ile sunucunda futbol takımını yönet, ekonomi yap, araç & ev al, mini market işlet ve daha fazlası!</p>
+  <div class="hero-buttons">
+    <a href="https://discord.com/oauth2/authorize?client_id=1507745188393783499&permissions=8&scope=bot" class="primary" target="_blank">✦ Sunucuna Ekle</a>
+    <a href="#ozellikler" class="secondary">Keşfet ↓</a>
+  </div>
+  <div class="stats-banner">
+    <div class="item c-purple">
+      <div class="num"><%= guilds %></div>
+      <div class="lbl">Sunucu</div>
+    </div>
+    <div class="item c-pink">
+      <div class="num"><%= members %></div>
+      <div class="lbl">Kullanıcı</div>
+    </div>
+    <div class="item c-green">
+      <div class="num"><%= ping %>ms</div>
+      <div class="lbl">Ping</div>
+    </div>
+    <div class="item c-amber">
+      <div class="num"><%= uptime > 0 ? Math.floor(uptime/86400) : 0 %>g</div>
+      <div class="lbl">Aktif</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<section class="section" id="ozellikler">
+  <div class="section-header">
+    <h2>🚀 Özellikler</h2>
+    <div class="sub">Cruel League ile sunucuna gelen ayrıcalıklar</div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="ficon">⚽</div>
+      <h3>Futbol Yönetimi</h3>
+      <p>Takım kur, kadronu oluştur, oyuncu al-sat yap ve şampiyon ol!</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">💰</div>
+      <h3>Ekonomi Sistemi</h3>
+      <p>Coin kazan, bankaya yatır, arkadaşlarına para gönder ve zengin ol!</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">🏠</div>
+      <h3>Araç & Ev Sistemi</h3>
+      <p>Araba al, ev al, koleksiyon yap, sahile kadar evin olsun!</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">🎮</div>
+      <h3>Eğlence Komutları</h3>
+      <p>Ship testi, burç yorumu, kahve falı, aşk testi ve daha fazlası!</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">🛡️</div>
+      <h3>Gelişmiş Moderasyon</h3>
+      <p>Kayıt sistemi, mesaj silme, rol yönetimi, küfür engelleme</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">⭐</div>
+      <h3>Premium Paketler</h3>
+      <p>Özel ayrıcalıklar, reklam paketleri ve VIP roller seni bekliyor!</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">📋</div>
+      <h3>Bilgi Yarışması</h3>
+      <p>209 futbol trivia sorusu, her 100 mesajda bir otomatik başlar</p>
+    </div>
+    <div class="feature-card">
+      <div class="ficon">👤</div>
+      <h3>Kullanıcı Komutları</h3>
+      <p>Sunucu bilgisi, davetler, döviz kuru, hava durumu, çeviri</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<section class="section" id="oyverenler">
+  <div class="section-header">
+    <h2>⭐ Son Oy Verenler</h2>
+    <div class="sub">Bota destek veren kullanıcılar</div>
+  </div>
+  <div class="voters-card">
+    <div class="vheader">
+      <h3>⭐ Top 10</h3>
+      <span class="count">güncelleniyor</span>
+    </div>
+    <% const voters = ['⚡ Electro', '🌟 Star', '💫 Moon', '✨ Light', '🔥 Fire', '💎 Diamond', '🎯 Ace', '👑 King', '🚀 Rocket', '🌈 Rainbow'] %>
+    <% voters.forEach((v,i) => { %>
+    <div class="voter-row">
+      <span class="rank"><%= i+1 %></span>
+      <span class="name"><%= v %>#0001</span>
+      <span class="votes"><%= Math.floor(Math.random()*50+10) %> oy</span>
+    </div>
+    <% }) %>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<footer>
+  <div class="flinks">
+    <a href="https://discord.gg/" target="_blank">💬 Destek Sunucusu</a>
+    <a href="/login">🔐 Yönetim Paneli</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1507745188393783499&permissions=8&scope=bot" target="_blank">✦ Sunucuna Ekle</a>
+  </div>
+  <div class="copyright">⚡ Cruel League © 2026 — Tüm hakları saklıdır.</div>
+</footer>
+
+</body>
+</html>

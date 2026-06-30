@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elektro Lig - Panel</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a0f;
+      color: #fff;
+      min-height: 100vh;
+    }
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 220px;
+      background: #101018;
+      border-right: 1px solid #1f1f2c;
+      padding: 24px 0;
+    }
+    .sidebar .logo {
+      padding: 0 20px;
+      margin-bottom: 32px;
+    }
+    .sidebar .logo h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .sidebar .logo span { color: #818cf8; }
+    .sidebar .logo small {
+      color: #6b7280;
+      font-size: 11px;
+      display: block;
+      margin-top: 2px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 20px;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      color: #fff;
+      background: #1a1a24;
+      border-left-color: #818cf8;
+    }
+    .sidebar .logout {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 10px;
+      text-align: center;
+      background: #1f1f2c;
+      border-radius: 8px;
+      color: #ef4444;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .main {
+      margin-left: 220px;
+      padding: 32px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .header h1 { font-size: 22px; font-weight: 600; }
+    .header .status-badge {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .status-badge.online { background: #065f46; color: #6ee7b7; }
+    .status-badge.offline { background: #5f0606; color: #fca5a5; }
+    .status-badge.starting, .status-badge.stopping { background: #5f5206; color: #fde68a; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: #13131a;
+      border: 1px solid #1f1f2c;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .stat-card .label { color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .value { font-size: 26px; font-weight: 700; margin-top: 6px; }
+    .stat-card .value.green { color: #6ee7b7; }
+    .stat-card .value.blue { color: #93c5fd; }
+    .stat-card .value.purple { color: #c4b5fd; }
+    .stat-card .value.pink { color: #f9a8d4; }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .controls button {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #fff;
+    }
+    .controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-start { background: linear-gradient(135deg, #059669, #10b981); }
+    .btn-stop { background: linear-gradient(135deg, #dc2626, #ef4444); }
+    .btn-restart { background: linear-gradient(135deg, #d97706, #f59e0b); }
+    .controls button:hover:not(:disabled) { transform: translateY(-1px); }
+
+    .logs-box {
+      background: #0c0c14;
+      border: 1px solid #1f1f2c;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .logs-box h3 { font-size: 15px; margin-bottom: 12px; color: #9ca3af; }
+    .logs-box .log-count { color: #6b7280; font-size: 12px; }
+    .log-container {
+      max-height: 350px;
+      overflow-y: auto;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .log-container::-webkit-scrollbar { width: 6px; }
+    .log-container::-webkit-scrollbar-track { background: #0c0c14; }
+    .log-container::-webkit-scrollbar-thumb { background: #2a2a35; border-radius: 3px; }
+    .log-line { color: #9ca3af; }
+    .log-line.error { color: #fca5a5; }
+    .log-line.warn { color: #fde68a; }
+    .log-time { color: #4b5563; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <h2>⚡ <span>Elektro</span></h2>
+      <small>Lig</small>
+    </div>
+    <a href="/" class="active">📊 Genel Bakış</a>
+    <a href="/logout" class="logout">🚪 Çıkış Yap</a>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>Genel Bakış</h1>
+      <span class="status-badge <%= status %>"><%= status.charAt(0).toUpperCase() + status.slice(1) %></span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">Sunucular</div>
+        <div class="value purple"><%= guilds %></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Kullanıcılar</div>
+        <div class="value blue"><%= members %></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Ping</div>
+        <div class="value green"><%= ping %>ms</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Komut Sayısı</div>
+        <div class="value pink"><%= commands %></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Aktif Süre</div>
+        <div class="value" style="color:#fbbf24"><%= uptime %></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-start" id="startBtn" <%= ['online','starting'].includes(status) ? 'disabled' : '' %>>▶ Başlat</button>
+      <button class="btn-stop" id="stopBtn" <%= ['offline','stopping'].includes(status) ? 'disabled' : '' %>>■ Durdur</button>
+      <button class="btn-restart" id="restartBtn" <%= ['offline','stopping','starting'].includes(status) ? 'disabled' : '' %>>⟳ Yeniden Başlat</button>
+    </div>
+
+    <div class="logs-box">
+      <h3>📋 Konsol Logları <span class="log-count">(son 50)</span></h3>
+      <div class="log-container" id="logContainer">
+        <% if (logs.length === 0) { %>
+          <div class="log-line" style="color:#4b5563">Henüz log yok.</div>
+        <% } %>
+        <% logs.forEach(l => { %>
+          <div class="log-line <%= l.includes('[HATA]') ? 'error' : '' %>">
+            <%= l %>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const statusBadge = document.querySelector('.status-badge');
+    const statValues = document.querySelectorAll('.stat-card .value');
+    const logContainer = document.getElementById('logContainer');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const restartBtn = document.getElementById('restartBtn');
+
+    async function fetchStatus() {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+
+        // Update badges & buttons
+        const status = data.status;
+        statusBadge.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        statusBadge.className = 'status-badge ' + status;
+
+        startBtn.disabled = ['online', 'starting'].includes(status);
+        stopBtn.disabled = ['offline', 'stopping'].includes(status);
+        restartBtn.disabled = ['offline', 'stopping', 'starting'].includes(status);
+
+        statValues[0].textContent = data.guilds;
+        statValues[1].textContent = data.members;
+        statValues[2].textContent = data.ping + 'ms';
+        statValues[3].textContent = data.commands;
+        statValues[4].textContent = data.uptime > 0
+          ? `${Math.floor(data.uptime / 86400)}g ${Math.floor((data.uptime % 86400) / 3600)}s ${Math.floor((data.uptime % 3600) / 60)}d`
+          : '—';
+
+        // Update logs
+        if (data.logs && data.logs.length > 0) {
+          logContainer.innerHTML = data.logs.map(l =>
+            `<div class="log-line ${l.includes('[HATA]') ? 'error' : ''}">${escapeHtml(l)}</div>`
+          ).join('');
+          logContainer.scrollTop = 0;
+        }
+      } catch {}
+    }
+
+    function escapeHtml(text) {
+      const d = document.createElement('div');
+      d.textContent = text;
+      return d.innerHTML;
+    }
+
+    async function action(endpoint) {
+      try {
+        await fetch(endpoint, { method: 'POST' });
+        await new Promise(r => setTimeout(r, 1000));
+        await fetchStatus();
+      } catch {}
+    }
+
+    startBtn.addEventListener('click', () => action('/api/bot/start'));
+    stopBtn.addEventListener('click', () => action('/api/bot/stop'));
+    restartBtn.addEventListener('click', () => action('/api/bot/restart'));
+
+    setInterval(fetchStatus, 5000);
+    fetchStatus();
+  </script>
+</body>
+</html>

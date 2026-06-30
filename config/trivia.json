@@ -1,0 +1,2301 @@
+[
+  {
+    "q": "Dunya Kupasini en cok kazanan ulke hangisidir?",
+    "a": "Brezilya",
+    "opts": [
+      "Almanya",
+      "Italya",
+      "Brezilya",
+      "Arjantin"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Brezilya kac kez Dunya Kupasi kazanmistir?",
+    "a": "5",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2022 Dunya Kupasini hangi ulke kazanmistir?",
+    "a": "Arjantin",
+    "opts": [
+      "Fransa",
+      "Brezilya",
+      "Arjantin",
+      "Portekiz"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2026 Dunya Kupasi hangi ulkede oynanacaktir?",
+    "a": "ABD",
+    "opts": [
+      "Katar",
+      "ABD",
+      "Kanada",
+      "Meksika"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "En cok Dunya Kupasi golcu unvanini alan oyuncu kimdir?",
+    "a": "Miroslav Klose",
+    "opts": [
+      "Ronaldo Nazario",
+      "Miroslav Klose",
+      "Gerd Muller",
+      "Just Fontaine"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Miroslav Klose kac Dunya Kupasi golune sahiptir?",
+    "a": "16",
+    "opts": [
+      "14",
+      "15",
+      "16",
+      "17"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Dunya Kupasinda en cok gol atan oyuncu kimdir?",
+    "a": "Miroslav Klose",
+    "opts": [
+      "Ronaldo",
+      "Messi",
+      "Miroslav Klose",
+      "Pele"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Pele kac Dunya Kupasi kazanmistir?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2018 Dunya Kupasini hangi ulke kazanmistir?",
+    "a": "Fransa",
+    "opts": [
+      "Hirvatistan",
+      "Belcika",
+      "Fransa",
+      "Ingiltere"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2022 Dunya Kupasi finalinde Arjantin kimi yendi?",
+    "a": "Fransa",
+    "opts": [
+      "Fransa",
+      "Portekiz",
+      "Hirvatistan",
+      "Fas"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Dunya Kupasinda en farkli galibiyet hangisidir?",
+    "a": "9-0",
+    "opts": [
+      "8-0",
+      "9-0",
+      "10-1",
+      "7-0"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Macaristana 9-0lik Dunya Kupasi maglubiyetini kim yasatti?",
+    "a": "Yugoslavya",
+    "opts": [
+      "Brezilya",
+      "Yugoslavya",
+      "Almanya",
+      "Italya"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Dunya Kupasinda en hizli gol kac saniyedir?",
+    "a": "11",
+    "opts": [
+      "8",
+      "11",
+      "15",
+      "7"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Dunya Kupasinda en hizli gol Hakan Sukur e aittir kac saniye?",
+    "a": "11",
+    "opts": [
+      "9",
+      "11",
+      "15",
+      "7"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2022 Dunya Kupasi gol krali kimdi?",
+    "a": "Mbappe",
+    "opts": [
+      "Messi",
+      "Mbappe",
+      "Ronaldo",
+      "Giroud"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Fransa kac kez Dunya Kupasi kazanmistir?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Italya kac kez Dunya Kupasi kazanmistir?",
+    "a": "4",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Almanya kac kez Dunya Kupasi kazanmistir?",
+    "a": "4",
+    "opts": [
+      "4",
+      "5",
+      "3",
+      "6"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Arjantin kac kez Dunya Kupasi kazanmistir?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Uruguay kac kez Dunya Kupasi kazanmistir?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ingiltere kac kez Dunya Kupasi kazanmistir?",
+    "a": "1",
+    "opts": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ispanya kac kez Dunya Kupasi kazanmistir?",
+    "a": "1",
+    "opts": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2014 Dunya Kupasi gol krali kimdi?",
+    "a": "James Rodriguez",
+    "opts": [
+      "Messi",
+      "Neymar",
+      "James Rodriguez",
+      "Mueller"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "1998 Dunya Kupasi finalinde Fransa kimi yendi?",
+    "a": "Brezilya",
+    "opts": [
+      "Brezilya",
+      "Italya",
+      "Almanya",
+      "Hirvatistan"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2002 Dunya Kupasi finalinde Brezilya kimi yendi?",
+    "a": "Almanya",
+    "opts": [
+      "Almanya",
+      "Italya",
+      "Ingiltere",
+      "Turkiye"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Maradona hangi yil Dunya Kupasi kazanmistir?",
+    "a": "1986",
+    "opts": [
+      "1978",
+      "1986",
+      "1990",
+      "1982"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Dunya Kupasinda bir macta en cok gol atan oyuncu kac gol atmistir?",
+    "a": "5",
+    "opts": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Dunya Kupasinda bir macta 5 gol atan oyuncu kimdir?",
+    "a": "Oleg Salenko",
+    "opts": [
+      "Klose",
+      "Ronaldo",
+      "Oleg Salenko",
+      "Mueller"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Avrupa Sampiyonasini en cok kazanan ulke hangisidir?",
+    "a": "Almanya",
+    "opts": [
+      "Almanya",
+      "Ispanya",
+      "Italya",
+      "Fransa"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Almanya kac kez Avrupa Sampiyonu olmustur?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ispanya kac kez Avrupa Sampiyonu olmustur?",
+    "a": "4",
+    "opts": [
+      "3",
+      "4",
+      "2",
+      "5"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2024 Avrupa Sampiyonasini hangi ulke kazanmistir?",
+    "a": "Ispanya",
+    "opts": [
+      "Almanya",
+      "Fransa",
+      "Ispanya",
+      "Portekiz"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2020 Avrupa Sampiyonasini hangi ulke kazanmistir?",
+    "a": "Italya",
+    "opts": [
+      "Fransa",
+      "Italya",
+      "Ispanya",
+      "Ingiltere"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Avrupa Sampiyonasi en cok gol krali olan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Platini",
+      "Cristiano Ronaldo",
+      "Griezmann",
+      "Shevchenko"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Cristiano Ronaldo Avrupa Sampiyonasinda kac gol atmistir?",
+    "a": "14",
+    "opts": [
+      "11",
+      "14",
+      "10",
+      "15"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Avrupa Sampiyonasinda en cok gol atan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Cristiano Ronaldo",
+      "Platini",
+      "Griezmann",
+      "Morata"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Portekiz ilk Avrupa Sampiyonasini hangi yil kazanmistir?",
+    "a": "2016",
+    "opts": [
+      "2004",
+      "2012",
+      "2016",
+      "2020"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Fransa kac kez Avrupa Sampiyonu olmustur?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Danimarka Avrupa Sampiyonasini hangi yil kazanmistir?",
+    "a": "1992",
+    "opts": [
+      "1988",
+      "1992",
+      "1996",
+      "2000"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Yunanistan Avrupa Sampiyonasini hangi yil kazanmistir?",
+    "a": "2004",
+    "opts": [
+      "2000",
+      "2004",
+      "2008",
+      "2012"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Hollanda Avrupa Sampiyonasini hangi yil kazanmistir?",
+    "a": "1988",
+    "opts": [
+      "1984",
+      "1988",
+      "1992",
+      "1976"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Cek Cumhuriyeti Avrupa Sampiyonasini hangi yil kazanmistir?",
+    "a": "1976",
+    "opts": [
+      "1972",
+      "1976",
+      "1980",
+      "1984"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Sampiyonlar Ligi ni en cok kazanan takim hangisidir?",
+    "a": "Real Madrid",
+    "opts": [
+      "Barcelona",
+      "Real Madrid",
+      "Milan",
+      "Liverpool"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Real Madrid kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "15",
+    "opts": [
+      "13",
+      "14",
+      "15",
+      "16"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Milan kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "7",
+    "opts": [
+      "6",
+      "7",
+      "8",
+      "5"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Liverpool kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "6",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "4"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Barcelona kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "5",
+    "opts": [
+      "4",
+      "5",
+      "6",
+      "3"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Bayern Munih kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "6",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "4"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ajax kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "4",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Inter kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Juventus kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Porto kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "2024 Sampiyonlar Ligi finalini kazanan takim hangisidir?",
+    "a": "Real Madrid",
+    "opts": [
+      "Borussia Dortmund",
+      "Real Madrid",
+      "Man City",
+      "Bayern Munih"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2023 Sampiyonlar Ligi finalini kazanan takim hangisidir?",
+    "a": "Man City",
+    "opts": [
+      "Inter",
+      "Man City",
+      "Real Madrid",
+      "Milan"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Sampiyonlar Ligi tarihinin en golcu oyuncusu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Messi",
+      "Cristiano Ronaldo",
+      "Lewandowski",
+      "Benzema"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Cristiano Ronaldo nun Sampiyonlar Ligi gol sayisi kactir?",
+    "a": "140",
+    "opts": [
+      "130",
+      "140",
+      "120",
+      "150"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Messi nin Sampiyonlar Ligi gol sayisi kactir?",
+    "a": "129",
+    "opts": [
+      "129",
+      "140",
+      "120",
+      "135"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Sampiyonlar Ligi finalinde en cok gol atan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Messi",
+      "Cristiano Ronaldo",
+      "Di Stefano",
+      "Puskas"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Sampiyonlar Ligi finalinde kac gol atan oyuncu en coktur?",
+    "a": "4",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Sampiyonlar Ligi finalinde 4 gol atan oyuncu kimdir?",
+    "a": "Ferenc Puskas",
+    "opts": [
+      "Di Stefano",
+      "Cristiano Ronaldo",
+      "Ferenc Puskas",
+      "Gerd Muller"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Istanbulda oynanan 2005 Sampiyonlar Ligi finalini kazanan takim?",
+    "a": "Liverpool",
+    "opts": [
+      "Milan",
+      "Liverpool",
+      "Juventus",
+      "Barcelona"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "1999 Sampiyonlar Ligi finalinde Man United kimi yendi?",
+    "a": "Bayern Munih",
+    "opts": [
+      "Bayern Munih",
+      "Juventus",
+      "Barcelona",
+      "Milan"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "En cok Sampiyonlar Ligi oynayan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Casillas",
+      "Messi",
+      "Cristiano Ronaldo",
+      "Buffon"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Bir sezonda Sampiyonlar Ligi en cok gol atan futbolcu kac gol atmistir?",
+    "a": "17",
+    "opts": [
+      "17",
+      "15",
+      "14",
+      "16"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Sampiyonlar Liginde bir sezonda en cok gol atan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Messi",
+      "Cristiano Ronaldo",
+      "Lewandowski",
+      "Haaland"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Cristiano Ronaldo bir Sampiyonlar Ligi sezonunda kac gol atarak rekor kirdi?",
+    "a": "17",
+    "opts": [
+      "15",
+      "16",
+      "17",
+      "18"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "En cok Ballon dOr kazanan oyuncu kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Cristiano Ronaldo",
+      "Messi",
+      "Ronaldo Nazario",
+      "Zidane"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Messi kac Ballon dOr kazanmistir?",
+    "a": "8",
+    "opts": [
+      "7",
+      "8",
+      "6",
+      "9"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Cristiano Ronaldo kac Ballon dOr kazanmistir?",
+    "a": "5",
+    "opts": [
+      "4",
+      "5",
+      "6",
+      "3"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2024 Ballon dOr kazanani kimdir?",
+    "a": "Rodri",
+    "opts": [
+      "Haaland",
+      "Rodri",
+      "Vinicius",
+      "Bellingham"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2023 Ballon dOr kazanani kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Messi",
+      "Haaland",
+      "Mbappe",
+      "Lewandowski"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2022 Ballon dOr kazanani kimdir?",
+    "a": "Benzema",
+    "opts": [
+      "Messi",
+      "Benzema",
+      "Mbappe",
+      "Lewandowski"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2005 Ballon dOr kazanani kimdir?",
+    "a": "Ronaldinho",
+    "opts": [
+      "Shevchenko",
+      "Ronaldinho",
+      "Henry",
+      "Zidane"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ballon dOr u en cok kazanan kulup hangisidir?",
+    "a": "Barcelona",
+    "opts": [
+      "Real Madrid",
+      "Barcelona",
+      "Juventus",
+      "Milan"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Ballon dOr kazanan ilk Turk futbolcu kimdir?",
+    "a": "Hicbir Turk kazanmamistir",
+    "opts": [
+      "Hakan Sukur",
+      "Emre Belozoglu",
+      "Hicbir Turk kazanmamistir",
+      "Sergen Yalcin"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Fransiz futbolcu Zinedine Zidane kac Ballon dOr kazanmistir?",
+    "a": "1",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ronaldo Nazario kac Ballon dOr kazanmistir?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Lewandowski kac Ballon dOr kazanmistir?",
+    "a": "1",
+    "opts": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Premier Lig i en cok kazanan takim hangisidir?",
+    "a": "Man United",
+    "opts": [
+      "Man United",
+      "Liverpool",
+      "Arsenal",
+      "Chelsea"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Man United kac kez Premier Lig kazanmistir?",
+    "a": "13",
+    "opts": [
+      "12",
+      "13",
+      "14",
+      "11"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Liverpool kac kez Premier Lig kazanmistir?",
+    "a": "1",
+    "opts": [
+      "1",
+      "2",
+      "0",
+      "3"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Arsenal kac kez Premier Lig kazanmistir?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "13"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Chelsea kac kez Premier Lig kazanmistir?",
+    "a": "5",
+    "opts": [
+      "4",
+      "5",
+      "6",
+      "3"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Man City kac kez Premier Lig kazanmistir?",
+    "a": "8",
+    "opts": [
+      "7",
+      "8",
+      "9",
+      "6"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Premier Lig de en cok gol atan oyuncu kimdir?",
+    "a": "Alan Shearer",
+    "opts": [
+      "Rooney",
+      "Alan Shearer",
+      "Henry",
+      "Kane"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Alan Shearer in Premier Lig gol sayisi kactir?",
+    "a": "260",
+    "opts": [
+      "260",
+      "250",
+      "275",
+      "240"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Premier Lig de bir sezonda en cok gol atan oyuncu kac gol atmistir?",
+    "a": "36",
+    "opts": [
+      "36",
+      "34",
+      "32",
+      "38"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Premier Ligde bir sezonda en cok gol atan oyuncu kimdir?",
+    "a": "Erling Haaland",
+    "opts": [
+      "Suarez",
+      "Kane",
+      "Erling Haaland",
+      "Salah"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "La Ligayi en cok kazanan takim hangisidir?",
+    "a": "Real Madrid",
+    "opts": [
+      "Real Madrid",
+      "Barcelona",
+      "Atletico",
+      "Valencia"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Real Madrid kac kez La Liga kazanmistir?",
+    "a": "36",
+    "opts": [
+      "35",
+      "36",
+      "37",
+      "34"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Barcelona kac kez La Liga kazanmistir?",
+    "a": "27",
+    "opts": [
+      "25",
+      "26",
+      "27",
+      "28"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "La Ligada en cok gol atan oyuncu kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Cristiano Ronaldo",
+      "Messi",
+      "Raul",
+      "Benzema"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Messi La Ligada kac gol atmistir?",
+    "a": "474",
+    "opts": [
+      "474",
+      "450",
+      "500",
+      "420"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Cristiano Ronaldo La Ligada kac gol atmistir?",
+    "a": "311",
+    "opts": [
+      "311",
+      "330",
+      "300",
+      "280"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Serie A yi en cok kazanan takim hangisidir?",
+    "a": "Juventus",
+    "opts": [
+      "Milan",
+      "Inter",
+      "Juventus",
+      "Roma"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Juventus kac kez Serie A kazanmistir?",
+    "a": "36",
+    "opts": [
+      "35",
+      "36",
+      "37",
+      "34"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Milan kac kez Serie A kazanmistir?",
+    "a": "19",
+    "opts": [
+      "19",
+      "18",
+      "20",
+      "17"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Inter kac kez Serie A kazanmistir?",
+    "a": "20",
+    "opts": [
+      "19",
+      "20",
+      "18",
+      "21"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Serie A da en cok gol atan oyuncu kimdir?",
+    "a": "Silvio Piola",
+    "opts": [
+      "Totti",
+      "Del Piero",
+      "Silvio Piola",
+      "Nordahl"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Bundesligayi en cok kazanan takim hangisidir?",
+    "a": "Bayern Munih",
+    "opts": [
+      "Bayern Munih",
+      "B. Dortmund",
+      "Gladbach",
+      "Leverkusen"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Bayern Munih kac kez Bundesliga kazanmistir?",
+    "a": "33",
+    "opts": [
+      "32",
+      "33",
+      "31",
+      "34"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Bundesligada en cok gol atan oyuncu kimdir?",
+    "a": "Gerd Muller",
+    "opts": [
+      "Lewandowski",
+      "Gerd Muller",
+      "Fischer",
+      "Heynckes"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ligue 1 i en cok kazanan takim hangisidir?",
+    "a": "PSG",
+    "opts": [
+      "PSG",
+      "Marseille",
+      "Monaco",
+      "Lyon"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "PSG kac kez Ligue 1 kazanmistir?",
+    "a": "12",
+    "opts": [
+      "11",
+      "12",
+      "13",
+      "10"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Super Lig i en cok kazanan takim hangisidir?",
+    "a": "Galatasaray",
+    "opts": [
+      "Galatasaray",
+      "Fenerbahce",
+      "Besiktas",
+      "Trabzonspor"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Galatasaray kac kez Super Lig sampiyonu olmustur?",
+    "a": "24",
+    "opts": [
+      "22",
+      "23",
+      "24",
+      "25"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Fenerbahce kac kez Super Lig sampiyonu olmustur?",
+    "a": "19",
+    "opts": [
+      "18",
+      "19",
+      "20",
+      "17"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Besiktas kac kez Super Lig sampiyonu olmustur?",
+    "a": "16",
+    "opts": [
+      "15",
+      "16",
+      "14",
+      "17"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Trabzonspor kac kez Super Lig sampiyonu olmustur?",
+    "a": "7",
+    "opts": [
+      "6",
+      "7",
+      "8",
+      "5"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Super Lig de en cok gol atan oyuncu kimdir?",
+    "a": "Hakan Sukur",
+    "opts": [
+      "Hakan Sukur",
+      "Alex de Souza",
+      "Sergen Yalcin",
+      "Feyyaz Ucar"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Hakan Sukur Super Ligde kac gol atmistir?",
+    "a": "249",
+    "opts": [
+      "240",
+      "249",
+      "260",
+      "230"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Super Lig de bir sezonda en cok gol atan oyuncu kac gol atmistir?",
+    "a": "38",
+    "opts": [
+      "36",
+      "38",
+      "40",
+      "34"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Super Ligde bir sezonda en cok gol atan oyuncu kimdir?",
+    "a": "Tuncay Sanli",
+    "opts": [
+      "Hakan Sukur",
+      "Tuncay Sanli",
+      "Alex de Souza",
+      "Gokhan Unal"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Turk futbolcusu Hakan Sukur hangi takimda en cok gol atmistir?",
+    "a": "Galatasaray",
+    "opts": [
+      "Galatasaray",
+      "Fenerbahce",
+      "Besiktas",
+      "Trabzonspor"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2002 Dunya Kupasinda Turkiye kacinci olmustur?",
+    "a": "3.",
+    "opts": [
+      "3.",
+      "2.",
+      "4.",
+      "5."
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2002 Dunya Kupasinda Turkiye nin gol krali kimdi?",
+    "a": "Hakan Sukur",
+    "opts": [
+      "Ilhan Mansiz",
+      "Hakan Sukur",
+      "Yildiray Basturk",
+      "Emre Belozoglu"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Europe de oynayan ilk Turk futbolcusu kimdir?",
+    "a": "Sukru Gulesin",
+    "opts": [
+      "Can Bartu",
+      "Sukru Gulesin",
+      "Metin Oktay",
+      "Lefter Kucukandonyadis"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Turkiye Avrupa Sampiyonasinda en iyi derecesi nedir?",
+    "a": "Yari final",
+    "opts": [
+      "Final",
+      "Yari final",
+      "Ceyrek final",
+      "Grup asama"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2008 Avrupa Sampiyonasinda Turkiye kacinci olmustur?",
+    "a": "Yari final",
+    "opts": [
+      "Final",
+      "Yari final",
+      "Ceyrek final",
+      "Grup asama"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Turk futbol tarihinin en golcu oyuncusu kimdir?",
+    "a": "Hakan Sukur",
+    "opts": [
+      "Hakan Sukur",
+      "Metin Oktay",
+      "Lefter Kucukandonyadis",
+      "Sergen Yalcin"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Fenerbahce efsanesi Alex de Souza hangi ulke vatandasidir?",
+    "a": "Brezilya",
+    "opts": [
+      "Portekiz",
+      "Brezilya",
+      "Arjantin",
+      "Ispanya"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Galatasaray efsanesi Metin Oktay kac gol atmistir?",
+    "a": "217",
+    "opts": [
+      "217",
+      "200",
+      "230",
+      "250"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Besiktas efsanesi Sergen Yalcin hangi mevkide oynamistir?",
+    "a": "Orta saha",
+    "opts": [
+      "Forvet",
+      "Orta saha",
+      "Defans",
+      "Kaleci"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Turk futbolunda 6 kez gol krali olan oyuncu kimdir?",
+    "a": "Metin Oktay",
+    "opts": [
+      "Hakan Sukur",
+      "Metin Oktay",
+      "Tanju Colak",
+      "Aykut Kocaman"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Trabzonspor ilk sampiyonlugunu hangi yil kazanmistir?",
+    "a": "1976",
+    "opts": [
+      "1976",
+      "1980",
+      "1978",
+      "1984"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Bursaspor Super Lig sampiyonlugunu hangi yil kazanmistir?",
+    "a": "2010",
+    "opts": [
+      "2008",
+      "2010",
+      "2012",
+      "2014"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Istanbul takimi olmayan Super Lig sampiyonu hangisidir?",
+    "a": "Bursaspor",
+    "opts": [
+      "Trabzonspor",
+      "Bursaspor",
+      "Konyaspor",
+      "Sivaspor"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Sampiyonlar Liginde gruplardan cikan ilk Turk takimi hangisidir?",
+    "a": "Galatasaray",
+    "opts": [
+      "Galatasaray",
+      "Fenerbahce",
+      "Besiktas",
+      "Trabzonspor"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Galatasaray UEFA Kupasini hangi yil kazanmistir?",
+    "a": "2000",
+    "opts": [
+      "1999",
+      "2000",
+      "2001",
+      "2002"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Galatasaray UEFA Kupasi finalinde kimi yendi?",
+    "a": "Arsenal",
+    "opts": [
+      "Arsenal",
+      "Real Madrid",
+      "Juventus",
+      "Barcelona"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "UEFA Avrupa Ligi ne Turkiye den katilan ilk sampiyon hangisidir?",
+    "a": "Galatasaray (UEFA Kupasi)",
+    "opts": [
+      "Fenerbahce",
+      "Galatasaray (UEFA Kupasi)",
+      "Besiktas",
+      "Trabzonspor"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Türk Milli Takiminin en cok milli olan oyuncusu kimdir?",
+    "a": "Rustu Recber",
+    "opts": [
+      "Hakan Sukur",
+      "Rustu Recber",
+      "Emre Belozoglu",
+      "Tugay Kerimoglu"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Rustu Recber kac kez milli olmustur?",
+    "a": "120",
+    "opts": [
+      "110",
+      "120",
+      "130",
+      "100"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Turkiye Milli Takiminin en golcu oyuncusu kimdir?",
+    "a": "Hakan Sukur",
+    "opts": [
+      "Hakan Sukur",
+      "Tuncay Sanli",
+      "Cenk Tosun",
+      "Burak Yilmaz"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Hakan Sukur milli takimda kac gol atmistir?",
+    "a": "51",
+    "opts": [
+      "51",
+      "45",
+      "55",
+      "48"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Pele hangi ulkenin futbolcusudur?",
+    "a": "Brezilya",
+    "opts": [
+      "Brezilya",
+      "Arjantin",
+      "Portekiz",
+      "Ispanya"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Maradona hangi ulkenin futbolcusudur?",
+    "a": "Arjantin",
+    "opts": [
+      "Arjantin",
+      "Uruguay",
+      "Brezilya",
+      "Kolombiya"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Cristiano Ronaldo hangi ulkede dogmustur?",
+    "a": "Portekiz",
+    "opts": [
+      "Portekiz",
+      "Brezilya",
+      "Ispanya",
+      "Fransa"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Messi hangi ulkede dogmustur?",
+    "a": "Arjantin",
+    "opts": [
+      "Arjantin",
+      "Brezilya",
+      "Uruguay",
+      "Ispanya"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Zinedine Zidane hangi ulkede dogmustur?",
+    "a": "Fransa",
+    "opts": [
+      "Fransa",
+      "Italya",
+      "Ispanya",
+      "Cezayir"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Socrates hangi ulkenin futbolcusuydu?",
+    "a": "Brezilya",
+    "opts": [
+      "Brezilya",
+      "Yunanistan",
+      "Arjantin",
+      "Portekiz"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Eusebio hangi ulkede dogmustur?",
+    "a": "Portekiz",
+    "opts": [
+      "Portekiz",
+      "Mozambik",
+      "Brezilya",
+      "Ispanya"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "George Best hangi ulkenin futbolcusuydu?",
+    "a": "Kuzey Irlanda",
+    "opts": [
+      "Irlanda",
+      "Kuzey Irlanda",
+      "Ingiltere",
+      "Iskocya"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Johan Cruyff hangi ulkenin futbolcusuydu?",
+    "a": "Hollanda",
+    "opts": [
+      "Hollanda",
+      "Almanya",
+      "Belcika",
+      "Fransa"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Franz Beckenbauer hangi ulkenin futbolcusuydu?",
+    "a": "Almanya",
+    "opts": [
+      "Almanya",
+      "Avusturya",
+      "Isvicre",
+      "Hollanda"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Lev Yashin hangi mevkide oynamistir?",
+    "a": "Kaleci",
+    "opts": [
+      "Forvet",
+      "Defans",
+      "Kaleci",
+      "Orta saha"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Lev Yashin kac Ballon dOr kazanmistir?",
+    "a": "1",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Kaleci olarak Ballon dOr kazanan tek oyuncu kimdir?",
+    "a": "Lev Yashin",
+    "opts": [
+      "Buffon",
+      "Neuer",
+      "Lev Yashin",
+      "Casillas"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Paolo Maldini hangi takimda tum kariyerini gecirdi?",
+    "a": "Milan",
+    "opts": [
+      "Juventus",
+      "Milan",
+      "Inter",
+      "Roma"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Francesco Totti hangi takimda tum kariyerini gecirdi?",
+    "a": "Roma",
+    "opts": [
+      "Juventus",
+      "Milan",
+      "Roma",
+      "Lazio"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Ryan Giggs hangi taimda tum kariyerini gecirdi?",
+    "a": "Man United",
+    "opts": [
+      "Man United",
+      "Liverpool",
+      "Arsenal",
+      "Chelsea"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Xavi hangi takimin alt yapisindan yetismistir?",
+    "a": "Barcelona",
+    "opts": [
+      "Real Madrid",
+      "Barcelona",
+      "Valencia",
+      "Atletico"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Iniesta hangi takimin alt yapisindan yetismistir?",
+    "a": "Barcelona",
+    "opts": [
+      "Real Madrid",
+      "Barcelona",
+      "Valencia",
+      "Atletico"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Wembley Stadyumu hangi ulkededir?",
+    "a": "Ingiltere",
+    "opts": [
+      "Ingiltere",
+      "Almanya",
+      "Ispanya",
+      "Italya"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Camp Nou hangi takimin stadyumudur?",
+    "a": "Barcelona",
+    "opts": [
+      "Real Madrid",
+      "Barcelona",
+      "Valencia",
+      "Atletico"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Old Trafford hangi takimin stadyumudur?",
+    "a": "Man United",
+    "opts": [
+      "Liverpool",
+      "Arsenal",
+      "Man United",
+      "Chelsea"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Santiago Bernabeu hangi takimin stadyumudur?",
+    "a": "Real Madrid",
+    "opts": [
+      "Barcelona",
+      "Real Madrid",
+      "Atletico",
+      "Valencia"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "San Siro hangi sehirdedir?",
+    "a": "Milano",
+    "opts": [
+      "Roma",
+      "Torino",
+      "Milano",
+      "Napoli"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Allianz Arena hangi sehirdedir?",
+    "a": "Munih",
+    "opts": [
+      "Berlin",
+      "Munih",
+      "Hamburg",
+      "Dortmund"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Signal Iduna Park hangi takimin stadyumudur?",
+    "a": "B. Dortmund",
+    "opts": [
+      "B. Dortmund",
+      "Bayern Munih",
+      "Leverkusen",
+      "Schalke"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Anfield hangi takimin stadyumudur?",
+    "a": "Liverpool",
+    "opts": [
+      "Liverpool",
+      "Everton",
+      "Man United",
+      "Arsenal"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "En cok seyirci kapasiteli stadyum hangisidir?",
+    "a": "Rungrado",
+    "opts": [
+      "Camp Nou",
+      "Wembley",
+      "Rungrado",
+      "Moscow Luzhniki"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Istanbul daki en buyuk stadyum hangisidir?",
+    "a": "Ataturk Olimpiyat",
+    "opts": [
+      "Ataturk Olimpiyat",
+      "Ali Sami Yen",
+      "Sukru Saracoglu",
+      "Vodafone Park"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Turk Telekom Stadyumu hangi takimin stadyumudur?",
+    "a": "Galatasaray",
+    "opts": [
+      "Galatasaray",
+      "Fenerbahce",
+      "Besiktas",
+      "Trabzonspor"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "UEFA Stadyum kategorilerinde en ust kategori hangisidir?",
+    "a": "4",
+    "opts": [
+      "4",
+      "5",
+      "3",
+      "Elite"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Futbol tarihinin en golcu oyuncusu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Messi",
+      "Pele",
+      "Cristiano Ronaldo",
+      "Romario"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Bir takvim yilinda en cok gol atan oyuncu kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Cristiano Ronaldo",
+      "Messi",
+      "Lewandowski",
+      "Pele"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Messi 2012 takvim yilinda kac gol atmisti?",
+    "a": "91",
+    "opts": [
+      "86",
+      "91",
+      "95",
+      "80"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "En pahali transfer hangisidir?",
+    "a": "Neymar",
+    "opts": [
+      "Neymar",
+      "Mbappe",
+      "Coutinho",
+      "Griezmann"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Neymar in transfer ucreti kac eurodur?",
+    "a": "222 milyon",
+    "opts": [
+      "200 milyon",
+      "222 milyon",
+      "250 milyon",
+      "180 milyon"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Mbappe nin PSG ye transfer ucreti kactir?",
+    "a": "180 milyon",
+    "opts": [
+      "180 milyon",
+      "200 milyon",
+      "150 milyon",
+      "220 milyon"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "En hizli kirmizi kart rekoru kac saniyedir?",
+    "a": "2",
+    "opts": [
+      "2",
+      "5",
+      "10",
+      "1"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Bir mac en cok golu hangi macta atilmistir?",
+    "a": "149-0",
+    "opts": [
+      "149-0",
+      "100-0",
+      "50-0",
+      "200-0"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "149-0 lik mac hangi ulkede oynanmistir?",
+    "a": "Madagaskar",
+    "opts": [
+      "Madagaskar",
+      "Brezilya",
+      "Hindistan",
+      "Avustralya"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Bir mac 149-0 bitti ise kac gol atan takim gol atmistir?",
+    "a": "149 gol",
+    "opts": [
+      "149 gol",
+      "150 gol",
+      "100 gol",
+      "200 gol"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "UEFA da en cok gol atan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Messi",
+      "Cristiano Ronaldo",
+      "Lewandowski",
+      "Benzema"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Cristiano Ronaldo nun profesyonel kariyer gol sayisi kactir?",
+    "a": "900+",
+    "opts": [
+      "800+",
+      "900+",
+      "700+",
+      "1000+"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "En genc Ballon dOr kazanani kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Ronaldo Nazario",
+      "Messi",
+      "Mbappe",
+      "Haaland"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Ronaldo Nazario ilk Ballon dOr unu kac yasinda kazanmisti?",
+    "a": "21",
+    "opts": [
+      "19",
+      "21",
+      "23",
+      "25"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "En yasli Ballon dOr kazanani kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Buffon",
+      "Messi",
+      "Cristiano Ronaldo",
+      "Benzema"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "En cok asist yapan oyuncu kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Messi",
+      "Cristiano Ronaldo",
+      "Ozil",
+      "Xavi"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "En cok UEFA Kupasi kazanan oyuncu kimdir?",
+    "a": "Cristiano Ronaldo",
+    "opts": [
+      "Messi",
+      "Cristiano Ronaldo",
+      "Seedorf",
+      "Maldini"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Clarence Seedorf kac farkli kulple Sampiyonlar Ligi kazanmistir?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Seedorf hangi takimlarla Sampiyonlar Ligi kazanmistir?",
+    "a": "Ajax Real Milan",
+    "opts": [
+      "Ajax Real Milan",
+      "Milan Inter",
+      "Real Milan Juve",
+      "Ajax Milan Juve"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "2024 Avrupa Sampiyonasi finalinde Ispanya kimi yendi?",
+    "a": "Ingiltere",
+    "opts": [
+      "Almanya",
+      "Fransa",
+      "Ingiltere",
+      "Portekiz"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "2024 Avrupa Sampiyonasi gol krali kimdi?",
+    "a": "Kane",
+    "opts": [
+      "Kane",
+      "Gakpo",
+      "Musiala",
+      "Mikautadze"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "2024 Avrupa Sampiyonasinda en cok gol atan oyuncu kac gol atmistir?",
+    "a": "3",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "2024 Avrupa Sampiyonasinin en degerli oyuncusu kimdi?",
+    "a": "Rodri",
+    "opts": [
+      "Yamal",
+      "Rodri",
+      "Kane",
+      "Musiala"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "2024 Avrupa Sampiyonasina ev sahipligi yapan ulke?",
+    "a": "Almanya",
+    "opts": [
+      "Almanya",
+      "Fransa",
+      "Italya",
+      "Ispanya"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "En cok Sampiyonlar Ligi kazanan teknik direktordur?",
+    "a": "Ancelotti",
+    "opts": [
+      "Ancelotti",
+      "Ferguson",
+      "Guardiola",
+      "Mourinho"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Ancelotti kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "5",
+    "opts": [
+      "4",
+      "5",
+      "3",
+      "6"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Alex Ferguson kac kez Premier Lig kazanmistir?",
+    "a": "13",
+    "opts": [
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Pep Guardiola kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "3",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Jose Mourinho kac kez Sampiyonlar Ligi kazanmistir?",
+    "a": "2",
+    "opts": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Arsene Wenger hangi takimi en uzun sure yonetti?",
+    "a": "Arsenal",
+    "opts": [
+      "Monaco",
+      "Arsenal",
+      "Nagoya Grampus",
+      "Barcelona"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Fatih Terim hangi takimla UEFA Kupasi kazanmistir?",
+    "a": "Galatasaray",
+    "opts": [
+      "Galatasaray",
+      "Fenerbahce",
+      "Milan",
+      "Besiktas"
+    ],
+    "zor": 1
+  },
+  {
+    "q": "Fatih Terim kac kez Super Lig sampiyonlugu yasamistir?",
+    "a": "8",
+    "opts": [
+      "7",
+      "8",
+      "9",
+      "6"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Copa America yi en cok kazanan ulke hangisidir?",
+    "a": "Arjantin",
+    "opts": [
+      "Brezilya",
+      "Arjantin",
+      "Uruguay",
+      "Kolombiya"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Arjantin kac kez Copa America kazanmistir?",
+    "a": "16",
+    "opts": [
+      "14",
+      "15",
+      "16",
+      "17"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Brezilya kac kez Copa America kazanmistir?",
+    "a": "9",
+    "opts": [
+      "8",
+      "9",
+      "10",
+      "7"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Uruguay kac kez Copa America kazanmistir?",
+    "a": "15",
+    "opts": [
+      "14",
+      "15",
+      "13",
+      "16"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "2024 Copa America yı hangi ulke kazanmistir?",
+    "a": "Arjantin",
+    "opts": [
+      "Brezilya",
+      "Arjantin",
+      "Uruguay",
+      "Kolombiya"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "FIFA yilina en cok secilen oyuncu kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Cristiano Ronaldo",
+      "Messi",
+      "Neymar",
+      "Lewandowski"
+    ],
+    "zor": 2
+  },
+  {
+    "q": "Altin Ayakkabi oculunu en cok kazanan oyuncu kimdir?",
+    "a": "Messi",
+    "opts": [
+      "Cristiano Ronaldo",
+      "Messi",
+      "Suarez",
+      "Ibrahimovic"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "FIFA U20 Dunya Kupasini en cok kazanan ulke?",
+    "a": "Arjantin",
+    "opts": [
+      "Brezilya",
+      "Arjantin",
+      "Portekiz",
+      "Ispanya"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Olimpiyat futbol turnuvasini en cok kazanan ulke?",
+    "a": "Macaristan",
+    "opts": [
+      "Brezilya",
+      "Macaristan",
+      "Arjantin",
+      "Italya"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Afrika Uluslar Kupasini en cok kazanan ulke?",
+    "a": "Misir",
+    "opts": [
+      "Nijerya",
+      "Kamerun",
+      "Misir",
+      "Gana"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "Asya Kupasini en cok kazanan ulke?",
+    "a": "Japonya",
+    "opts": [
+      "Japonya",
+      "Suudi Arabistan",
+      "Iran",
+      "Guney Kore"
+    ],
+    "zor": 3
+  },
+  {
+    "q": "CONCACAF Altin Kupayi en cok kazanan ulke?",
+    "a": "Meksika",
+    "opts": [
+      "Meksika",
+      "ABD",
+      "Kanada",
+      "Kosta Rika"
+    ],
+    "zor": 3
+  }
+]

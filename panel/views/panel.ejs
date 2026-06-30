@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Elekro">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#030305">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<title>Elektro Lig · Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#030305;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;font-size:14px;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#030305}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#a855f7,#d946ef);border-radius:3px}
+a{text-decoration:none;color:inherit}
+
+/* ambient bg */
+body::before{content:'';position:fixed;top:-30%;left:-20%;width:50%;height:70%;background:radial-gradient(circle,rgba(168,85,247,0.06),transparent 70%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:-30%;right:-20%;width:50%;height:70%;background:radial-gradient(circle,rgba(217,70,239,0.05),transparent 70%);pointer-events:none;z-index:0}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:60px;background:rgba(3,3,5,0.9);border-bottom:1px solid rgba(255,255,255,0.04);position:sticky;top:0;z-index:100;flex-shrink:0;-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+nav::after{content:'';position:absolute;bottom:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.25),rgba(217,70,239,0.2),transparent)}
+nav .brand{display:flex;align-items:center;gap:14px}
+nav .brand .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#a855f7,#d946ef);display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;box-shadow:0 0 24px rgba(168,85,247,0.3)}
+nav .brand h2{font-size:18px;font-weight:900;letter-spacing:-0.5px;color:#f1f5f9}
+nav .brand h2 span{background:linear-gradient(135deg,#a855f7,#d946ef);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .brand small{font-size:7.5px;color:#6b7280;background:rgba(255,255,255,0.03);padding:3px 10px;border-radius:6px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(255,255,255,0.05)}
+nav .right{display:flex;align-items:center;gap:16px}
+nav .right .status{display:flex;align-items:center;gap:7px;font-size:11px;color:#6b7280;background:rgba(255,255,255,0.02);padding:5px 16px;border-radius:20px;border:1px solid rgba(255,255,255,0.04)}
+nav .right .status .dot{width:8px;height:8px;border-radius:50%;transition:all .3s}
+nav .right .status .dot.on{background:#22c55e;box-shadow:0 0 14px rgba(34,197,94,0.5)}
+nav .right .status .dot.off{background:#ef4444;box-shadow:0 0 14px rgba(239,68,68,0.4)}
+nav .right .status .dot.starting,nav .right .status .dot.stopping{background:#f59e0b;animation:pls 1.5s ease-in-out infinite}
+@keyframes pls{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+nav .right a{font-size:11px;color:#6b7280;padding:6px 16px;border-radius:10px;transition:all .2s;font-weight:500}
+nav .right a:hover{color:#f1f5f9;background:rgba(255,255,255,0.06)}
+
+/* layout */
+.container{flex:1;display:flex;overflow:hidden;position:relative;z-index:1}
+
+/* sidebar */
+.sidebar{width:260px;background:rgba(3,3,5,0.6);border-right:1px solid rgba(255,255,255,0.04);flex-shrink:0;display:flex;flex-direction:column;overflow-y:auto;padding:20px 14px}
+.sidebar .sec{font-size:10px;color:#4b5563;text-transform:uppercase;letter-spacing:1.5px;padding:24px 18px 10px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;transition:color .2s}
+.sidebar .sec:hover{color:#9ca3af}
+.sidebar .sec .arr{font-size:9px;color:#4b5563;transition:transform .3s cubic-bezier(.16,1,.3,1);display:inline-block}
+.sidebar .sec .arr.open{transform:rotate(90deg);color:#a855f7}
+.sidebar .sec-items{overflow:hidden;max-height:0;opacity:0;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s ease,margin .3s ease;margin:0}
+.sidebar .sec-items.open{max-height:500px;opacity:1;margin:3px 0 10px}
+.sidebar a{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;font-size:13.5px;color:#6b7280;margin-bottom:3px;transition:all .2s cubic-bezier(.16,1,.3,1);position:relative;font-weight:500}
+.sidebar a:hover{color:#e5e7eb;background:rgba(255,255,255,0.04)}
+.sidebar a.active{color:#fff;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(217,70,239,0.1));border:1px solid rgba(168,85,247,0.15);font-weight:600;box-shadow:0 4px 20px rgba(168,85,247,0.06)}
+.sidebar a.active::before{content:'';position:absolute;left:-1px;top:30%;bottom:30%;width:2.5px;background:linear-gradient(180deg,#a855f7,#d946ef);border-radius:0 3px 3px 0}
+.sidebar .spacer{flex:1}
+.sidebar .logout-link{font-size:12px;color:#4b5563;border-top:1px solid rgba(255,255,255,0.03);padding:16px 14px 0;margin-top:16px;border-radius:0;font-weight:500}
+.sidebar .logout-link:hover{color:#ef4444!important;background:transparent!important}
+
+/* content */
+.content{flex:1;padding:32px 36px;overflow-y:auto}
+.page{display:none}.page.active{display:block;animation:fi .4s cubic-bezier(.16,1,.3,1)}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* page header */
+.page-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.page-hdr .lft{display:flex;align-items:center;gap:14px}
+.page-hdr .lft .pi{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(217,70,239,0.08));display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid rgba(168,85,247,0.08)}
+.page-hdr h1{font-size:22px;font-weight:800;letter-spacing:-0.5px;color:#f1f5f9;line-height:1.2}
+.page-hdr .sub{color:#6b7280;font-size:12px;margin-top:2px;line-height:1.5}
+
+/* stat cards */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:28px}
+.stat{background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1.5px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.4),transparent);opacity:0;transition:opacity .35s}
+.stat:hover{transform:translateY(-4px);border-color:rgba(168,85,247,0.12);background:rgba(255,255,255,0.025);box-shadow:0 12px 40px rgba(0,0,0,0.25)}
+.stat:hover::before{opacity:1}
+.stat .lbl{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-bottom:5px}
+.stat .val{font-size:28px;font-weight:800;margin-top:2px;letter-spacing:-1px;line-height:1.1}
+.stat .val.blue{color:#60a5fa}.stat .val.green{color:#34d399}.stat .val.pink{color:#f472b6}
+.stat .val.amber{color:#fbbf24}.stat .val.purple{color:#a78bfa}.stat .val.red{color:#f87171}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border:none;border-radius:12px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);color:#fff;font-family:'Inter',sans-serif;position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent 60%);opacity:0;transition:opacity .3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.btn:hover::after{opacity:1}
+.btn:active{transform:scale(0.97);transition-duration:.05s}
+.btn:disabled{opacity:0.2;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.btn:disabled::after{opacity:0!important}
+.btn-sm{padding:7px 16px;font-size:11px;border-radius:10px}
+.btn-xs{padding:5px 12px;font-size:10px;border-radius:8px}
+.btn-p{background:linear-gradient(135deg,#a855f7,#d946ef);box-shadow:0 4px 18px rgba(168,85,247,0.2)}
+.btn-g{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 18px rgba(16,185,129,0.2)}
+.btn-r{background:linear-gradient(135deg,#dc2626,#ef4444);box-shadow:0 4px 18px rgba(239,68,68,0.2)}
+.btn-y{background:linear-gradient(135deg,#d97706,#f59e0b);box-shadow:0 4px 18px rgba(245,158,11,0.2)}
+.btn-s{background:rgba(255,255,255,0.04);color:#9ca3af;border:1px solid rgba(255,255,255,0.06);box-shadow:none}
+.btn-s:hover{background:rgba(255,255,255,0.07);box-shadow:0 4px 15px rgba(0,0,0,0.15)}
+
+/* log box */
+.controls{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.log-box{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;position:relative}
+.log-box::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1.5px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.2),transparent)}
+.log-box .hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:12px;color:#9ca3af}
+.log-box .hdr span{color:#4b5563;font-size:10px;background:rgba(255,255,255,0.03);padding:2px 10px;border-radius:6px}
+.logs{max-height:280px;overflow-y:auto;font-family:'JetBrains Mono','Cascadia Code','Consolas',monospace;font-size:11px;line-height:1.9}
+.logs .l{color:#6b7280;padding:3px 0;transition:background .15s;border-radius:3px}
+.logs .l:hover{background:rgba(255,255,255,0.015)}
+.logs .l .t{color:#4b5563;margin-right:10px;opacity:0.6}
+.logs .l.err{color:#fca5a5}
+.logs .l.ok{color:#6ee7b7}
+
+/* server cards */
+.slist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.scard{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:16px;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.scard::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1.5px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.25),transparent);opacity:0;transition:opacity .35s}
+.scard:hover{transform:translateY(-3px);border-color:rgba(168,85,247,0.1);background:rgba(255,255,255,0.025);box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+.scard:hover::before{opacity:1}
+.scard .ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(217,70,239,0.05));flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid rgba(255,255,255,0.05)}
+.scard .ic img{width:100%;height:100%;object-fit:cover;border-radius:11px}
+.scard .inf{flex:1;min-width:0}
+.scard .inf .n{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.2px}
+.scard .inf .d{color:#6b7280;font-size:11px;margin-top:2px}
+.scard .inf .i{color:#4b5563;font-size:10px;font-family:'JetBrains Mono',monospace;margin-top:2px;opacity:0.7}
+.scard .leave-guild-btn{position:absolute;top:10px;right:10px;opacity:0;transition:opacity .35s;z-index:2}
+.scard:hover .leave-guild-btn{opacity:1}
+
+/* card */
+.card{background:rgba(255,255,255,0.012);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:22px;margin-bottom:16px;transition:all .35s cubic-bezier(.16,1,.3,1)}
+.card:hover{border-color:rgba(168,85,247,0.08);box-shadow:0 6px 25px rgba(0,0,0,0.1)}
+
+/* tables */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.008)}
+.mtable{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtable thead{position:sticky;top:0;z-index:1}
+.mtable th{text-align:left;padding:12px 16px;color:#4b5563;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:0.6px;background:#08080b;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mtable td{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.02);color:#cbd5e1}
+.mtable tbody tr{transition:background .15s}
+.mtable tbody tr:nth-child(even){background:rgba(255,255,255,0.005)}
+.mtable tbody tr:hover td{background:rgba(168,85,247,0.05)}
+.mtable tbody tr:last-child td{border-bottom:none}
+
+/* settings */
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;margin-bottom:28px}
+.settings-card{background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:22px;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.settings-card::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1.5px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.2),transparent);opacity:0;transition:opacity .35s}
+.settings-card:hover{border-color:rgba(168,85,247,0.08);box-shadow:0 6px 25px rgba(0,0,0,0.15)}
+.settings-card:hover::before{opacity:1}
+.settings-card .shdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.settings-card .shdr h3{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;color:#e2e8f0}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+.srow:last-child{border-bottom:none;padding-bottom:0}
+.srow .info{flex:1;min-width:0;padding-right:14px}
+.srow .info .n{font-size:12.5px;font-weight:600}
+.srow .info .d{font-size:10.5px;color:#6b7280;margin-top:3px;line-height:1.4}
+
+/* toggle */
+.toggle{position:relative;width:42px;height:22px;background:rgba(255,255,255,0.06);border-radius:11px;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);flex-shrink:0;border:1px solid rgba(255,255,255,0.04)}
+.toggle.on{background:linear-gradient(135deg,#a855f7,#d946ef);border-color:transparent;box-shadow:0 0 14px rgba(168,85,247,0.3)}
+.toggle .knob{position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.toggle.on .knob{left:22px;box-shadow:0 0 10px rgba(168,85,247,0.35)}
+
+/* inputs */
+.setting-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:7px 14px;color:#e2e8f0;font-size:11.5px;font-family:'Inter',sans-serif;width:160px;outline:none;transition:all .2s}
+.setting-input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.1)}
+.setting-input::placeholder{color:#4b5563}
+.server-select{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:11px 16px;color:#e2e8f0;font-size:12.5px;font-family:'Inter',sans-serif;outline:none;margin-bottom:24px;width:380px;max-width:100%;cursor:pointer;transition:all .2s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.server-select:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.1)}
+.server-select option{background:#0a0a10;color:#e2e8f0}
+.search-box{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.search-box input{flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:11px 18px;color:#e2e8f0;font-size:12.5px;font-family:'Inter',sans-serif;outline:none;min-width:220px;max-width:340px;transition:all .2s}
+.search-box input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.1)}
+.search-box input::placeholder{color:#4b5563}
+.search-box select{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:7px 14px;color:#e2e8f0;font-size:11.5px;font-family:'Inter',sans-serif;outline:none;cursor:pointer;transition:all .2s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px}
+.search-box select:focus{border-color:#a855f7}
+
+/* tags */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 12px;border-radius:8px;font-size:10px;font-weight:600;border:1px solid transparent}
+.tag-p{background:rgba(168,85,247,0.08);color:#c084fc;border-color:rgba(168,85,247,0.12)}
+.tag-g{background:rgba(34,197,94,0.08);color:#86efac;border-color:rgba(34,197,94,0.12)}
+.tag-r{background:rgba(239,68,68,0.08);color:#fca5a5;border-color:rgba(239,68,68,0.12)}
+.tag-y{background:rgba(245,158,11,0.08);color:#fde68a;border-color:rgba(245,158,11,0.12)}
+.tag-b{background:rgba(59,130,246,0.08);color:#93c5fd;border-color:rgba(59,130,246,0.12)}
+
+/* modal */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;display:flex;align-items:center;justify-content:center;animation:fi .2s ease;backdrop-filter:blur(4px)}
+.modal{background:#0c0c12;border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:32px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 32px 100px rgba(0,0,0,0.5);position:relative}
+.modal::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1.5px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.25),transparent)}
+.modal h2{font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.modal label{display:block;font-size:11px;color:#6b7280;margin-bottom:5px;margin-top:12px;font-weight:500}
+.modal input,.modal textarea{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:11px 14px;color:#e2e8f0;font-size:12.5px;font-family:'Inter',sans-serif;outline:none;margin-bottom:8px;transition:all .2s}
+.modal input:focus,.modal textarea:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.1)}
+.modal textarea{resize:vertical;min-height:80px}
+.modal .mtns{display:flex;gap:10px;margin-top:16px}
+
+/* toast */
+.toast{position:fixed;bottom:28px;right:28px;padding:14px 24px;border-radius:14px;font-size:13px;z-index:9999;animation:su .4s cubic-bezier(.16,1,.3,1);max-width:380px;pointer-events:none;font-weight:600;box-shadow:0 10px 40px rgba(0,0,0,0.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);letter-spacing:-0.1px}
+.toast.ok{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);color:#86efac}
+.toast.err{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2);color:#fca5a5}
+@keyframes su{from{opacity:0;transform:translateY(16px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* helpers */
+.mono{font-family:'JetBrains Mono','Cascadia Code','Consolas',monospace;font-size:11px;letter-spacing:-0.2px}
+.num-p{color:#a78bfa;font-weight:700}.num-g{color:#34d399;font-weight:700}
+.num-r{color:#f87171;font-weight:700}.num-y{color:#fbbf24;font-weight:700}
+.num-b{color:#60a5fa;font-weight:700}
+.empty-state{padding:56px 20px;text-align:center;color:#4b5563}
+.empty-state .icon{font-size:40px;margin-bottom:12px;opacity:0.35}
+.empty-state p{font-size:13px;margin-top:6px}
+.spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,0.04);border-top-color:#a855f7;border-right-color:#d946ef;border-radius:50%;animation:sp .7s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* user detail grid */
+.ud-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ud-item{padding:16px 18px;background:rgba(255,255,255,0.01);border-radius:10px;border:1px solid rgba(255,255,255,0.03);transition:border-color .2s}
+.ud-item:hover{border-color:rgba(168,85,247,0.06)}
+.ud-item .ud-lbl{font-size:9.5px;color:#4b5563;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px;font-weight:600}
+.ud-item .ud-val{font-size:17px;font-weight:800}
+
+/* responsive */
+@media(max-width:700px){
+  .sidebar{display:none}
+  .content{padding:18px;overflow-y:auto}
+  .stats{grid-template-columns:1fr 1fr}
+  .settings-grid{grid-template-columns:1fr}
+  .page-hdr h1{font-size:18px}
+  .server-select{width:100%}
+  .search-box input{max-width:100%;min-width:0}
+  .ud-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">
+    <div class="logo">⚡</div>
+    <h2><span>Elektro</span></h2>
+    <small>PANEL</small>
+  </div>
+  <div class="right">
+    <div class="status">
+      <span class="dot <%= status %>" id="statusDot"></span>
+      <span id="statusText"><%= status.charAt(0).toUpperCase() + status.slice(1) %></span>
+    </div>
+    <a href="/logout">Çıkış</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="sidebar">
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Genel</div>
+    <div class="sec-items open">
+      <a href="#" class="active" data-page="dashboard">📊 Genel Bakış</a>
+      <a href="#" data-page="servers">🖥 Sunucular</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Takımlar</div>
+    <div class="sec-items">
+      <a href="#" data-page="squads">👥 Kadrolar</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Futbol</div>
+    <div class="sec-items">
+      <a href="#" data-page="players">⚽ Oyuncular</a>
+      <a href="#" data-page="matches">🏟️ Maçlar</a>
+      <a href="#" data-page="tournaments">🏆 Turnuvalar</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Ekonomi</div>
+    <div class="sec-items">
+      <a href="#" data-page="economy">💰 Bakiye</a>
+      <a href="#" data-page="inventory">🏠 Envanter</a>
+      <a href="#" data-page="market">🛒 Market</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> RPG</div>
+    <div class="sec-items">
+      <a href="#" data-page="rpg">⚔️ Karakterler</a>
+      <a href="#" data-page="training">🏋️ Antrenman</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Yönetim</div>
+    <div class="sec-items">
+      <a href="#" data-page="users">👥 Kullanıcılar</a>
+      <a href="#" data-page="registration">📝 Kayıt Geçmişi</a>
+      <a href="#" data-page="invites">📨 Davetler</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Koruma</div>
+    <div class="sec-items">
+      <a href="#" data-page="settings">⚙️ Güvenlik</a>
+      <a href="#" data-page="guild-config">📋 Sunucu Ayarları</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Eğlence</div>
+    <div class="sec-items">
+      <a href="#" data-page="giveaways">🎁 Çekilişler</a>
+      <a href="#" data-page="trivia">🧠 Trivia</a>
+      <a href="#" data-page="snipe">👻 Snipe</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Lig</div>
+    <div class="sec-items">
+      <a href="#" data-page="standings">📋 Puan Durumu</a>
+      <a href="#" data-page="fixtures">📅 Fikstür</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Medya</div>
+    <div class="sec-items">
+      <a href="#" data-page="music">🎵 Müzik</a>
+      <a href="#" data-page="gallery">📸 Galeri</a>
+    </div>
+    <div class="sec" onclick="toggleCat(this)"><span class="arr">▸</span> Sistem</div>
+    <div class="sec-items">
+      <a href="#" data-page="stats">📊 İstatistikler</a>
+      <a href="#" data-page="backup">💾 Yedekleme</a>
+    </div>
+    <div class="spacer"></div>
+    <a href="/logout" class="logout-link">🚪 Çıkış Yap</a>
+  </div>
+
+  <div class="content">
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-hdr"><div class="lft"><div class="pi">📊</div><div><h1>Genel Bakış</h1><div class="sub">Botun anlık durumu</div></div></div></div>
+      <div class="stats">
+        <div class="stat"><div class="lbl">Sunucu</div><div class="val purple" id="s-guilds"><%= guilds %></div></div>
+        <div class="stat"><div class="lbl">Kullanıcı</div><div class="val blue" id="s-members"><%= members %></div></div>
+        <div class="stat"><div class="lbl">Ping</div><div class="val green" id="s-ping"><%= ping %>ms</div></div>
+        <div class="stat"><div class="lbl">Komut</div><div class="val pink" id="s-cmds"><%= commands %></div></div>
+        <div class="stat"><div class="lbl">Aktif</div><div class="val amber" id="s-uptime"><%= uptime %></div></div>
+      </div>
+      <div class="controls">
+        <button class="btn btn-p" id="startBtn" <%= ['online','starting'].includes(status) ? 'disabled' : '' %>>▶ Başlat</button>
+        <button class="btn btn-r" id="stopBtn" <%= ['offline','stopping'].includes(status) ? 'disabled' : '' %>>■ Durdur</button>
+        <button class="btn btn-y" id="restartBtn" <%= ['offline','stopping','starting'].includes(status) ? 'disabled' : '' %>>⟳ Yeniden Başlat</button>
+      </div>
+      <div class="log-box">
+        <div class="hdr"><span>📋 Konsol</span><span>son 50</span></div>
+        <div class="logs" id="logContainer">
+          <% if (logs.length === 0) { %><div class="l" style="color:#334155">Log bekleniyor...</div><% } %>
+          <% logs.forEach(l => { %>
+            <div class="l <%= l.includes('[HATA]') ? 'err' : '' %>"><span class="t">▸</span><%= l %></div>
+          <% }); %>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
+        <div class="card" style="overflow:hidden"><div class="shdr" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.04)"><h3 style="font-size:13px;font-weight:700">💰 En Zenginler</h3></div><div style="font-size:12px" id="topBalance"><div style="color:#475569">Yükleniyor...</div></div></div>
+        <div class="card" style="overflow:hidden"><div class="shdr" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.04)"><h3 style="font-size:13px;font-weight:700">⭐ En Değerliler</h3></div><div style="font-size:12px" id="topValue"><div style="color:#475569">Yükleniyor...</div></div></div>
+      </div>
+    </div>
+
+    <!-- SERVERS -->
+    <div class="page" id="page-servers">
+      <div class="page-hdr"><div class="lft"><div class="pi">🖥</div><div><h1>Sunucular</h1><div class="sub">Botun bulunduğu sunucular</div></div></div></div>
+      <div class="slist" id="serverGrid">
+        <% const gl = typeof guildList !== 'undefined' ? guildList : []; %>
+        <% if (gl.length === 0) { %><div style="color:#475569;padding:40px 0;text-align:center">Sunucu bilgisi alınamadı.</div><% } %>
+        <% gl.forEach(g => { %>
+          <div class="scard" style="cursor:pointer" onclick="showServerDetail('<%= g.id %>','<%= g.name.replace(/'/g,"\\'") %>')">
+            <div class="ic"><% if (g.icon) { %><img src="<%= g.icon %>"><% } else { %>🌐<% } %></div>
+            <div class="inf">
+              <div class="n"><%= g.name %></div>
+              <div class="d"><%= g.memberCount %> üye</div>
+              <div class="i"><%= g.id %></div>
+            </div>
+            <button class="btn btn-r btn-xs leave-guild-btn" data-id="<%= g.id %>" onclick="event.stopPropagation();leaveGuild('<%= g.id %>','<%= g.name.replace(/'/g,"\\'") %>')" style="position:absolute;top:10px;right:10px;opacity:0;transition:opacity .35s">Sunucuyu At</button>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <!-- SQUADS -->
+    <div class="page" id="page-squads">
+      <div class="page-hdr"><div class="lft"><div class="pi">👥</div><div><h1>Kadrolar</h1><div class="sub">Takımlara göre oyuncu listeleri</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="squadContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="page" id="page-settings">
+      <div class="page-hdr"><div class="lft"><div class="pi">⚙️</div><div><h1>Güvenlik</h1><div class="sub">Sunucu bazında koruma ayarları</div></div></div></div>
+      <select class="server-select" id="guildSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <div class="settings-grid" id="settingsContainer">
+        <div style="color:#475569;padding:40px;text-align:center;grid-column:1/-1">Lütfen bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- ECONOMY -->
+    <div class="page" id="page-economy">
+      <div class="page-hdr"><div class="lft"><div class="pi">💰</div><div><h1>Ekonomi</h1><div class="sub">Kullanıcı bakiyelerini görüntüle ve düzenle</div></div></div></div>
+      <div class="search-box">
+        <input id="ecoSearch" placeholder="Kullanıcı ID veya isim ara..." onkeyup="if(event.key==='Enter')loadEconomy()">
+        <button class="btn btn-p" onclick="loadEconomy()">Ara</button>
+        <button class="btn btn-s" onclick="loadEconomy()">Tümünü Getir</button>
+      </div>
+      <div class="card" style="overflow-x:auto" id="ecoContainer">
+        <div style="color:#475569;padding:20px;text-align:center">"Tümünü Getir"e tıklayın.</div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="page" id="page-users">
+      <div class="page-hdr"><div class="lft"><div class="pi">👥</div><div><h1>Kullanıcılar</h1><div class="sub">Kullanıcı detayları, karaliste ve uyarı yönetimi</div></div></div></div>
+      <div class="search-box">
+        <input id="userSearch" placeholder="Kullanıcı ID girin..." onkeyup="if(event.key==='Enter')searchUser()">
+        <button class="btn btn-p" onclick="searchUser()">Ara</button>
+      </div>
+      <div class="card" id="userDetail" style="display:none"></div>
+      <div class="card" id="userWarns" style="display:none;margin-top:10px"></div>
+    </div>
+
+    <!-- GUILD CONFIG -->
+    <div class="page" id="page-guild-config">
+      <div class="page-hdr"><div class="lft"><div class="pi">📋</div><div><h1>Sunucu Ayarları</h1><div class="sub">Rol, kanal ve sunucu yapılandırması</div></div></div></div>
+      <select class="server-select" id="gcfgSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <div class="settings-grid" id="gcfgContainer">
+        <div style="color:#475569;padding:40px;text-align:center;grid-column:1/-1">Lütfen bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- INVITES -->
+    <div class="page" id="page-invites">
+      <div class="page-hdr"><div class="lft"><div class="pi">📨</div><div><h1>Davetler</h1><div class="sub">Sunucu bazında davet liderlik tablosu</div></div></div></div>
+      <select class="server-select" id="invSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <div class="card" id="invContainer" style="overflow-x:auto">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- PLAYERS -->
+    <div class="page" id="page-players">
+      <div class="page-hdr"><div class="lft"><div class="pi">⚽</div><div><h1>Oyuncular</h1><div class="sub">Tüm oyuncuların futbol istatistikleri</div></div></div></div>
+      <div class="search-box">
+        <input id="plSearch" placeholder="İsim veya ID ara..." onkeyup="if(event.key==='Enter')loadPlayers()">
+        <select id="plSort" onchange="loadPlayers()"><option value="value">Değer</option><option value="goals">Gol</option><option value="assists">Asist</option><option value="name">İsim</option><option value="balance">Bakiye</option></select>
+        <select id="plOrder" onchange="loadPlayers()"><option value="desc">Azalan</option><option value="asc">Artan</option></select>
+        <button class="btn btn-p" onclick="loadPlayers()">Getir</button>
+      </div>
+      <div class="card" style="overflow-x:auto" id="plContainer">
+        <div style="color:#475569;padding:20px;text-align:center">"Getir"e tıklayın.</div>
+      </div>
+    </div>
+
+    <!-- MATCHES -->
+    <div class="page" id="page-matches">
+      <div class="page-hdr"><div class="lft"><div class="pi">🏟️</div><div><h1>Maçlar</h1><div class="sub">Maç geçmişi ve aktif karşılaşmalar</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="matchContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- INVENTORY -->
+    <div class="page" id="page-inventory">
+      <div class="page-hdr"><div class="lft"><div class="pi">🏠</div><div><h1>Envanter</h1><div class="sub">Sunucu bazında araç ve ev sahipleri</div></div></div></div>
+      <select class="server-select" id="invGuildSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <h2 style="margin-top:20px;font-size:15px;font-weight:700">🚗 Araçlar</h2>
+      <div class="card" style="overflow-x:auto;margin-top:10px" id="vehicleContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+      <h2 style="margin-top:18px;font-size:15px;font-weight:700">🏡 Evler</h2>
+      <div class="card" style="overflow-x:auto;margin-top:10px" id="houseContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- MARKET -->
+    <div class="page" id="page-market">
+      <div class="page-hdr"><div class="lft"><div class="pi">🛒</div><div><h1>Market</h1><div class="sub">Sunucu bazında satılık araç ve evler</div></div></div></div>
+      <select class="server-select" id="mktGuildSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <h2 style="margin-top:20px;font-size:15px;font-weight:700">🚗 Satılık Araçlar</h2>
+      <div class="card" style="overflow-x:auto;margin-top:10px" id="mktVehicleContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+      <h2 style="margin-top:18px;font-size:15px;font-weight:700">🏡 Satılık Evler</h2>
+      <div class="card" style="overflow-x:auto;margin-top:10px" id="mktHouseContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- TOURNAMENTS -->
+    <div class="page" id="page-tournaments">
+      <div class="page-hdr"><div class="lft"><div class="pi">🏆</div><div><h1>Turnuvalar</h1><div class="sub">Tüm turnuva ve fikstür bilgileri</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="tournamentContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- RPG -->
+    <div class="page" id="page-rpg">
+      <div class="page-hdr"><div class="lft"><div class="pi">⚔️</div><div><h1>RPG Karakterler</h1><div class="sub">Tüm oyuncuların RPG istatistikleri</div></div></div></div>
+      <div class="search-box">
+        <input id="rpgSearch" placeholder="Kullanıcı ID veya isim ara..." onkeyup="if(event.key==='Enter')loadRpg()">
+        <button class="btn btn-p" onclick="loadRpg()">Ara</button>
+        <button class="btn btn-s" onclick="loadRpg()">Tümünü Getir</button>
+      </div>
+      <div class="card" style="overflow-x:auto" id="rpgContainer">
+        <div style="color:#475569;padding:20px;text-align:center">"Tümünü Getir"e tıklayın.</div>
+      </div>
+    </div>
+
+    <!-- TRAINING -->
+    <div class="page" id="page-training">
+      <div class="page-hdr"><div class="lft"><div class="pi">🏋️</div><div><h1>Antrenman</h1><div class="sub">Antrenman sayıları sıralaması</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="trainingContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- GIVEAWAYS -->
+    <div class="page" id="page-giveaways">
+      <div class="page-hdr"><div class="lft"><div class="pi">🎁</div><div><h1>Çekilişler</h1><div class="sub">Aktif ve geçmiş çekilişler</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="giveawayContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- TRIVIA -->
+    <div class="page" id="page-trivia">
+      <div class="page-hdr"><div class="lft"><div class="pi">🧠</div><div><h1>Trivia</h1><div class="sub">Geçmiş trivia oyunları</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="triviaContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- SNIPE -->
+    <div class="page" id="page-snipe">
+      <div class="page-hdr"><div class="lft"><div class="pi">👻</div><div><h1>Snipe</h1><div class="sub">Silinen mesaj geçmişi</div></div></div></div>
+      <select class="server-select" id="snipeGuildSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <div class="card" style="overflow-x:auto" id="snipeContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- REGISTRATION -->
+    <div class="page" id="page-registration">
+      <div class="page-hdr"><div class="lft"><div class="pi">📝</div><div><h1>Kayıt Geçmişi</h1><div class="sub">Sunucu bazında kayıt olan kullanıcılar</div></div></div></div>
+      <select class="server-select" id="regGuildSelect">
+        <option value="">— Sunucu Seç —</option>
+        <% if (typeof guildList !== 'undefined') { %>
+          <% guildList.forEach(g => { %>
+            <option value="<%= g.id %>"><%= g.name %> (<%= g.memberCount %> üye)</option>
+          <% }); %>
+        <% } %>
+      </select>
+      <div class="card" style="overflow-x:auto" id="regContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>
+      </div>
+    </div>
+
+    <!-- BACKUP -->
+    <div class="page" id="page-backup">
+      <div class="page-hdr"><div class="lft"><div class="pi">💾</div><div><h1>Yedekleme</h1><div class="sub">Veritabanı yedekleme ve dışa aktarma</div></div></div></div>
+      <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="stat" id="backupStat"><div class="lbl">Veritabanı</div><div class="val blue" id="backupSize">—</div></div>
+        <div class="stat"><div class="lbl">Kullanıcı</div><div class="val purple" id="backupUsers">—</div></div>
+        <div class="stat"><div class="lbl">Anahtar</div><div class="val pink" id="backupKeys">—</div></div>
+      </div>
+      <div class="card" style="padding:28px;text-align:center">
+        <div style="font-size:48px;margin-bottom:16px;opacity:0.5">💾</div>
+        <h2 style="font-size:18px;font-weight:700;margin-bottom:8px">Veritabanı Yedekle</h2>
+        <p style="color:#6b7280;font-size:13px;margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto">Tüm bot verilerini JSON olarak dışa aktar. Bu dosyayı daha sonra geri yüklemek için kullanabilirsin.</p>
+        <button class="btn btn-p" onclick="downloadBackup()" style="font-size:15px;padding:14px 36px">📥 JSON İndir</button>
+      </div>
+    </div>
+
+    <!-- STANDINGS -->
+    <div class="page" id="page-standings">
+      <div class="page-hdr"><div class="lft"><div class="pi">📋</div><div><h1>Puan Durumu</h1><div class="sub">Takımların maç sonuçlarına göre sıralaması</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="standingsContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- FIXTURES -->
+    <div class="page" id="page-fixtures">
+      <div class="page-hdr"><div class="lft"><div class="pi">📅</div><div><h1>Fikstür</h1><div class="sub">Tüm maçların zaman çizelgesi</div></div></div></div>
+      <div class="card" style="overflow-x:auto" id="fixtureContainer">
+        <div style="color:#475569;padding:20px;text-align:center">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- MUSIC -->
+    <div class="page" id="page-music">
+      <div class="page-hdr"><div class="lft"><div class="pi">🎵</div><div><h1>Müzik</h1><div class="sub">Müzik komutları ve kullanım</div></div></div></div>
+      <div class="card" style="padding:28px;text-align:center">
+        <div style="font-size:48px;margin-bottom:16px;opacity:0.5">🎵</div>
+        <h2 style="font-size:18px;font-weight:700;margin-bottom:8px">Müzik Sistemi</h2>
+        <p style="color:#6b7280;font-size:13px;margin-bottom:20px;max-width:450px;margin-left:auto;margin-right:auto">Bot üzerinden ses kanallarında müzik çalma komutları.</p>
+        <div style="max-width:500px;margin:0 auto;text-align:left;font-size:13px">
+          <div class="srow" style="padding:10px 0"><code style="color:#a855f7;font-weight:600">.çal</code><span style="color:#94a3b8;margin-left:10px">Şarkı adı/URL ile müzik çalar</span></div>
+          <div class="srow" style="padding:10px 0"><code style="color:#a855f7;font-weight:600">.durdur</code><span style="color:#94a3b8;margin-left:10px">Çalan müziği durdurur</span></div>
+          <div class="srow" style="padding:10px 0"><code style="color:#a855f7;font-weight:600">.geç</code><span style="color:#94a3b8;margin-left:10px">Sıradaki şarkıya geçer</span></div>
+          <div class="srow" style="padding:10px 0"><code style="color:#a855f7;font-weight:600">.ses</code><span style="color:#94a3b8;margin-left:10px">Ses seviyesini ayarlar (1-100)</span></div>
+          <div class="srow" style="padding:10px 0"><code style="color:#a855f7;font-weight:600">.sıra</code><span style="color:#94a3b8;margin-left:10px">Çalma listesini gösterir</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="page" id="page-gallery">
+      <div class="page-hdr"><div class="lft"><div class="pi">📸</div><div><h1>Galeri</h1><div class="sub">Ekran görüntüleri ve medya</div></div></div></div>
+      <div class="card" style="padding:28px;text-align:center">
+        <div style="font-size:48px;margin-bottom:16px;opacity:0.5">📸</div>
+        <h2 style="font-size:18px;font-weight:700;margin-bottom:8px">Galeri</h2>
+        <p style="color:#6b7280;font-size:13px;max-width:450px;margin-left:auto;margin-right:auto">Henüz medya eklenmemiş. Galeriye eklemek için ilgili komutları kullanın.</p>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="page" id="page-stats">
+      <div class="page-hdr"><div class="lft"><div class="pi">📊</div><div><h1>İstatistikler</h1><div class="sub">Bot genel kullanım ve sistem durumu</div></div></div></div>
+      <div class="stats" id="statsGrid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+        <div class="stat"><div class="lbl">Yükleniyor...</div></div>
+      </div>
+      <div class="card" style="overflow-x:auto" id="statsDetail"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" style="display:none"></div>
+
+<script>
+const SETTINGS_DEFS = {
+  kufur:{label:'Küfür Koruması',desc:'Küfür içeren mesajları siler',icon:'🔞'},
+  link:{label:'Link Koruması',desc:'Reklam/kötü amaçlı linkleri engeller',icon:'🔗'},
+  reklam:{label:'Reklam Koruması',desc:'Discord davet linklerini engeller',icon:'📢'},
+  caps:{label:'Büyük Harf Koruması',desc:'%70\'den fazla büyük harf içeren mesajları siler',icon:'🔠'},
+  flood:{label:'Flood Koruması',desc:'4 saniyede 4\'ten fazla mesajı engeller',icon:'🌊'},
+  mention:{label:'Etiket Koruması',desc:'5\'ten fazla etiket içeren mesajları siler',icon:'@'},
+  resim:{label:'Resim Koruması',desc:'Resim gönderimini kısıtlar',icon:'🖼️'},
+  antiNuke:{label:'Anti-Nuke',desc:'Toplu kanal/rol silme işlemlerini engeller',icon:'☢️'},
+  antiKanal:{label:'Kanal Koruması',desc:'Kanal silme işlemlerini engeller',icon:'#️⃣'},
+  antiRol:{label:'Rol Koruması',desc:'Rol silme işlemlerini engeller',icon:'🎭'},
+  antiBan:{label:'Ban Koruması',desc:'Yetkili ban işlemlerini engeller',icon:'🔨'},
+  antiBot:{label:'Bot Koruması',desc:'Yeni bot eklenmesini engeller',icon:'🤖'},
+  antiWebhook:{label:'Webhook Koruması',desc:'Webhook oluşturulmasını engeller',icon:'🔗'},
+};
+const PAGES = ['dashboard','servers','settings','economy','users','players','matches','inventory','guild-config','invites','stats','tournaments','rpg','training','giveaways','trivia','snipe','registration','squads','market','backup','standings','fixtures','music','gallery'];
+
+function toggleCat(el) {
+  const a = el.querySelector('.arr');
+  const n = el.nextElementSibling;
+  if (!n||!n.classList.contains('sec-items')) return;
+  n.classList.toggle('open');
+  if (a) a.classList.toggle('open');
+}
+
+function nav(page) {
+  document.querySelectorAll('.sidebar a[data-page]').forEach(x => x.classList.remove('active'));
+  const link = document.querySelector(`.sidebar a[data-page="${page}"]`);
+  if (link) {
+    link.classList.add('active');
+    let p = link.parentElement;
+    if (p && p.classList.contains('sec-items') && !p.classList.contains('open')) {
+      p.classList.add('open');
+      const prev = p.previousElementSibling;
+      if (prev && prev.classList.contains('sec')) {
+        const arr = prev.querySelector('.arr');
+        if (arr) arr.classList.add('open');
+      }
+    }
+  }
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  const pg = document.getElementById('page-' + page);
+  if (pg) pg.classList.add('active');
+  if (page === 'economy') loadEconomy();
+  if (page === 'players') loadPlayers();
+  if (page === 'matches') loadMatches();
+  if (page === 'settings') { const s = document.getElementById('guildSelect'); if (s.value) loadSettings(s.value); }
+  if (page === 'guild-config') { const s = document.getElementById('gcfgSelect'); if (s.value) loadGuildConfig(s.value); }
+  if (page === 'invites') { const s = document.getElementById('invSelect'); if (s.value) loadInvites(s.value); }
+  if (page === 'inventory') { const s = document.getElementById('invGuildSelect'); if (s.value) loadInventory(s.value); }
+  if (page === 'stats') loadStats();
+  if (page === 'tournaments') loadTournaments();
+  if (page === 'rpg') loadRpg();
+  if (page === 'training') loadTraining();
+  if (page === 'giveaways') loadGiveaways();
+  if (page === 'trivia') loadTrivia();
+  if (page === 'snipe') { const s = document.getElementById('snipeGuildSelect'); if (s.value) loadSnipe(s.value); }
+  if (page === 'registration') { const s = document.getElementById('regGuildSelect'); if (s.value) loadRegistration(s.value); }
+  if (page === 'squads') loadSquads();
+  if (page === 'market') { const s = document.getElementById('mktGuildSelect'); if (s.value) loadMarket(s.value); }
+  if (page === 'backup') loadBackup();
+  if (page === 'dashboard') loadDashboardData();
+  if (page === 'standings') loadStandings();
+  if (page === 'fixtures') loadFixtures();
+}
+
+document.querySelectorAll('.sidebar a[data-page]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const p = this.dataset.page;
+    history.pushState(null, '', '#' + p);
+    nav(p);
+  });
+});
+window.addEventListener('hashchange', () => {
+  const p = location.hash.replace('#','') || 'dashboard';
+  if (PAGES.includes(p)) nav(p);
+});
+(function() {
+  const p = location.hash.replace('#','') || 'dashboard';
+  nav(p);
+})();
+
+document.getElementById('guildSelect')?.addEventListener('change', function() {
+  if (this.value) loadSettings(this.value); else document.getElementById('settingsContainer').innerHTML = '<div style="color:#475569;padding:40px;text-align:center;grid-column:1/-1">Lütfen bir sunucu seçin.</div>';
+});
+document.getElementById('invSelect')?.addEventListener('change', function() {
+  if (this.value) loadInvites(this.value); else document.getElementById('invContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>';
+});
+document.getElementById('gcfgSelect')?.addEventListener('change', function() {
+  if (this.value) loadGuildConfig(this.value); else document.getElementById('gcfgContainer').innerHTML = '<div style="color:#475569;padding:40px;text-align:center;grid-column:1/-1">Lütfen bir sunucu seçin.</div>';
+});
+document.getElementById('invGuildSelect')?.addEventListener('change', function() {
+  if (this.value) loadInventory(this.value); else { document.getElementById('vehicleContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>'; document.getElementById('houseContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>'; }
+});
+document.getElementById('snipeGuildSelect')?.addEventListener('change', function() {
+  if (this.value) loadSnipe(this.value); else document.getElementById('snipeContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>';
+});
+document.getElementById('regGuildSelect')?.addEventListener('change', function() {
+  if (this.value) loadRegistration(this.value); else document.getElementById('regContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>';
+});
+document.getElementById('mktGuildSelect')?.addEventListener('change', function() {
+  if (this.value) loadMarket(this.value); else { document.getElementById('mktVehicleContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>'; document.getElementById('mktHouseContainer').innerHTML = '<div style="color:#475569;padding:20px;text-align:center">Bir sunucu seçin.</div>'; }
+});
+
+// SETTINGS
+async function loadSettings(id) {
+  const c = document.getElementById('settingsContainer');
+  c.innerHTML = '<div style="color:#475569;padding:40px;text-align:center;grid-column:1/-1"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/settings?guildId=' + id);
+    const d = await r.json();
+    if (d.error) { c.innerHTML = '<div style="color:#fca5a5;padding:40px;text-align:center">Hata</div>'; return; }
+    renderSettings(d.settings, id);
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:40px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+function renderSettings(settings, id) {
+  let html = '<div class="settings-card"><div class="shdr"><h3>📝 Log</h3></div><div class="srow"><div class="info"><div class="n">Log Kanalı ID</div><div class="d">Koruma loglarının gönderileceği kanal</div></div><input class="setting-input" id="logKanalInput" value="' + esc(settings.logKanal||'') + '" placeholder="Kanal ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveSetting(\''+id+'\',\'logKanal\',document.getElementById(\'logKanalInput\').value||null)">Kaydet</button></div></div>';
+  html += '<div class="settings-card"><div class="shdr"><h3>👮 Whitelist</h3></div><div class="srow"><div class="info"><div class="n">Yetkili ID\'leri</div><div class="d">Virgülle ayırın (123,456)</div></div><input class="setting-input" id="wlInput" value="'+((settings.whitelist||[]).join(','))+'" placeholder="ID,ID,ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveWhitelist(\''+id+'\')">Kaydet</button></div></div>';
+  html += '<div class="settings-card"><div class="shdr"><h3>🛡️ Mesaj Korumaları</h3></div>';
+  ['kufur','link','reklam','caps','flood','mention','resim'].forEach(k => {
+    const s = SETTINGS_DEFS[k];
+    const v = settings[k]?.enabled !== undefined ? settings[k].enabled : !!settings[k];
+    html += '<div class="srow"><div class="info"><div class="n">' + s.icon + ' ' + s.label + '</div><div class="d">' + s.desc + '</div></div><div class="toggle ' + (v?'on':'') + '" onclick="toggleSetting(\''+id+'\',\''+k+'\',this)"><div class="knob"></div></div></div>';
+  });
+  html += '</div><div class="settings-card"><div class="shdr"><h3>☢️ Sunucu Korumaları</h3></div>';
+  ['antiNuke','antiKanal','antiRol','antiBan','antiBot','antiWebhook'].forEach(k => {
+    const s = SETTINGS_DEFS[k];
+    const v = settings[k]?.enabled !== undefined ? settings[k].enabled : !!settings[k];
+    html += '<div class="srow"><div class="info"><div class="n">' + s.icon + ' ' + s.label + '</div><div class="d">' + s.desc + '</div></div><div class="toggle ' + (v?'on':'') + '" onclick="toggleSetting(\''+id+'\',\''+k+'\',this)"><div class="knob"></div></div></div>';
+  });
+  html += '</div>';
+  document.getElementById('settingsContainer').innerHTML = html;
+}
+
+async function toggleSetting(id, key, el) {
+  const was = el.classList.contains('on');
+  el.classList.toggle('on');
+  try {
+    const r = await fetch('/api/settings', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({guildId:id, key, value:{enabled:!was}}) });
+    const d = await r.json();
+    if (d.ok) showToast('✅ ' + (SETTINGS_DEFS[key]?.label||key) + ' ' + (!was?'açıldı':'kapatıldı'), 'ok');
+    else { el.classList.toggle('on'); showToast('❌ Hata', 'err'); }
+  } catch { el.classList.toggle('on'); showToast('❌ Bağlantı hatası', 'err'); }
+}
+
+async function saveSetting(id, key, value) {
+  try {
+    const r = await fetch('/api/settings', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({guildId:id, key, value}) });
+    const d = await r.json();
+    if (d.ok) showToast('✅ Kaydedildi', 'ok'); else showToast('❌ Hata', 'err');
+  } catch { showToast('❌ Bağlantı hatası', 'err'); }
+}
+
+async function saveWhitelist(id) {
+  const val = document.getElementById('wlInput').value;
+  const ids = val ? val.split(',').map(s => s.trim()).filter(Boolean) : [];
+  try {
+    const r = await fetch('/api/settings', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({guildId:id, key:'whitelist', value:ids}) });
+    const d = await r.json();
+    if (d.ok) showToast('✅ Whitelist kaydedildi', 'ok'); else showToast('❌ Hata', 'err');
+  } catch { showToast('❌ Bağlantı hatası', 'err'); }
+}
+
+// ECONOMY
+async function loadEconomy() {
+  const c = document.getElementById('ecoContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/users');
+    const d = await r.json();
+    if (d.error) { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Hata: '+d.error+'</div>'; return; }
+    let users = d.users || [];
+    const q = document.getElementById('ecoSearch').value.trim().toLowerCase();
+    if (q) users = users.filter(u => u.id.includes(q)||(u.name||'').toLowerCase().includes(q));
+    if (!users.length) { c.innerHTML = '<div class="empty-state"><div class="icon">💸</div><p>Kullanıcı bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>ID</th><th>İsim</th><th>Bakiye</th><th>Banka</th><th>Toplam</th><th>Değer</th><th>Mevki</th><th>Takım</th><th></th></tr></thead><tbody>';
+    users.forEach(u => {
+      const t = (u.balance||0)+(u.bankBalance||0);
+      const isB = u.role && u.role.toLowerCase() === 'baskan';
+      const valCell = isB ? '<td style="color:#4b5563">—</td>' : '<td class="num-y">'+fmt(u.value)+'</td>';
+      const posCell = isB ? '<td style="color:#4b5563">—</td>' : '<td>'+(u.position||'—')+'</td>';
+      html += '<tr><td class="mono">'+u.id+'</td><td>'+(u.name||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td class="num-g">'+fmt(u.balance)+'</td><td class="num-b">'+fmt(u.bankBalance)+'</td><td class="num-p">'+fmt(t)+'</td>'+valCell+posCell+'<td>'+(u.squad||'—')+'</td><td><button class="btn btn-p btn-xs" onclick="editEco(\''+u.id+'\',\''+esc(u.name||u.id)+'\','+(u.balance||0)+','+(u.bankBalance||0)+')">✏️</button></td></tr>';
+    });
+    html += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+users.length+' kullanıcı</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+function editEco(id, name, bal, bank) {
+  const ov = document.createElement('div'); ov.className = 'modal-overlay';
+  ov.innerHTML = '<div class="modal"><h2>💰 ' + name + '</h2><label>Bakiye</label><input id="ecoBal" value="'+bal+'"><label>Banka</label><input id="ecoBank" value="'+bank+'"><div class="mtns"><button class="btn btn-p" onclick="saveEco(\''+id+'\')">Kaydet</button><button class="btn btn-r" onclick="this.closest(\'.modal-overlay\').remove()">İptal</button></div></div>';
+  document.body.appendChild(ov);
+}
+
+async function saveEco(id) {
+  const bal = parseInt(document.getElementById('ecoBal').value)||0;
+  const bank = parseInt(document.getElementById('ecoBank').value)||0;
+  await fetch('/api/admin/user-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:id,key:'balance',value:bal})});
+  await fetch('/api/admin/user-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId:id,key:'bankBalance',value:bank})});
+  showToast('✅ Bakiye güncellendi','ok');
+  document.querySelector('.modal-overlay')?.remove();
+  loadEconomy();
+}
+
+// PLAYERS
+async function loadPlayers() {
+  const c = document.getElementById('plContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const search = document.getElementById('plSearch').value.trim();
+    const sort = document.getElementById('plSort').value;
+    const order = document.getElementById('plOrder').value;
+    const r = await fetch('/api/admin/players?search='+encodeURIComponent(search)+'&sort='+sort+'&order='+order);
+    const d = await r.json();
+    if (d.error) { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Hata: '+d.error+'</div>'; return; }
+    const pl = d.players || [];
+    if (!pl.length) { c.innerHTML = '<div class="empty-state"><div class="icon">⚽</div><p>Oyuncu bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>#</th><th>İsim</th><th>Değer</th><th>Gol</th><th>Asist</th><th>Bakiye</th><th>Mevki</th><th>Takım</th><th>Skills</th></tr></thead><tbody>';
+    pl.forEach((p,i) => {
+      const isB = p.role && p.role.toLowerCase() === 'baskan';
+      const sk = p.skills || {};
+      const skStr = 'G:'+(sk.genel||50)+' H:'+(sk.hiz||50)+' Ş:'+(sk.sut||50);
+      const valCell = isB ? '<td style="color:#4b5563">—</td>' : '<td class="num-y">'+fmt(p.value)+'M</td>';
+      const gCell = isB ? '<td style="color:#4b5563">—</td>' : '<td class="num-g">'+p.goals+'</td>';
+      const aCell = isB ? '<td style="color:#4b5563">—</td>' : '<td class="num-b">'+p.assists+'</td>';
+      const posCell = isB ? '<td style="color:#4b5563">—</td>' : '<td>'+(p.position||'—')+'</td>';
+      const skCell = isB ? '<td style="color:#4b5563">—</td>' : '<td style="font-size:10px;color:#94a3b8">'+skStr+'</td>';
+      html += '<tr><td>'+(i+1)+'</td><td>'+(p.name||'<span style="color:#4b5563">Kayıtsız</span>')+'</td>'+valCell+gCell+aCell+'<td class="num-p">'+fmt(p.balance)+'</td>'+posCell+'<td>'+(p.squad||'—')+'</td>'+skCell+'</tr>';
+    });
+    html += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+d.total+' oyuncu (gösterilen: '+pl.length+')</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// MATCHES
+async function loadMatches() {
+  const c = document.getElementById('matchContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/matches');
+    const d = await r.json();
+    const ms = d.matches || [];
+    if (!ms.length) { c.innerHTML = '<div class="empty-state"><div class="icon">🏟️</div><p>Maç bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>ID</th><th>İsim</th><th>Durum</th><th>Skor</th><th>Gol Sayısı</th><th>Başlangıç</th><th></th></tr></thead><tbody>';
+    ms.forEach(m => {
+      const gs = m.goals||[];
+      const status = m.status === 'devam' ? '<span style="color:#4ade80;font-weight:600">● Devam</span>' : '<span style="color:#94a3b8">● Bitti</span>';
+      const skor = m.skor || (gs.length+' - 0');
+      html += '<tr><td class="mono">'+m.id+'</td><td>'+esc(m.name||'İsimsiz Maç')+'</td><td>'+status+'</td><td class="num-y">'+skor+'</td><td>'+gs.length+'</td><td style="font-size:11px;color:#94a3b8">'+fmtDate(m.startTime)+'</td><td><button class="btn btn-s btn-xs" onclick="toggleMatchDetail(this,\''+m.id+'\')">📋</button></td></tr>';
+      html += '<tr id="md-'+m.id+'" style="display:none"><td colspan="7"><div style="padding:10px;font-size:12px">';
+      if (gs.length) {
+        html += '<div style="font-weight:600;margin-bottom:6px;color:#a855f7">Goller:</div>';
+        gs.forEach(g => { html += '<div style="padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03)">⚽ '+(g.dk||'?')+'\' — '+(g.userName||g.player||g.userId||'?')+'</div>'; });
+      } else { html += '<div style="color:#475569">Henüz gol yok.</div>'; }
+      html += '<div style="margin-top:8px;color:#475569;font-size:10px">Kanal: '+(m.channelId||'—')+'</div>';
+      if (m.endTime) html += '<div style="color:#475569;font-size:10px">Bitiş: '+fmtDate(m.endTime)+'</div>';
+      html += '</div></td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+function toggleMatchDetail(btn, id) {
+  const row = document.getElementById('md-'+id);
+  if (!row) return;
+  row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+}
+
+// INVENTORY
+async function loadInventory(guildId) {
+  const vc = document.getElementById('vehicleContainer');
+  const hc = document.getElementById('houseContainer');
+  vc.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  hc.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const [vr, hr] = await Promise.all([
+      fetch('/api/admin/vehicles?guildId='+guildId),
+      fetch('/api/admin/houses?guildId='+guildId)
+    ]);
+    const vd = await vr.json(); const hd = await hr.json();
+    const vehs = vd.vehicles || []; const hous = hd.houses || [];
+    if (!vehs.length) { vc.innerHTML = '<div class="empty-state"><div class="icon">🚗</div><p>Bu sunucuda araç bulunamadı.</p></div>'; }
+    else {
+      let h = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Kullanıcı</th><th>Tip</th><th>Model</th><th>Fiyat</th><th>Tarih</th></tr></thead><tbody>';
+      vehs.forEach(v => { h += '<tr><td>'+(v.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td>'+esc(v.tip||'—')+'</td><td>'+esc(v.model||'—')+'</td><td class="num-y">'+fmt(v.fiyat)+'</td><td style="font-size:11px;color:#94a3b8">'+fmtDate(v.tarih)+'</td></tr>'; });
+      h += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+vehs.length+' araç</div>';
+      vc.innerHTML = h;
+    }
+    if (!hous.length) { hc.innerHTML = '<div class="empty-state"><div class="icon">🏡</div><p>Bu sunucuda ev bulunamadı.</p></div>'; }
+    else {
+      let h = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Kullanıcı</th><th>İsim</th><th>Fiyat</th><th>Tarih</th></tr></thead><tbody>';
+      hous.forEach(ev => { h += '<tr><td>'+(ev.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td>'+esc(ev.isim||'—')+'</td><td class="num-y">'+fmt(ev.fiyat)+'</td><td style="font-size:11px;color:#94a3b8">'+fmtDate(ev.tarih)+'</td></tr>'; });
+      h += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+hous.length+' ev</div>';
+      hc.innerHTML = h;
+    }
+  } catch {
+    vc.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>';
+    hc.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>';
+  }
+}
+
+// USERS
+async function searchUser() {
+  const id = document.getElementById('userSearch').value.trim();
+  if (!id) { showToast('❌ Kullanıcı ID girin','err'); return; }
+  const d = document.getElementById('userDetail'); const w = document.getElementById('userWarns');
+  d.style.display='block'; d.innerHTML='<div style="color:#475569"><div class="spinner"></div></div>'; w.style.display='none';
+  try {
+    const r = await fetch('/api/admin/user?userId='+id);
+    const j = await r.json();
+    if (j.error) { d.innerHTML='<div style="color:#fca5a5">Kullanıcı bulunamadı</div>'; return; }
+    const u = j.user;
+    let nm = u.name;
+    const isB = u.role && u.role.toLowerCase() === 'baskan';
+    let html = '<div class="srow" style="padding:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.04);border-bottom-style:solid"><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#a855f7,#d946ef);display:flex;align-items:center;justify-content:center;font-size:18px">👤</div><div><div style="font-weight:600;font-size:14px">'+esc(nm||'Kayıtsız')+'</div><div class="mono" style="color:#475569;font-size:11px">'+id+'</div></div></div></div><div class="ud-grid"><div class="ud-item"><div class="ud-lbl">Bakiye</div><div class="ud-val num-g">'+fmt(u.balance)+'</div></div><div class="ud-item"><div class="ud-lbl">Banka</div><div class="ud-val num-b">'+fmt(u.bankBalance)+'</div></div>'+(isB?'':'<div class="ud-item"><div class="ud-lbl">Değer</div><div class="ud-val num-y">'+fmt(u.value)+'</div></div><div class="ud-item"><div class="ud-lbl">Gol / Asist</div><div class="ud-val">'+(u.goals||0)+' / '+(u.assists||0)+'</div></div><div class="ud-item"><div class="ud-lbl">Mevki</div><div class="ud-val">'+(u.position||'—')+'</div></div><div class="ud-item"><div class="ud-lbl">Ülke</div><div class="ud-val">'+(u.country||'—')+'</div></div>')+'<div class="ud-item"><div class="ud-lbl">Takım</div><div class="ud-val">'+(u.squad||'—')+'</div></div></div><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn '+(j.blacklisted?'btn-r':'btn-g')+' btn-sm" onclick="toggleBL(\''+id+'\','+j.blacklisted+')">'+(j.blacklisted?'Karalisteden Çıkar':'Karalisteye Ekle')+'</button><button class="btn btn-y btn-sm" onclick="showWarn(\''+id+'\')">Uyarı Ver</button><button class="btn btn-s btn-sm" onclick="viewWarns(\''+id+'\')">Uyarılar ('+(j.warns||[]).length+')</button></div>';
+    if (j.blacklisted) html += '<div style="margin-top:8px;padding:8px 12px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1);border-radius:6px;font-size:11px;color:#fca5a5">Bu kullanıcı karalistededir.</div>';
+    d.innerHTML = html;
+  } catch { d.innerHTML = '<div style="color:#fca5a5">Bağlantı hatası</div>'; }
+}
+
+async function toggleBL(id, cur) {
+  if (!confirm(cur?'Karalisteden çıkarmak istediğine emin misin?':'Karalisteye eklemek istediğine emin misin?')) return;
+  try {
+    const r = await fetch('/api/admin/blacklist', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:id, action:cur?'remove':'add'}) });
+    const d = await r.json();
+    if (d.ok) { showToast('✅ ' + (cur?'Karalisteden çıkarıldı':'Karalisteye eklendi'), 'ok'); searchUser(); }
+    else showToast('❌ Hata', 'err');
+  } catch { showToast('❌ Bağlantı hatası', 'err'); }
+}
+
+function showWarn(id) {
+  const ov = document.createElement('div'); ov.className = 'modal-overlay';
+  ov.innerHTML = '<div class="modal"><h2>⚠️ Uyarı Ver</h2><label>Sebep</label><input id="warnReason" placeholder="Uyarı sebebi..."><div class="mtns"><button class="btn btn-y" onclick="addWarn(\''+id+'\')">Uyar</button><button class="btn btn-r" onclick="this.closest(\'.modal-overlay\').remove()">İptal</button></div></div>';
+  document.body.appendChild(ov);
+}
+
+async function addWarn(id) {
+  const reason = document.getElementById('warnReason').value.trim();
+  if (!reason) { showToast('❌ Sebep girin', 'err'); return; }
+  try {
+    const r = await fetch('/api/admin/warn', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:id, reason}) });
+    const d = await r.json();
+    if (d.ok) { showToast('✅ Uyarı verildi', 'ok'); document.querySelector('.modal-overlay')?.remove(); searchUser(); }
+    else showToast('❌ Hata', 'err');
+  } catch { showToast('❌ Bağlantı hatası', 'err'); }
+}
+
+async function viewWarns(id) {
+  const w = document.getElementById('userWarns'); w.style.display='block'; w.innerHTML='<div style="color:#475569"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/warns?userId='+id);
+    const d = await r.json();
+    const warns = d.warns||[];
+    if (!warns.length) { w.innerHTML = '<div style="color:#4b5563;padding:10px 0">Henüz uyarı yok.</div>'; return; }
+    let html = '<div style="font-weight:600;font-size:13px;margin-bottom:10px">⚠️ Uyarılar ('+warns.length+')</div>';
+    warns.forEach(ww => {
+      html += '<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:12px"><div style="color:#94a3b8;margin-bottom:3px">'+(ww.reason||ww.sebep||'Belirtilmemiş')+'</div><div style="color:#4b5563;font-size:10px">'+(ww.date||ww.tarih||'—')+'</div></div>';
+    });
+    w.innerHTML = html;
+  } catch { w.innerHTML = '<div style="color:#fca5a5">Bağlantı hatası</div>'; }
+}
+
+// GUILD CONFIG
+async function loadGuildConfig(id) {
+  const c = document.getElementById('gcfgContainer');
+  c.innerHTML = '<div style="color:#475569;padding:40px;text-align:center;grid-column:1/-1"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/guild-config?guildId='+id);
+    const d = await r.json();
+    if (d.error) { c.innerHTML = '<div style="color:#fca5a5;padding:40px;text-align:center">Hata</div>'; return; }
+    const cfg = d.config||{};
+    let html = '<div class="settings-card"><div class="shdr"><h3>📌 Roller</h3></div>';
+    html += '<div class="srow"><div class="info"><div class="n">Başkan</div></div><input class="setting-input" id="gc-baskan" value="'+esc(cfg.roller?.baskan||'')+'" placeholder="Rol ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveGc(\''+id+'\',\'roller.baskan\',document.getElementById(\'gc-baskan\').value)">Kaydet</button></div>';
+    html += '<div class="srow"><div class="info"><div class="n">Teknik</div></div><input class="setting-input" id="gc-teknik" value="'+esc(cfg.roller?.teknik||'')+'" placeholder="Rol ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveGc(\''+id+'\',\'roller.teknik\',document.getElementById(\'gc-teknik\').value)">Kaydet</button></div>';
+    html += '<div class="srow"><div class="info"><div class="n">Futbolcu</div></div><input class="setting-input" id="gc-futbolcu" value="'+esc(cfg.roller?.futbolcu||'')+'" placeholder="Rol ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveGc(\''+id+'\',\'roller.futbolcu\',document.getElementById(\'gc-futbolcu\').value)">Kaydet</button></div></div>';
+    html += '<div class="settings-card"><div class="shdr"><h3>🔧 Kanallar</h3></div>';
+    html += '<div class="srow"><div class="info"><div class="n">Değer Kanal</div></div><input class="setting-input" id="gc-degerKanal" value="'+esc(cfg.degerKanal||'')+'" placeholder="Kanal ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveGc(\''+id+'\',\'degerKanal\',document.getElementById(\'gc-degerKanal\').value)">Kaydet</button></div>';
+    html += '<div class="srow"><div class="info"><div class="n">Maç Sonucu Kanal</div></div><input class="setting-input" id="gc-macSonucuKanal" value="'+esc(cfg.macSonucuKanal||'')+'" placeholder="Kanal ID"><button class="btn btn-g btn-xs" style="margin-left:6px" onclick="saveGc(\''+id+'\',\'macSonucuKanal\',document.getElementById(\'gc-macSonucuKanal\').value)">Kaydet</button></div></div>';
+    html += '<div class="settings-card"><div class="shdr"><h3>📊 Diğer</h3></div>';
+    html += '<div class="srow"><div class="info"><div class="n">Kayıt Sayacı</div><div class="d">'+((cfg.kayitSayac&&cfg.kayitSayac[id])||0)+'</div></div></div>';
+    html += '</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:40px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+async function saveGc(id, key, value) {
+  try {
+    const r = await fetch('/api/admin/guild-config', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({guildId:id, key, value}) });
+    const d = await r.json();
+    if (d.ok) showToast('✅ Kaydedildi', 'ok'); else showToast('❌ Hata', 'err');
+  } catch { showToast('❌ Bağlantı hatası', 'err'); }
+}
+
+// INVITES
+async function loadInvites(id) {
+  const c = document.getElementById('invContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/invites?guildId='+id);
+    const d = await r.json();
+    const invs = d.invites||[];
+    if (!invs.length) { c.innerHTML = '<div class="empty-state"><div class="icon">📨</div><p>Davet bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>#</th><th>Kullanıcı</th><th>Davet</th></tr></thead><tbody>';
+    invs.forEach((i, idx) => {
+      html += '<tr><td>'+(idx+1)+'</td><td>'+(i.name||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td class="num-g">'+i.count+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// STATS
+async function loadStats() {
+  const g = document.getElementById('statsGrid');
+  g.innerHTML = '<div class="stat"><div class="lbl">Yükleniyor...</div></div>';
+  try {
+    const r = await fetch('/api/admin/stats');
+    const d = await r.json();
+    g.innerHTML = '<div class="stat"><div class="lbl">Toplam Kullanıcı</div><div class="val purple">'+fmt(d.totalUsers)+'</div></div><div class="stat"><div class="lbl">Toplam Bakiye</div><div class="val green">'+fmt(d.totalBalance)+'</div></div><div class="stat"><div class="lbl">Toplam Banka</div><div class="val blue">'+fmt(d.totalBank)+'</div></div><div class="stat"><div class="lbl">Toplam Değer</div><div class="val amber">'+fmt(d.totalValue)+'</div></div><div class="stat"><div class="lbl">Koruma Açık Sunucu</div><div class="val pink">'+d.guardGuilds+'</div></div><div class="stat"><div class="lbl">Toplam Uyarı</div><div class="val red">'+fmt(d.totalWarns)+'</div></div>';
+    document.getElementById('statsDetail').innerHTML = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Metric</th><th>Değer</th></tr></thead><tbody><tr><td>Sunucular</td><td class="num-p">'+fmt(d.guildCount)+'</td></tr><tr><td>Kullanıcılar</td><td class="num-p">'+fmt(d.memberCount)+'</td></tr><tr><td>Komutlar</td><td class="num-p">'+fmt(d.commands)+'</td></tr><tr><td>Toplam Maç</td><td class="num-p">'+fmt(d.totalMatches)+'</td></tr><tr><td>Uptime</td><td class="num-p">'+fmtUptime(d.uptime)+'</td></tr></tbody></table></div>';
+  } catch { g.innerHTML = '<div style="color:#fca5a5;padding:20px">Bağlantı hatası</div>'; }
+}
+function fmtUptime(s) {
+  if (!s) return '—';
+  const d = Math.floor(s/86400), h = Math.floor((s%86400)/3600), m = Math.floor((s%3600)/60);
+  return (d>0?d+'g ':'')+(h>0?h+'s ':'')+m+'d';
+}
+
+// TOURNAMENTS
+async function loadTournaments() {
+  const c = document.getElementById('tournamentContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/tournaments');
+    const d = await r.json();
+    const ts = d.tournaments||[];
+    if (!ts.length) { c.innerHTML = '<div class="empty-state"><div class="icon">🏆</div><p>Turnuva bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>İsim</th><th>Durum</th><th>Takım</th><th>Maç</th><th>Oynanan</th></tr></thead><tbody>';
+    ts.forEach(t => {
+      const st = t.aktif ? '<span style="color:#4ade80;font-weight:600">● Aktif</span>' : '<span style="color:#94a3b8">● Bitti</span>';
+      html += '<tr><td style="font-weight:600">'+esc(t.name)+'</td><td>'+st+'</td><td class="num-p">'+t.teamCount+'</td><td>'+t.fixtureCount+'</td><td class="num-g">'+t.playedMatches+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// RPG
+async function loadRpg() {
+  const c = document.getElementById('rpgContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/rpg');
+    const d = await r.json();
+    let chars = d.characters||[];
+    const q = document.getElementById('rpgSearch').value.trim().toLowerCase();
+    if (q) chars = chars.filter(c => c.userId.includes(q)||(c.userName||'').toLowerCase().includes(q));
+    if (!chars.length) { c.innerHTML = '<div class="empty-state"><div class="icon">⚔️</div><p>Karakter bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Kullanıcı</th><th>Seviye</th><th>XP</th><th>HP</th><th>Saldırı</th><th>Savunma</th><th>Altın</th><th>İksir</th><th>Konum</th><th>Silah</th><th>Pet</th><th>Kat</th></tr></thead><tbody>';
+    chars.forEach(c => {
+      const hpStr = c.hp+'/'+c.maxHp;
+      html += '<tr><td>'+(c.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td class="num-y">'+c.level+'</td><td>'+fmt(c.xp)+'</td><td>'+hpStr+'</td><td class="num-r">'+c.atk+'</td><td class="num-b">'+c.def+'</td><td class="num-y">'+fmt(c.gold)+'</td><td>'+c.potions+'</td><td style="font-size:11px">'+esc(c.location||'—')+'</td><td style="font-size:11px">'+(c.weapon||'—')+'</td><td>'+(c.pet||'—')+'</td><td class="num-p">'+c.highestFloor+'</td></tr>';
+    });
+    html += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+chars.length+' karakter</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// TRAINING
+async function loadTraining() {
+  const c = document.getElementById('trainingContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/training');
+    const d = await r.json();
+    const tr = d.training||[];
+    if (!tr.length) { c.innerHTML = '<div class="empty-state"><div class="icon">🏋️</div><p>Antrenman verisi bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>#</th><th>Kullanıcı</th><th>Antrenman</th></tr></thead><tbody>';
+    tr.forEach((t, i) => {
+      html += '<tr><td>'+(i+1)+'</td><td>'+(t.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td class="num-g">'+fmt(t.count)+'</td></tr>';
+    });
+    html += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+tr.length+' kişi</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// GIVEAWAYS
+async function loadGiveaways() {
+  const c = document.getElementById('giveawayContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/giveaways');
+    const d = await r.json();
+    const gs = d.giveaways||[];
+    if (!gs.length) { c.innerHTML = '<div class="empty-state"><div class="icon">🎁</div><p>Çekiliş bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Ödül</th><th>Durum</th><th>Katılımcı</th><th>Kazanan</th><th>Ev Sahibi</th><th>Bitiş</th></tr></thead><tbody>';
+    gs.forEach(g => {
+      const st = g.ended ? '<span style="color:#94a3b8">● Bitti</span>' : '<span style="color:#4ade80;font-weight:600">● Devam</span>';
+      html += '<tr><td style="font-weight:600">'+esc(g.prize)+'</td><td>'+st+'</td><td class="num-p">'+g.entrantCount+'</td><td>'+g.winnerCount+'</td><td>'+(g.hostName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td style="font-size:11px;color:#94a3b8">'+(g.endTime?fmtDate(g.endTime):'—')+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// TRIVIA
+async function loadTrivia() {
+  const c = document.getElementById('triviaContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/trivia');
+    const d = await r.json();
+    const ts = d.trivia||[];
+    if (!ts.length) { c.innerHTML = '<div class="empty-state"><div class="icon">🧠</div><p>Trivia bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Soru #</th><th>Ödül</th><th>Durum</th><th>Cevap</th></tr></thead><tbody>';
+    ts.forEach(t => {
+      const st = t.cevaplandi ? '<span style="color:#4ade80;font-weight:600">✓ Cevaplandı</span>' : '<span style="color:#fbbf24">● Bekliyor</span>';
+      html += '<tr><td>#'+t.idx+'</td><td class="num-y">'+fmt(t.odul)+'</td><td>'+st+'</td><td>'+(t.dogruCevap||'<span style="color:#4b5563">—</span>')+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// SNIPE
+async function loadSnipe(guildId) {
+  const c = document.getElementById('snipeContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/snipe?guildId='+guildId);
+    const d = await r.json();
+    const sn = d.snipe||[];
+    if (!sn.length) { c.innerHTML = '<div class="empty-state"><div class="icon">👻</div><p>Bu sunucuda silinen mesaj yok.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Kanal</th><th>Yazar</th><th>Mesaj</th><th>Silinme</th></tr></thead><tbody>';
+    sn.forEach(s => {
+      html += '<tr><td class="mono">'+s.channelId+'</td><td>'+esc(s.author||'<span style="color:#4b5563">Bilinmiyor</span>')+'</td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#94a3b8">'+esc(s.content||'')+'</td><td style="font-size:11px;color:#4b5563">'+(s.deletedAt?fmtDate(s.deletedAt):'—')+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// REGISTRATION HISTORY
+async function loadRegistration(guildId) {
+  const c = document.getElementById('regContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/registration-history?guildId='+guildId);
+    const d = await r.json();
+    const hist = d.history||[];
+    if (!hist.length) { c.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Bu sunucuda kayıt geçmişi yok.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Kullanıcı</th><th>Kayıtlı İsim</th><th>Rol</th><th>Kayıt Eden</th><th>Tarih</th></tr></thead><tbody>';
+    hist.forEach(h => {
+      html += '<tr><td>'+(h.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td>'+esc(h.registeredName||'—')+'</td><td><span class="tag '+(h.role==='Baskan'?'tag-p':h.role==='Uye'?'tag-g':'tag-s')+'">'+esc(h.role||'—')+'</span></td><td>'+(h.kayitEdenName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td style="font-size:11px;color:#94a3b8">'+(h.timestamp?fmtDate(h.timestamp):'—')+'</td></tr>';
+    });
+    html += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+hist.length+' kayıt</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// SQUADS
+async function loadSquads() {
+  const c = document.getElementById('squadContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/players?sort=name&order=asc');
+    const d = await r.json();
+    const pl = d.players||[];
+    const teams = {};
+    pl.forEach(p => {
+      const t = p.squad || 'Takımsız';
+      if (!teams[t]) teams[t] = [];
+      teams[t].push(p);
+    });
+    const sorted = Object.keys(teams).sort((a,b) => {
+      if (a === 'Takımsız') return 1;
+      if (b === 'Takımsız') return -1;
+      return teams[b].length - teams[a].length;
+    });
+    if (!sorted.length) { c.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>Oyuncu bulunamadı.</p></div>'; return; }
+    let html = '';
+    sorted.forEach(t => {
+      const members = teams[t];
+      html += '<div class="card" style="margin-bottom:14px;padding:16px 20px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-weight:700;font-size:14px">'+(t==='Takımsız'?'👤 Takımsız': '👥 '+esc(t))+'</span><span style="color:#6b7280;font-size:11px">'+members.length+' oyuncu</span></div><div class="table-wrap"><table class="mtable"><thead><tr><th>#</th><th>İsim</th><th>Mevki</th><th>Değer</th><th>Gol</th><th>Asist</th></tr></thead><tbody>';
+      members.forEach((p,i) => {
+        html += '<tr><td>'+(i+1)+'</td><td>'+(p.name||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td>'+(p.position||'—')+'</td><td class="num-y">'+fmt(p.value)+'M</td><td class="num-g">'+p.goals+'</td><td class="num-b">'+p.assists+'</td></tr>';
+      });
+      html += '</tbody></table></div></div>';
+    });
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// MARKET
+async function loadMarket(guildId) {
+  const vc = document.getElementById('mktVehicleContainer');
+  const hc = document.getElementById('mktHouseContainer');
+  vc.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  hc.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const [vr, hr] = await Promise.all([
+      fetch('/api/admin/vehicles?guildId='+guildId),
+      fetch('/api/admin/houses?guildId='+guildId)
+    ]);
+    const vd = await vr.json(); const hd = await hr.json();
+    const vehs = vd.vehicles || []; const hous = hd.houses || [];
+    if (!vehs.length) { vc.innerHTML = '<div class="empty-state"><div class="icon">🚗</div><p>Bu sunucuda satılık araç yok.</p></div>'; }
+    else {
+      let h = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Sahip</th><th>Tip</th><th>Model</th><th>Fiyat</th></tr></thead><tbody>';
+      vehs.forEach(v => { h += '<tr><td>'+(v.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td>'+esc(v.tip||'—')+'</td><td>'+esc(v.model||'—')+'</td><td class="num-y">'+fmt(v.fiyat)+' TL</td></tr>'; });
+      h += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+vehs.length+' araç</div>';
+      vc.innerHTML = h;
+    }
+    if (!hous.length) { hc.innerHTML = '<div class="empty-state"><div class="icon">🏡</div><p>Bu sunucuda satılık ev yok.</p></div>'; }
+    else {
+      let h = '<div class="table-wrap"><table class="mtable"><thead><tr><th>Sahip</th><th>İsim</th><th>Fiyat</th></tr></thead><tbody>';
+      hous.forEach(ev => { h += '<tr><td>'+(ev.userName||'<span style="color:#4b5563">Kayıtsız</span>')+'</td><td>'+esc(ev.isim||'—')+'</td><td class="num-y">'+fmt(ev.fiyat)+' TL</td></tr>'; });
+      h += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+hous.length+' ev</div>';
+      hc.innerHTML = h;
+    }
+  } catch {
+    vc.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>';
+    hc.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>';
+  }
+}
+
+// BACKUP
+async function loadBackup() {
+  try {
+    const r = await fetch('/api/admin/backup');
+    const d = await r.json();
+    const json = JSON.stringify(d);
+    const size = new Blob([json]).size;
+    const sizes = ['B','KB','MB','GB'];
+    const i = Math.floor(Math.log(size)/Math.log(1024));
+    const sz = (size / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+    document.getElementById('backupSize').textContent = sz;
+    document.getElementById('backupUsers').textContent = Object.keys(d.users||{}).length;
+    document.getElementById('backupKeys').textContent = Object.keys(d).length;
+  } catch {}
+}
+function downloadBackup() {
+  fetch('/api/admin/backup').then(r => r.json()).then(d => {
+    const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'elektro-backup-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('✅ Yedek indiriliyor', 'ok');
+  }).catch(() => showToast('❌ Yedek alınamadı', 'err'));
+}
+
+// SERVER DETAIL
+function showServerDetail(guildId, guildName) {
+  const ov = document.createElement('div'); ov.className = 'modal-overlay';
+  ov.innerHTML = '<div class="modal" style="max-width:600px"><h2>🖥 ' + esc(guildName) + '</h2><div style="color:#475569;text-align:center;padding:20px"><div class="spinner"></div></div><div class="mtns"><button class="btn btn-s" onclick="this.closest(\'.modal-overlay\').remove()">Kapat</button></div></div>';
+  document.body.appendChild(ov);
+  fetch('/api/admin/guild-detail?guildId=' + guildId).then(r => r.json()).then(d => {
+    if (d.error) { ov.querySelector('.modal > div:first-of-type').innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">' + d.error + '</div>'; return; }
+    let html = '<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)">';
+    if (d.icon) html += '<img src="' + d.icon + '" style="width:48px;height:48px;border-radius:12px">';
+    html += '<div><div style="font-weight:700;font-size:15px">' + esc(d.name) + '</div><div class="mono" style="color:#475569;font-size:11px">' + d.id + '</div></div></div>';
+    html += '<div class="ud-grid"><div class="ud-item"><div class="ud-lbl">Toplam Üye</div><div class="ud-val purple">' + d.memberCount + '</div></div><div class="ud-item"><div class="ud-lbl">İnsan</div><div class="ud-val blue">' + d.humanCount + '</div></div><div class="ud-item"><div class="ud-lbl">Bot</div><div class="ud-val green">' + d.botCount + '</div></div><div class="ud-item"><div class="ud-lbl">Sahip</div><div class="ud-val" style="font-size:13px">' + d.ownerId + '</div></div></div>';
+    html += '<h3 style="font-size:13px;font-weight:700;margin:16px 0 8px">📋 Kanallar (' + (d.channels||[]).length + ')</h3><div style="max-height:140px;overflow-y:auto;font-size:11px">';
+    (d.channels||[]).forEach(c => { html += '<div style="padding:4px 0;color:#94a3b8"><span class="mono">#' + esc(c.name) + '</span> <span style="color:#4b5563">(' + c.id + ')</span></div>'; });
+    html += '</div><h3 style="font-size:13px;font-weight:700;margin:16px 0 8px">🎭 Roller (' + (d.roles||[]).length + ')</h3><div style="max-height:140px;overflow-y:auto;font-size:11px">';
+    (d.roles||[]).forEach(r => { html += '<div style="padding:4px 0;color:#94a3b8"><span style="color:#' + r.color.toString(16).padStart(6,'0') + '">●</span> ' + esc(r.name) + ' <span style="color:#4b5563">(' + r.memberCount + ' üye)</span></div>'; });
+    html += '</div>';
+    const container = ov.querySelector('.modal > div');
+    if (container) container.outerHTML = html;
+  }).catch(() => { const c = ov.querySelector('.modal > div'); if (c) c.innerHTML = '<div style="color:#fca5a5;text-align:center">Bağlantı hatası</div>'; });
+}
+
+// DASHBOARD DATA
+async function loadDashboardData() {
+  try {
+    const [balR, valR] = await Promise.all([
+      fetch('/api/admin/top-users?type=balance&limit=5'),
+      fetch('/api/admin/top-users?type=value&limit=5')
+    ]);
+    const bal = await balR.json(); const val = await valR.json();
+    let bh = ''; (bal.users||[]).forEach((u,i) => {
+      bh += '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.02)"><span>'+(i+1)+'. '+(u.name||'<span style="color:#4b5563">Kayıtsız</span>')+'</span><span class="num-g">'+fmt(u.value)+' TL</span></div>';
+    });
+    if (!bh) bh = '<div style="color:#475569">Veri yok</div>';
+    document.getElementById('topBalance').innerHTML = bh;
+    let vh = ''; (val.users||[]).forEach((u,i) => {
+      vh += '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.02)"><span>'+(i+1)+'. '+(u.name||'<span style="color:#4b5563">Kayıtsız</span>')+'</span><span class="num-y">'+fmt(u.value)+'M</span></div>';
+    });
+    if (!vh) vh = '<div style="color:#475569">Veri yok</div>';
+    document.getElementById('topValue').innerHTML = vh;
+  } catch {}
+}
+
+// STANDINGS
+async function loadStandings() {
+  const c = document.getElementById('standingsContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const mr = await fetch('/api/admin/matches');
+    const md = await mr.json();
+    const ms = md.matches || [];
+    const teams = {};
+    ms.forEach(m => {
+      if (m.status !== 'bitti' && m.status !== 'finished') return;
+      const name = m.name || 'İsimsiz';
+      if (!teams[name]) teams[name] = { O:0, G:0, B:0, M:0, A:0, Y:0, P:0 };
+      const t = teams[name];
+      t.O++;
+      const gs = m.goals||[];
+      const gol = gs.length;
+      t.A += gol; t.Y += 0;
+      if (gol > 0) t.G++; else if (gol === 0) t.B++;
+      t.P = t.G * 3 + t.B;
+    });
+    const sorted = Object.keys(teams).sort((a,b) => {
+      if (teams[b].P !== teams[a].P) return teams[b].P - teams[a].P;
+      const gdA = teams[a].A - teams[a].Y, gdB = teams[b].A - teams[b].Y;
+      return gdB - gdA;
+    });
+    if (!sorted.length) { c.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>Henüz maç verisi yok.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>#</th><th>Takım</th><th>O</th><th>G</th><th>B</th><th>M</th><th>A</th><th>Y</th><th>AV</th><th>P</th></tr></thead><tbody>';
+    sorted.forEach((name, i) => {
+      const t = teams[name];
+      html += '<tr><td style="font-weight:700">'+(i+1)+'.</td><td style="font-weight:600">'+esc(name)+'</td><td>'+t.O+'</td><td class="num-g">'+t.G+'</td><td class="num-y">'+t.B+'</td><td class="num-r">'+t.M+'</td><td class="num-b">'+t.A+'</td><td>'+t.Y+'</td><td class="num-p">'+(t.A-t.Y)+'</td><td style="font-weight:700;font-size:15px" class="num-g">'+t.P+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// FIXTURES
+async function loadFixtures() {
+  const c = document.getElementById('fixtureContainer');
+  c.innerHTML = '<div style="color:#475569;padding:20px;text-align:center"><div class="spinner"></div></div>';
+  try {
+    const r = await fetch('/api/admin/matches');
+    const d = await r.json();
+    const ms = d.matches || [];
+    if (!ms.length) { c.innerHTML = '<div class="empty-state"><div class="icon">📅</div><p>Maç bulunamadı.</p></div>'; return; }
+    let html = '<div class="table-wrap"><table class="mtable"><thead><tr><th>İsim</th><th>Durum</th><th>Skor</th><th>Tarih</th></tr></thead><tbody>';
+    const sorted = ms.sort((a,b) => (b.startTime||0) - (a.startTime||0));
+    sorted.forEach(m => {
+      const gs = m.goals||[];
+      const st = m.status === 'devam' ? '<span style="color:#4ade80;font-weight:600">● Devam</span>' : '<span style="color:#94a3b8">● Bitti</span>';
+      html += '<tr><td style="font-weight:600">'+esc(m.name||'İsimsiz')+'</td><td>'+st+'</td><td class="num-y">'+(m.skor||(gs.length+' - 0'))+'</td><td style="font-size:11px;color:#94a3b8">'+fmtDate(m.startTime)+'</td></tr>';
+    });
+    html += '</tbody></table></div><div style="color:#475569;font-size:11px;margin-top:8px">'+ms.length+' maç</div>';
+    c.innerHTML = html;
+  } catch { c.innerHTML = '<div style="color:#fca5a5;padding:20px;text-align:center">Bağlantı hatası</div>'; }
+}
+
+// LIVE REFRESH
+async function leaveGuild(id, name) {
+  if (!confirm(`"${name}" sunucusundan çıkılsın mı?`)) return;
+  const btn = document.querySelector(`.leave-guild-btn[data-id="${id}"]`);
+  if (btn) { btn.disabled = true; btn.textContent = 'Çıkılıyor...'; }
+  const r = await fetch('/api/admin/guild-leave', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({guildId:id}) });
+  const d = await r.json();
+  if (d.ok) { toast('Sunucudan çıkıldı: ' + (d.name||name)); setTimeout(() => refresh(), 1000); }
+  else { toast('Hata: ' + (d.error||'Bilinmeyen'), true); if (btn) { btn.disabled = false; btn.textContent = 'Sunucuyu At'; } }
+}
+async function refresh() {
+  try {
+    const r = await fetch('/api/status');
+    const d = await r.json();
+    document.getElementById('statusDot').className = 'dot ' + d.status;
+    document.getElementById('statusText').textContent = d.status.charAt(0).toUpperCase() + d.status.slice(1);
+    document.getElementById('s-guilds').textContent = d.guilds;
+    document.getElementById('s-members').textContent = d.members;
+    document.getElementById('s-ping').textContent = d.ping + 'ms';
+    document.getElementById('s-cmds').textContent = d.commands;
+    const u = d.uptime || 0;
+    document.getElementById('s-uptime').textContent = u > 0 ? Math.floor(u/86400)+'g '+Math.floor((u%86400)/3600)+'s '+Math.floor((u%3600)/60)+'d' : '—';
+    document.getElementById('startBtn').disabled = ['online','starting'].includes(d.status);
+    document.getElementById('stopBtn').disabled = ['offline','stopping'].includes(d.status);
+    document.getElementById('restartBtn').disabled = ['offline','stopping','starting'].includes(d.status);
+    if (d.logs && d.logs.length) {
+      document.getElementById('logContainer').innerHTML = d.logs.map(l => { const c = l.includes('[HATA]')?'err':''; return '<div class="l '+c+'"><span class="t">▸</span>'+esc(l)+'</div>'; }).join('');
+    }
+  } catch {}
+}
+async function act(e) { await fetch(e,{method:'POST'}); await new Promise(r => setTimeout(r,1200)); refresh(); }
+document.getElementById('startBtn')?.addEventListener('click', () => act('/api/bot/start'));
+document.getElementById('stopBtn')?.addEventListener('click', () => act('/api/bot/stop'));
+document.getElementById('restartBtn')?.addEventListener('click', () => act('/api/bot/restart'));
+setInterval(refresh, 5000);
+refresh();
+
+// HELPERS
+function fmt(n) { return (n===undefined||n===null) ? '0' : n.toLocaleString('tr'); }
+function fmtDate(d) { if (!d) return '—'; try { return new Date(d).toLocaleString('tr'); } catch { return d; } }
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+function toast(msg, isErr) { showToast(msg, isErr ? 'err' : 'ok'); }
+function showToast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast ' + type; el.style.display = 'block';
+  clearTimeout(el._t); el._t = setTimeout(() => el.style.display = 'none', 3000);
+}
+</script>
+</body>
+</html>

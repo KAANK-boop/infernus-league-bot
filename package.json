@@ -1,0 +1,33 @@
+{
+  "name": "discord-football-bot",
+  "version": "1.0.0",
+  "description": "Discord Football Management Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "panel": "node panel/server.js",
+    "dashboard": "node dashboard/server.js"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.19.2",
+    "@distube/youtube": "^1.0.4",
+    "@distube/yt-dlp": "^2.0.1",
+    "@jimp/plugin-circle": "^1.6.1",
+    "@jimp/plugin-print": "^1.6.1",
+    "@jimp/plugin-resize": "^1.6.1",
+    "@napi-rs/canvas": "^1.0.0",
+    "axios": "^1.18.1",
+    "bcrypt": "^6.0.0",
+    "cheerio": "^1.2.0",
+    "discord.js": "^14.14.1",
+    "distube": "^5.2.3",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "ffmpeg-static": "^5.3.0",
+    "jimp": "^1.6.1",
+    "opusscript": "^0.0.8",
+    "play-dl": "^1.9.7"
+  }
+}

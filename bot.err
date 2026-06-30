@@ -1,0 +1,8 @@
+UNHANDLED: ConnectTimeoutError: Connect Timeout Error (attempted address: discord.com:443, timeout: 10000ms)
+    at onConnectTimeout (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\@discordjs\rest\node_modules\undici\lib\core\connect.js:237:24)
+    at Immediate._onImmediate (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\@discordjs\rest\node_modules\undici\lib\core\connect.js:188:35)
+    at process.processImmediate (node:internal/timers:504:21) {
+  code: 'UND_ERR_CONNECT_TIMEOUT',
+  Symbol(undici.error.UND_ERR): true,
+  Symbol(undici.error.UND_ERR_CONNECT_TIMEOUT): true
+}

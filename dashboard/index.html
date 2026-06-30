@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electro Panel — Admin</title>
+<style>
+  :root {
+    --bg: #08080e;
+    --bg2: #0c0c1a;
+    --bg3: #111122;
+    --card: #0e0e22;
+    --card2: #14142a;
+    --border: #1a1a3a;
+    --text: #a0a0c0;
+    --text2: #c0c0e0;
+    --heading: #e0e0f0;
+    --muted: #666688;
+    --cyan: #00e5ff;
+    --cyan2: #00b8d4;
+    --magenta: #ff2d95;
+    --magenta2: #d81b60;
+    --purple: #7c4dff;
+    --purple2: #651fff;
+    --green: #00e676;
+    --red: #ff1744;
+    --orange: #ff9100;
+    --yellow: #ffd600;
+    --shadow-cyan: 0 0 20px rgba(0,229,255,.15), 0 0 40px rgba(0,229,255,.05);
+    --shadow-magenta: 0 0 20px rgba(255,45,149,.15), 0 0 40px rgba(255,45,149,.05);
+    --shadow-purple: 0 0 20px rgba(124,77,255,.15), 0 0 40px rgba(124,77,255,.05);
+    --radius: 12px;
+    --sidebar-w: 240px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+  ::selection { background: var(--magenta); color: #fff; }
+
+  /* === LOGIN === */
+  #loginScreen {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(124,77,255,.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(0,229,255,.06) 0%, transparent 50%);
+  }
+  #loginScreen.hidden { display: none; }
+  .login-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    width: 380px;
+    max-width: 92vw;
+    box-shadow: var(--shadow-purple);
+    position: relative;
+    overflow: hidden;
+  }
+  .login-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--purple));
+  }
+  .login-logo {
+    text-align: center; margin-bottom: 28px;
+  }
+  .login-logo h1 {
+    font-size: 28px; font-weight: 800; letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .login-logo p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .login-box label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
+  .login-box input {
+    width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text); font-size: 14px; outline: none;
+    transition: border .2s, box-shadow .2s; margin-bottom: 16px;
+  }
+  .login-box input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(124,77,255,.15); }
+  .login-btn {
+    width: 100%; padding: 11px; border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    color: #fff; transition: opacity .2s, transform .1s;
+  }
+  .login-btn:hover { opacity: .9; }
+  .login-btn:active { transform: scale(.98); }
+  .login-error { color: var(--red); font-size: 13px; text-align: center; margin-top: 12px; min-height: 20px; }
+  .login-hint { text-align: center; font-size: 12px; color: var(--muted); margin-top: 16px; }
+  .login-discord {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text); font-size: 13px; cursor: pointer;
+    transition: border .2s, background .2s; margin-top: 12px;
+  }
+  .login-discord:hover { border-color: #5865f2; background: rgba(88,101,242,.1); }
+  .login-discord svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* === DASHBOARD LAYOUT === */
+  #app { display: flex; height: 100vh; }
+  #app.hidden { display: none; }
+
+  /* === SIDEBAR === */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: var(--card); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; overflow: hidden;
+    transition: transform .3s ease;
+  }
+  .sidebar-brand {
+    padding: 18px 20px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sidebar-brand .logo {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff; flex-shrink: 0;
+  }
+  .sidebar-brand h2 { font-size: 16px; font-weight: 700; color: var(--heading); }
+  .sidebar-brand span { font-size: 11px; color: var(--muted); display: block; margin-top: -2px; }
+  .sidebar-nav { flex: 1; overflow-y: auto; padding: 8px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 8px;
+    color: var(--muted); cursor: pointer; transition: all .2s;
+    text-decoration: none; font-size: 13px;
+  }
+  .nav-item:hover { background: var(--bg2); color: var(--text); }
+  .nav-item.active {
+    background: linear-gradient(135deg, rgba(124,77,255,.12), rgba(255,45,149,.08));
+    color: var(--heading); font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--purple);
+  }
+  .nav-item .icon { width: 18px; text-align: center; flex-shrink: 0; font-size: 15px; }
+  .nav-item .badge {
+    margin-left: auto; font-size: 11px; padding: 1px 7px;
+    border-radius: 10px; background: var(--bg2); color: var(--muted);
+  }
+  .sidebar-footer {
+    padding: 12px; border-top: 1px solid var(--border);
+  }
+  .sidebar-footer .nav-item { font-size: 12px; padding: 8px 12px; background: none; width: 100%; }
+
+  /* === MAIN CONTENT === */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .topbar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 24px; border-bottom: 1px solid var(--border);
+    background: var(--card); min-height: 56px;
+  }
+  .topbar h3 { font-size: 16px; font-weight: 600; color: var(--heading); }
+  .topbar .sub { font-size: 12px; color: var(--muted); }
+  .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .topbar-status { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .status-dot.offline { background: var(--red); }
+  .topbar-user { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); }
+  .topbar-user .avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 600;
+  }
+  .content { flex: 1; overflow-y: auto; padding: 24px; }
+
+  /* === CARDS === */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .card:hover { border-color: rgba(124,77,255,.2); }
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .card-header h4 { font-size: 14px; font-weight: 600; color: var(--heading); }
+  .card-header .action { font-size: 12px; color: var(--cyan); cursor: pointer; }
+  .card-header .action:hover { text-decoration: underline; }
+  .card-glow-cyan { box-shadow: var(--shadow-cyan); }
+  .card-glow-magenta { box-shadow: var(--shadow-magenta); }
+  .card-glow-purple { box-shadow: var(--shadow-purple); }
+
+  /* === STAT CARDS GRID === */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    transition: all .2s;
+    position: relative; overflow: hidden;
+  }
+  .stat-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .stat-card.cyan::before { background: var(--cyan); }
+  .stat-card.magenta::before { background: var(--magenta); }
+  .stat-card.purple::before { background: var(--purple); }
+  .stat-card.green::before { background: var(--green); }
+  .stat-card.orange::before { background: var(--orange); }
+  .stat-card:hover {
+    border-color: rgba(124,77,255,.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  }
+  .stat-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .stat-card .value { font-size: 28px; font-weight: 700; color: var(--heading); margin-top: 4px; }
+  .stat-card .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* === TABLE === */
+  .table-wrap {
+    overflow-x: auto; border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+  }
+  table th {
+    text-align: left; padding: 10px 14px; font-size: 11px;
+    text-transform: uppercase; letter-spacing: .5px;
+    color: var(--muted); background: var(--bg2);
+    border-bottom: 1px solid var(--border); font-weight: 600;
+    white-space: nowrap;
+  }
+  table td {
+    padding: 10px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  table tr:hover td { background: rgba(124,77,255,.03); }
+  table tr:last-child td { border-bottom: none; }
+
+  /* === BADGES & TAGS === */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600;
+  }
+  .tag-green { background: rgba(0,230,118,.12); color: var(--green); }
+  .tag-red { background: rgba(255,23,68,.12); color: var(--red); }
+  .tag-cyan { background: rgba(0,229,255,.12); color: var(--cyan); }
+  .tag-purple { background: rgba(124,77,255,.12); color: var(--purple); }
+  .tag-magenta { background: rgba(255,45,149,.12); color: var(--magenta); }
+  .tag-orange { background: rgba(255,145,0,.12); color: var(--orange); }
+
+  /* === TOGGLE SWITCH === */
+  .toggle { position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle .slider {
+    position: absolute; cursor: pointer; inset: 0;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 22px; transition: all .25s;
+  }
+  .toggle .slider::before {
+    content: ''; position: absolute; height: 16px; width: 16px;
+    left: 2px; bottom: 2px; background: var(--muted); border-radius: 50%;
+    transition: all .25s;
+  }
+  .toggle input:checked + .slider { background: linear-gradient(135deg, var(--purple), var(--magenta)); border-color: transparent; }
+  .toggle input:checked + .slider::before { transform: translateX(18px); background: #fff; }
+
+  /* === CHIPS / BUTTONS === */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 8px; border: none;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all .2s; text-decoration: none;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--purple), var(--magenta)); color: #fff; }
+  .btn-primary:hover { opacity: .9; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--purple); color: var(--heading); }
+  .btn-danger { background: linear-gradient(135deg, var(--red), #b71c1c); color: #fff; }
+  .btn-danger:hover { opacity: .9; }
+  .btn-sm { padding: 5px 12px; font-size: 12px; }
+  .btn-xs { padding: 3px 8px; font-size: 11px; }
+
+  /* === FORMS === */
+  input, select, textarea {
+    background: var(--bg2); border: 1px solid var(--border);
+    color: var(--text); padding: 8px 12px; border-radius: 6px;
+    font-size: 13px; outline: none; transition: all .2s;
+    font-family: inherit;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(124,77,255,.12); }
+  select { cursor: pointer; }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 4px; font-weight: 500; }
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .form-row > * { flex: 1; min-width: 120px; }
+
+  /* === SEARCH === */
+  .search-box {
+    position: relative; max-width: 280px;
+  }
+  .search-box input { padding-left: 32px; width: 100%; }
+  .search-box .icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; pointer-events: none; }
+
+  /* === TABS === */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab {
+    padding: 8px 18px; font-size: 13px; color: var(--muted); cursor: pointer;
+    border-bottom: 2px solid transparent; transition: all .2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--heading); border-bottom-color: var(--purple); font-weight: 600; }
+
+  /* === MODAL === */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,.7); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: auto; }
+  .modal {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px;
+    width: 500px; max-width: 92vw; max-height: 85vh; overflow-y: auto;
+    box-shadow: var(--shadow-purple);
+  }
+  .modal h3 { font-size: 17px; font-weight: 600; color: var(--heading); margin-bottom: 16px; }
+  .modal-close { float: right; background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 4px; }
+  .modal-close:hover { color: var(--text); }
+
+  /* === GUARD SETTINGS === */
+  .setting-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-row .info { flex: 1; }
+  .setting-row .info h5 { font-size: 13px; color: var(--heading); font-weight: 500; }
+  .setting-row .info p { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+  /* === LOADING === */
+  .loading {
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px; color: var(--muted); gap: 10px;
+  }
+  .spinner {
+    width: 20px; height: 20px; border: 2px solid var(--border);
+    border-top-color: var(--purple); border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 100; transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .topbar { padding: 10px 16px; }
+    .content { padding: 16px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .login-box { padding: 28px 20px; }
+    .form-row > * { flex: 1 1 100%; }
+  }
+  .table-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+  .flex-center { display: flex; align-items: center; gap: 8px; }
+  .gap-4 { gap: 4px; }
+  .mt-16 { margin-top: 16px; }
+  .mb-16 { margin-bottom: 16px; }
+  .text-muted { color: var(--muted); }
+  .text-heading { color: var(--heading); }
+  .text-center { text-align: center; }
+  .w-full { width: 100%; }
+  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeIn .3s ease forwards; }
+
+  /* === GRID BG EFFECT === */
+  #app::before {
+    content: ''; position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(124,77,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,77,255,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+  .main { position: relative; z-index: 1; }
+
+  /* === SCAN LINE === */
+  .scanline {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+    opacity: .08; pointer-events: none; z-index: 999;
+    animation: scan 8s linear infinite;
+  }
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+
+  /* table fix */
+  .table-wrap.compact td, .table-wrap.compact th { padding: 6px 10px; font-size: 12px; }
+  .text-right { text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <h1>ELECTRO</h1>
+      <p>Yönetim Paneli</p>
+    </div>
+    <label>Admin Şifresi</label>
+    <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
+    <button class="login-btn" id="loginBtn">Giriş Yap</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-hint">Varsayılan şifre: <strong style="color:var(--text2)">admin</strong></div>
+    <button class="login-discord" id="discordLoginBtn">
+      <svg viewBox="0 0 640 512" fill="currentColor"><path d="M524.5 69.8a1.5 1.5 0 0 0-.8-.7A485.1 485.1 0 0 0 404.1 32a1.8 1.8 0 0 0-1.9.7 337 337 0 0 0-14.9 30.6 447.8 447.8 0 0 0-134.4 0 309.5 309.5 0 0 0-15-30.6 1.9 1.9 0 0 0-1.9-.7 483.7 483.7 0 0 0-119.6 37.1 1.7 1.7 0 0 0-.8.7C13.3 222.8-4.5 371.3 4.6 517.7a2 2 0 0 0 .8 1.4c50.2 36.9 98.8 59.3 146.6 74.2a2 2 0 0 0 2.1-.7 328 328 0 0 0 28.6-46.5 1.8 1.8 0 0 0-1-2.5c-15.6-5.9-30.5-13-44.5-21.2a1.7 1.7 0 0 1-.2-2.9 182 182 0 0 0 8.7-6.9 1.7 1.7 0 0 1 1.8-.2c91.9 42 191.7 42 283.5 0a1.7 1.7 0 0 1 1.8.2c2.8 2.3 5.8 4.6 8.7 6.9a1.7 1.7 0 0 1-.2 2.9 170 170 0 0 1-44.5 21.2 1.9 1.9 0 0 0-1 2.5 310 310 0 0 0 28.6 46.5 1.8 1.8 0 0 0 2.1.7c47.8-14.9 96.4-37.3 146.6-74.2a2 2 0 0 0 .8-1.4c11.5-170.3-19.4-319.3-111.5-447.9zM214.1 430.6c-29.8 0-54.4-27.3-54.4-61s24.2-61.3 54.4-61.3c30.5 0 54.8 27.5 54.4 61.3 0 33.7-23.9 61-54.4 61zm211.8 0c-29.8 0-54.4-27.3-54.4-61s24.2-61.3 54.4-61.3c30.5 0 54.8 27.5 54.4 61.3 0 33.7-23.9 61-54.4 61z"/></svg>
+      Discord ile Bağlan
+    </button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="app" class="hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo">E</div>
+      <div><h2>Electro</h2><span>Yönetim Paneli</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-page="overview"><span class="icon">◉</span> Genel Bakış</div>
+      <div class="nav-item" data-page="players"><span class="icon">◎</span> Oyuncular</div>
+      <div class="nav-item" data-page="registrations"><span class="icon">⚲</span> Kayıtlar</div>
+      <div class="nav-item" data-page="training"><span class="icon">⚙</span> Antrenman</div>
+      <div class="nav-item" data-page="servers"><span class="icon">◈</span> Sunucular</div>
+      <div class="nav-item" data-page="guards"><span class="icon">◉</span> Guard Ayarları</div>
+      <div class="nav-item" data-page="commands"><span class="icon">⚡</span> Komutlar</div>
+      <div class="nav-item" data-page="analytics"><span class="icon">◌</span> İstatistikler</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="nav-item" data-page="settings"><span class="icon">⚲</span> Ayarlar</div>
+      <div class="nav-item" id="logoutBtn"><span class="icon">⊘</span> Çıkış Yap</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <span id="menuToggle" style="font-size:20px;cursor:pointer;color:var(--muted)">☰</span>
+      <div>
+        <h3 id="pageTitle">Genel Bakış</h3>
+        <div class="sub" id="pageSub">Panoya genel bir bakış</div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-status"><span class="status-dot offline" id="statusDot"></span><span id="botStatus">Kontrol ediliyor...</span></div>
+        <div class="topbar-user"><span class="avatar">A</span><span>Admin</span></div>
+      </div>
+    </header>
+    <div class="content" id="pageContent"></div>
+  </main>
+</div>
+
+<script>
+// ======================== STATE ========================
+const API = '';
+const TOKEN = localStorage.getItem('token');
+let pageData = { users: [], guilds: [], guards: [] };
+
+// ======================== AUTH ========================
+if (TOKEN) {
+  fetch(API + '/api/check-auth', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
+    .then(r => r.json())
+    .then(d => { if (d.authenticated) { showApp(); } else { localStorage.removeItem('token'); } })
+    .catch(() => {});
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('loginPassword').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('discordLoginBtn').addEventListener('click', () => {
+  showToast('Discord bağlantısı çok yakında!', 'info');
+});
+
+async function doLogin() {
+  const pw = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  if (!pw) { errEl.textContent = 'Şifre giriniz.'; return; }
+  errEl.textContent = 'Giriş yapılıyor...';
+  try {
+    const r = await fetch(API + '/api/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    const d = await r.json();
+    if (d.token) {
+      localStorage.setItem('token', d.token);
+      showApp();
+    } else {
+      errEl.textContent = d.error || 'Giriş başarısız.';
+    }
+  } catch(e) {
+    errEl.textContent = 'Sunucuya bağlanılamadı.';
+  }
+}
+
+function showApp() {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  loadPage('overview');
+}
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  const t = localStorage.getItem('token');
+  if (t) fetch(API + '/api/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + t } });
+  localStorage.removeItem('token');
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').textContent = '';
+});
+
+// ======================== NAVIGATION ========================
+const pages = {
+  overview: { title: 'Genel Bakış', sub: 'Panoya genel bir bakış' },
+  players: { title: 'Oyuncular', sub: 'Tüm oyuncuları yönetin' },
+  registrations: { title: 'Kayıt Geçmişi', sub: 'Kayıt logları' },
+  training: { title: 'Antrenman', sub: 'Antrenman istatistikleri ve limitler' },
+  servers: { title: 'Sunucular', sub: 'Bağlı sunucular' },
+  guards: { title: 'Guard Ayarları', sub: 'Güvenlik yapılandırması' },
+  commands: { title: 'Komutlar', sub: 'Bot komutlarını yönetin' },
+  analytics: { title: 'İstatistikler', sub: 'Detaylı veri analizi' },
+  settings: { title: 'Ayarlar', sub: 'Panel ayarları' },
+};
+
+document.querySelectorAll('.nav-item[data-page]').forEach(el => {
+  el.addEventListener('click', () => loadPage(el.dataset.page));
+});
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+document.addEventListener('click', e => {
+  const s = document.getElementById('sidebar');
+  if (window.innerWidth <= 768 && s.classList.contains('open') && !s.contains(e.target) && !e.target.closest('#menuToggle')) {
+    s.classList.remove('open');
+  }
+});
+
+async function loadPage(name) {
+  document.querySelectorAll('.nav-item[data-page]').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.nav-item[data-page="${name}"]`)?.classList.add('active');
+  const info = pages[name] || { title: name, sub: '' };
+  document.getElementById('pageTitle').textContent = info.title;
+  document.getElementById('pageSub').textContent = info.sub;
+  const content = document.getElementById('pageContent');
+  content.innerHTML = '<div class="loading"><div class="spinner"></div> Yükleniyor...</div>';
+  checkBotStatus();
+  try {
+    if (name === 'overview') await renderOverview(content);
+    else if (name === 'players') await renderPlayers(content);
+    else if (name === 'registrations') await renderRegistrations(content);
+    else if (name === 'training') await renderTraining(content);
+    else if (name === 'servers') await renderServers(content);
+    else if (name === 'guards') await renderGuards(content);
+    else if (name === 'commands') await renderCommands(content);
+    else if (name === 'analytics') await renderAnalytics(content);
+    else if (name === 'settings') await renderSettings(content);
+  } catch(e) {
+    console.error(e);
+    content.innerHTML = '<div class="empty-state"><div class="icon">⚠</div><p>Bir hata oluştu: ' + e.message + '</p></div>';
+  }
+}
+
+// ======================== API HELPERS ========================
+function authHeaders() {
+  return { 'Authorization': 'Bearer ' + localStorage.getItem('token'), 'Content-Type': 'application/json' };
+}
+
+async function apiGet(path) {
+  const r = await fetch(API + path, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+async function apiPost(path, body) {
+  const r = await fetch(API + path, { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+async function checkBotStatus() {
+  try {
+    const d = await fetch(API + '/api/status').then(r => r.json());
+    const dot = document.getElementById('statusDot');
+    const label = document.getElementById('botStatus');
+    if (d.status === 'online') {
+      dot.className = 'status-dot';
+      label.textContent = 'Çevrimiçi';
+    } else {
+      dot.className = 'status-dot offline';
+      label.textContent = 'Çevrimdışı';
+    }
+  } catch { document.getElementById('botStatus').textContent = 'Bağlantı hatası'; }
+}
+
+// ======================== OVERVIEW ========================
+async function renderOverview(el) {
+  const [status, stats, users] = await Promise.all([
+    fetch(API + '/api/status').then(r => r.json()).catch(() => ({})),
+    fetch(API + '/api/stats').then(r => r.json()).catch(() => ({})),
+    apiGet('/api/users').catch(() => ({ users: [] })),
+  ]);
+  pageData.users = users.users || [];
+
+  el.innerHTML = `
+    <div class="stat-grid">
+      <div class="stat-card cyan"><div class="label">Sunucular</div><div class="value">${status.guildCount || 0}</div><div class="sub">Bağlı sunucu</div></div>
+      <div class="stat-card magenta"><div class="label">Toplam Kullanıcı</div><div class="value">${stats.totalUsers || 0}</div><div class="sub">Kayıtlı & kayıtsız</div></div>
+      <div class="stat-card purple"><div class="label">Toplam Değer</div><div class="value">${fmt(stats.totalValue || 0)}</div><div class="sub">Toplam piyasa değeri</div></div>
+      <div class="stat-card green"><div class="label">Kayıtlı</div><div class="value">${stats.registeredCount || 0}</div><div class="sub">Toplam kayıt</div></div>
+      <div class="stat-card orange"><div class="label">Gol / Asist</div><div class="value">${stats.totalGoals || 0} / ${stats.totalAssists || 0}</div><div class="sub">Toplam istatistik</div></div>
+      <div class="stat-card cyan"><div class="label">Bakiye</div><div class="value">${fmt(stats.totalBalance || 0)}</div><div class="sub">Toplam ekonomi</div></div>
+    </div>
+    <div class="card mb-16">
+      <div class="card-header"><h4>En Değerli Oyuncular</h4></div>
+      <div class="table-wrap compact">
+        <table>
+          <thead><tr><th>#</th><th>İsim</th><th>Değer</th><th>Gol</th><th>Asist</th><th>Bakiye</th><th>Antrenman</th></tr></thead>
+          <tbody id="topUsers"></tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  const tbody = el.querySelector('#topUsers');
+  const top = (users.users || []).sort((a, b) => (b.value || 0) - (a.value || 0)).slice(0, 10);
+  if (top.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Henüz oyuncu yok</td></tr>';
+  } else {
+    top.forEach((u, i) => {
+      tbody.innerHTML += `<tr>
+        <td>${i + 1}</td>
+        <td><span class="tag tag-purple">${esc(u.name)}</span></td>
+        <td>${fmt(u.value || 0)}</td>
+        <td>${u.goals || 0}</td>
+        <td>${u.assists || 0}</td>
+        <td>${fmt(u.balance || 0)}</td>
+        <td>${u.trainingCount || 0} / ${u.trainingLimit || 10}</td>
+      </tr>`;
+    });
+  }
+}
+
+// ======================== PLAYERS ========================
+async function renderPlayers(el) {
+  const data = await apiGet('/api/users');
+  pageData.users = data.users || [];
+  el.innerHTML = `
+    <div class="table-actions">
+      <div class="search-box"><span class="icon">⌕</span><input placeholder="Oyuncu ara..." id="playerSearch" oninput="filterPlayers()" /></div>
+      <select id="playerSort" onchange="filterPlayers()"><option value="value">Değer</option><option value="goals">Gol</option><option value="assists">Asist</option><option value="balance">Bakiye</option><option value="name">İsim</option></select>
+      <select id="playerSquad" onchange="filterPlayers()"><option value="">Tümü</option><option value="A">A Takım</option><option value="B">B Takım</option><option value="altyapı">Altyapı</option></select>
+      <span class="text-muted" style="font-size:13px"><span id="playerCount">${data.users.length}</span> oyuncu</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>İsim</th><th>Değer</th><th>Gol</th><th>Asist</th><th>Bakiye</th><th>Takım</th><th>Antrenman</th><th>Durum</th><th></th></tr></thead>
+        <tbody id="playerTable"></tbody>
+      </table>
+    </div>
+  `;
+  renderPlayerRows();
+}
+
+let playerList = [];
+function renderPlayerRows() {
+  const search = (document.getElementById('playerSearch')?.value || '').toLowerCase();
+  const sort = document.getElementById('playerSort')?.value || 'value';
+  const squad = document.getElementById('playerSquad')?.value || '';
+  let list = [...pageData.users];
+  if (search) list = list.filter(u => (u.name || '').toLowerCase().includes(search) || u.id.includes(search));
+  if (squad) list = list.filter(u => (u.squad || '').toLowerCase() === squad.toLowerCase());
+  if (sort === 'name') list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+  else if (sort === 'goals') list.sort((a, b) => (b.goals || 0) - (a.goals || 0));
+  else if (sort === 'assists') list.sort((a, b) => (b.assists || 0) - (a.assists || 0));
+  else if (sort === 'balance') list.sort((a, b) => (b.balance || 0) - (a.balance || 0));
+  else list.sort((a, b) => (b.value || 0) - (a.value || 0));
+  playerList = list;
+  const tbody = document.getElementById('playerTable');
+  const pcount = document.getElementById('playerCount');
+  if (pcount) pcount.textContent = list.length;
+  if (!tbody) return;
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="10" class="text-center text-muted">Oyuncu bulunamadı</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(u => {
+    const reg = u.registered ? '<span class="tag tag-green">Kayıtlı</span>' : '<span class="tag tag-red">Kayıtsız</span>';
+    const squadTag = u.squad ? `<span class="tag tag-cyan">${esc(u.squad)}</span>` : '<span class="text-muted">—</span>';
+    return `<tr>
+      <td style="color:var(--muted);font-size:11px">${esc(u.id.slice(0,8))}..</td>
+      <td><span class="tag tag-purple">${esc(u.name)}</span></td>
+      <td>${fmt(u.value || 0)}</td>
+      <td>${u.goals || 0}</td>
+      <td>${u.assists || 0}</td>
+      <td>${fmt(u.balance || 0)}</td>
+      <td>${squadTag}</td>
+      <td>${u.trainingCount || 0} / ${u.trainingLimit || 10}</td>
+      <td>${reg}</td>
+      <td><button class="btn btn-ghost btn-xs" onclick="showPlayerDetail('${u.id}')">Detay</button></td>
+    </tr>`;
+  }).join('');
+}
+window.filterPlayers = renderPlayerRows;
+
+async function showPlayerDetail(uid) {
+  try {
+    const u = await apiGet('/api/user/' + uid);
+    showModal(`
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3>${esc(u.name)}</h3>
+      <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
+        <div class="stat-card cyan"><div class="label">Değer</div><div class="value" style="font-size:20px">${fmt(u.value || 0)}</div></div>
+        <div class="stat-card magenta"><div class="label">Gol / Asist</div><div class="value" style="font-size:20px">${u.goals || 0} / ${u.assists || 0}</div></div>
+        <div class="stat-card purple"><div class="label">Bakiye</div><div class="value" style="font-size:20px">${fmt(u.balance || 0)}</div></div>
+      </div>
+      ${u.skills && Object.keys(u.skills).length ? `<div style="margin-bottom:12px"><h5 style="color:var(--text2);font-size:13px;margin-bottom:6px">Yetenekler</h5><div class="form-row">${Object.entries(u.skills).map(([k, v]) => `<span class="tag tag-cyan">${esc(k)}: ${v}</span>`).join(' ')}</div></div>` : ''}
+      ${u.matchStats && Object.keys(u.matchStats).length ? `<div><h5 style="color:var(--text2);font-size:13px;margin-bottom:6px">Maç İstatistikleri</h5>${Object.entries(u.matchStats).map(([k, v]) => `<span class="tag tag-orange">${esc(k)}: ${v}</span>`).join(' ')}</div>` : ''}
+      <div style="margin-top:12px;font-size:12px;color:var(--muted)">ID: ${esc(u.id)}</div>
+    `);
+  } catch(e) {
+    alert('Kullanıcı bilgisi alınamadı: ' + e.message);
+  }
+}
+
+// ======================== REGISTRATIONS ========================
+async function renderRegistrations(el) {
+  const data = await apiGet('/api/registrations');
+  const list = data.registrations || [];
+  el.innerHTML = `
+    <div class="table-actions">
+      <div class="search-box"><span class="icon">⌕</span><input placeholder="Kayıt ara..." id="regSearch" oninput="filterRegs()" /></div>
+      <span class="text-muted" style="font-size:13px">${list.length} kayıt</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kullanıcı</th><th>ID</th><th>Rol</th><th>Tarih</th><th>Kaydeden</th></tr></thead>
+        <tbody id="regTable"></tbody>
+      </table>
+    </div>
+  `;
+  window._regList = list;
+  renderRegs();
+}
+function renderRegs() {
+  const search = (document.getElementById('regSearch')?.value || '').toLowerCase();
+  const list = (window._regList || []).filter(r => (r.userName || '').toLowerCase().includes(search) || r.userId.includes(search));
+  const tbody = document.getElementById('regTable');
+  if (!tbody) return;
+  if (list.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Kayıt bulunamadı</td></tr>'; return; }
+  tbody.innerHTML = list.map(r => `<tr>
+    <td><span class="tag tag-purple">${esc(r.userName)}</span></td>
+    <td style="color:var(--muted);font-size:11px">${esc(r.userId)}</td>
+    <td><span class="tag tag-cyan">${esc(r.role)}</span></td>
+    <td class="text-muted">${r.date ? new Date(r.date).toLocaleString('tr-TR') : '—'}</td>
+    <td class="text-muted">${esc(r.registeredBy || '—')}</td>
+  </tr>`).join('');
+}
+window.filterRegs = renderRegs;
+
+// ======================== TRAINING ========================
+async function renderTraining(el) {
+  const data = await apiGet('/api/training');
+  const list = data.training || [];
+  el.innerHTML = `
+    <div class="table-actions">
+      <div class="search-box"><span class="icon">⌕</span><input placeholder="Ara..." id="trainSearch" oninput="filterTrain()" /></div>
+      <span class="text-muted" style="font-size:13px">${list.length} kullanıcı</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kullanıcı</th><th>ID</th><th>Antrenman</th><th>Limit</th><th>Oran</th></tr></thead>
+        <tbody id="trainTable"></tbody>
+      </table>
+    </div>
+  `;
+  window._trainList = list;
+  renderTrain();
+}
+function renderTrain() {
+  const search = (document.getElementById('trainSearch')?.value || '').toLowerCase();
+  const list = (window._trainList || []).filter(t => (t.userName || '').toLowerCase().includes(search) || t.userId.includes(search));
+  const tbody = document.getElementById('trainTable');
+  if (!tbody) return;
+  if (list.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Veri yok</td></tr>'; return; }
+  tbody.innerHTML = list.map(t => {
+    const ratio = t.limit > 0 ? (t.count / t.limit * 100).toFixed(0) : 0;
+    const pct = ratio > 80 ? 'tag-red' : ratio > 50 ? 'tag-orange' : 'tag-green';
+    return `<tr>
+      <td><span class="tag tag-purple">${esc(t.userName)}</span></td>
+      <td style="color:var(--muted);font-size:11px">${esc(t.userId)}</td>
+      <td>${t.count}</td>
+      <td>${t.limit}</td>
+      <td><span class="tag ${pct}">${ratio}%</span></td>
+    </tr>`;
+  }).join('');
+}
+window.filterTrain = renderTrain;
+
+// ======================== SERVERS ========================
+async function renderServers(el) {
+  const data = await apiGet('/api/guilds');
+  const guilds = data.guilds || [];
+  pageData.guilds = guilds;
+  el.innerHTML = `
+    <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+      ${guilds.length === 0 ? '<div class="empty-state" style="grid-column:1/-1"><div class="icon">◈</div><p>Henüz sunucu verisi yok</p></div>' :
+        guilds.map(g => `
+          <div class="card" style="cursor:pointer" onclick="showServerSettings('${g.id}')">
+            <div class="card-header"><h4>${esc(g.name)}</h4></div>
+            <div style="font-size:12px;color:var(--muted)">ID: <span style="color:var(--text)">${g.id}</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">Üyeler: <span style="color:var(--text)">${g.memberCount || 0}</span></div>
+            <div style="margin-top:12px"><button class="btn btn-ghost btn-sm w-full" onclick="event.stopPropagation();showServerSettings('${g.id}')">Guard Ayarları</button></div>
+          </div>
+        `).join('')
+      }
+    </div>
+  `;
+}
+
+async function showServerSettings(guildId) {
+  try {
+    const data = await apiGet('/api/settings?guildId=' + guildId);
+    const s = data.settings || {};
+    showModal(`
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3>Guard Ayarları — ${guildId.slice(0, 10)}...</h3>
+      <div style="margin-bottom:12px"><span class="tag tag-cyan">Server ID: ${guildId}</span></div>
+      <div id="guardSettingsList">
+        ${renderGuardSettings(guildId, s)}
+      </div>
+    `);
+  } catch(e) {
+    alert('Ayarlar alınamadı: ' + e.message);
+  }
+}
+
+function renderGuardSettings(guildId, s) {
+  const guards = [
+    { key: 'kufur', label: 'Küfür Engel', desc: 'Küfür içeren mesajları engeller', type: 'toggle' },
+    { key: 'link', label: 'Link Engel', desc: 'Reklam linklerini engeller', type: 'toggle' },
+    { key: 'reklam', label: 'Reklam Engel', desc: 'Rekam mesajlarını engeller', type: 'toggle' },
+    { key: 'antiBan', label: 'Anti-Ban', desc: 'Yetkisiz ban işlemlerini engeller', type: 'toggle' },
+    { key: 'antiRol', label: 'Anti-Rol', desc: 'Yetkisiz rol işlemlerini engeller', type: 'toggle' },
+    { key: 'antiKanal', label: 'Anti-Kanal', desc: 'Yetkisiz kanal işlemlerini engeller', type: 'toggle' },
+    { key: 'antiBot', label: 'Anti-Bot', desc: 'Bot ekleme işlemlerini engeller', type: 'toggle' },
+    { key: 'antiWebhook', label: 'Anti-Webhook', desc: 'Webhook oluşturmayı engeller', type: 'toggle' },
+    { key: 'antiNuke', label: 'Anti-Nuke', desc: 'Toplu silme işlemlerini engeller', type: 'toggle' },
+    { key: 'caps', label: 'Caps Engel', desc: 'Fazla büyük harf kullanımını engeller', type: 'toggle' },
+    { key: 'flood', label: 'Flood Engel', desc: 'Spam mesajları engeller', type: 'toggle' },
+    { key: 'mention', label: 'Mention Engel', desc: 'Aşırı mention kullanımını engeller', type: 'toggle' },
+    { key: 'resim', label: 'Resim Engel', desc: 'Resim paylaşımını sınırlar', type: 'toggle' },
+  ];
+
+  let html = '';
+  for (const g of guards) {
+    const val = s[g.key];
+    const enabled = typeof val === 'object' ? val.enabled : !!val;
+    html += `<div class="setting-row">
+      <div class="info">
+        <h5>${g.label}</h5>
+        <p>${g.desc}</p>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" ${enabled ? 'checked' : ''} onchange="updateGuardSetting('${guildId}','${g.key}', this.checked)" />
+        <span class="slider"></span>
+      </label>
+    </div>`;
+  }
+  return html;
+}
+
+async function updateGuardSetting(guildId, key, value) {
+  try {
+    await apiPost('/api/settings', { guildId, key, value: typeof value === 'boolean' ? { enabled: value } : value });
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+// ======================== GUARDS ========================
+async function renderGuards(el) {
+  const data = await apiGet('/api/guards');
+  const guards = data.guards || [];
+  pageData.guards = guards;
+  el.innerHTML = `
+    <p class="text-muted mb-16" style="font-size:13px">${guards.length} sunucuda guard aktif</p>
+    <div class="table-wrap compact">
+      <table>
+        <thead><tr><th>Sunucu ID</th><th>Aktif Koruma</th><th>Durum</th><th></th></tr></thead>
+        <tbody id="guardTable"></tbody>
+      </table>
+    </div>
+  `;
+  const tbody = document.getElementById('guardTable');
+  if (guards.length === 0) { tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Guard ayarı bulunamadı</td></tr>'; return; }
+  tbody.innerHTML = guards.map(g => {
+    const s = g.settings || {};
+    const active = Object.entries(s).filter(([k, v]) => {
+      if (k === 'whitelist') return false;
+      return typeof v === 'object' ? v.enabled : !!v;
+    });
+    return `<tr>
+      <td style="font-size:11px;color:var(--muted)">${g.id}</td>
+      <td>${active.map(([k]) => `<span class="tag tag-green" style="margin:1px">${k}</span>`).join(' ') || '<span class="text-muted">—</span>'}</td>
+      <td>${active.length > 0 ? '<span class="tag tag-green">Aktif</span>' : '<span class="tag tag-red">Pasif</span>'}</td>
+      <td><button class="btn btn-ghost btn-xs" onclick="showServerSettings('${g.id}')">Düzenle</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ======================== COMMANDS ========================
+async function renderCommands(el) {
+  el.innerHTML = `
+    <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
+      <div class="card card-glow-cyan">
+        <div class="card-header"><h4>⚡ Sistem</h4></div>
+        <div class="setting-row"><div class="info"><h5>!güncelle</h5><p>Botu güncelle</p></div><button class="btn btn-ghost btn-sm" onclick="execCommand('güncelle')">Çalıştır</button></div>
+        <div class="setting-row"><div class="info"><h5>!bakım</h5><p>Bakım modu</p></div><button class="btn btn-ghost btn-sm" onclick="execCommand('bakım')">Çalıştır</button></div>
+        <div class="setting-row"><div class="info"><h5>!eval</h5><p>Kod çalıştır</p></div><button class="btn btn-ghost btn-sm" onclick="promptCmd('eval')">Çalıştır</button></div>
+      </div>
+      <div class="card card-glow-purple">
+        <div class="card-header"><h4>👤 Kullanıcı</h4></div>
+        <div class="setting-row"><div class="info"><h5>!top</h5><p>En zengin sıralaması</p></div></div>
+        <div class="setting-row"><div class="info"><h5>!profil</h5><p>Kullanıcı profili</p></div></div>
+        <div class="setting-row"><div class="info"><h5>!market</h5><p>Oyuncu marketi</p></div></div>
+        <div class="setting-row"><div class="info"><h5>!günlük</h5><p>Günlük ödül</p></div></div>
+      </div>
+      <div class="card card-glow-magenta">
+        <div class="card-header"><h4>🛡️ Guard</h4></div>
+        <div class="setting-row"><div class="info"><h5>!guard-ayar</h5><p>Guard yapılandırması</p></div></div>
+        <div class="setting-row"><div class="info"><h5>!whitelist</h5><p>Beyaz liste yönetimi</p></div></div>
+        <div class="setting-row"><div class="info"><h5>!guard-aç</h5><p>Korumaları aktifleştir</p></div></div>
+      </div>
+    </div>
+    <div class="card mt-16">
+      <div class="card-header"><h4>Komut Çalıştır</h4></div>
+      <div class="form-row">
+        <input placeholder="Komut adı (ör: eval)" id="cmdName" style="flex:1" />
+        <input placeholder="Argümanlar (opsiyonel)" id="cmdArgs" style="flex:2" />
+        <button class="btn btn-primary" onclick="execCustomCmd()">Gönder</button>
+      </div>
+      <div id="cmdResult" class="mt-16" style="display:none">
+        <div class="card" style="background:var(--bg2);font-family:monospace;font-size:12px;white-space:pre-wrap;max-height:200px;overflow:auto" id="cmdOutput"></div>
+      </div>
+    </div>
+  `;
+}
+
+async function execCommand(cmd) {
+  try {
+    const r = await apiPost('/api/proxy/send-message', { command: cmd });
+    showToast('Komut gönderildi: ' + cmd);
+  } catch(e) {
+    showToast('Hata: ' + e.message, 'error');
+  }
+}
+window.execCommand = execCommand;
+
+function promptCmd(cmd) {
+  const args = prompt('Argüman girin:');
+  if (args !== null) execCommand(cmd + ' ' + args);
+}
+window.promptCmd = promptCmd;
+
+async function execCustomCmd() {
+  const name = document.getElementById('cmdName').value.trim();
+  const args = document.getElementById('cmdArgs').value.trim();
+  if (!name) return showToast('Komut adı girin', 'error');
+  const fullCmd = name + (args ? ' ' + args : '');
+  document.getElementById('cmdResult').style.display = 'block';
+  document.getElementById('cmdOutput').textContent = 'Gönderiliyor...';
+  try {
+    const r = await apiPost('/api/proxy/send-message', { command: fullCmd });
+    document.getElementById('cmdOutput').textContent = JSON.stringify(r, null, 2);
+  } catch(e) {
+    document.getElementById('cmdOutput').textContent = 'Hata: ' + e.message;
+  }
+}
+window.execCustomCmd = execCustomCmd;
+
+// ======================== ANALYTICS ========================
+async function renderAnalytics(el) {
+  const [stats, usersData] = await Promise.all([
+    fetch(API + '/api/stats').then(r => r.json()).catch(() => ({})),
+    apiGet('/api/users').catch(() => ({ users: [] })),
+  ]);
+  const users = usersData.users || [];
+  const withValue = users.filter(u => (u.value || 0) > 0);
+  const avgValue = withValue.length > 0 ? withValue.reduce((s, u) => s + (u.value || 0), 0) / withValue.length : 0;
+  const withTraining = users.filter(u => (u.trainingCount || 0) > 0);
+  const withBalance = users.filter(u => (u.balance || 0) > 0);
+
+  el.innerHTML = `
+    <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat-card cyan"><div class="label">Ort. Değer</div><div class="value" style="font-size:22px">${fmt(Math.round(avgValue))}</div></div>
+      <div class="stat-card magenta"><div class="label">Değerli Oyuncu</div><div class="value" style="font-size:22px">${withValue.length}</div></div>
+      <div class="stat-card purple"><div class="label">Antrenman Yapan</div><div class="value" style="font-size:22px">${withTraining.length}</div></div>
+      <div class="stat-card green"><div class="label">Bakiyesi Olan</div><div class="value" style="font-size:22px">${withBalance.length}</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h4>Değer Dağılımı</h4></div>
+      <div style="height:40px;display:flex;border-radius:6px;overflow:hidden;margin-bottom:8px">
+        ${renderValueDist(users)}
+      </div>
+      <div class="form-row" style="font-size:12px;color:var(--muted)">
+        <span><span style="color:var(--cyan)">■</span> 0-5K</span>
+        <span><span style="color:var(--green)">■</span> 5K-25K</span>
+        <span><span style="color:var(--orange)">■</span> 25K-100K</span>
+        <span><span style="color:var(--magenta)">■</span> 100K+</span>
+      </div>
+    </div>
+    <div class="card mt-16">
+      <div class="card-header"><h4>Özet</h4></div>
+      <div style="font-size:13px;color:var(--text)">
+        <p>📊 Toplam <strong>${users.length}</strong> kullanıcı, <strong>${stats.registeredCount || 0}</strong> kayıtlı</p>
+        <p>💰 Toplam ekonomi: <strong>${fmt(stats.totalBalance || 0)}</strong> | Toplam değer: <strong>${fmt(stats.totalValue || 0)}</strong></p>
+        <p>⚽ Toplam <strong>${stats.totalGoals || 0}</strong> gol, <strong>${stats.totalAssists || 0}</strong> asist</p>
+        <p>🏋️ Antrenman yapan: <strong>${stats.trainingUsers || 0}</strong> kullanıcı</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderValueDist(users) {
+  const buckets = [0, 0, 0, 0];
+  users.forEach(u => {
+    const v = u.value || 0;
+    if (v <= 5000) buckets[0]++;
+    else if (v <= 25000) buckets[1]++;
+    else if (v <= 100000) buckets[2]++;
+    else buckets[3]++;
+  });
+  const total = buckets.reduce((a, b) => a + b, 0) || 1;
+  const colors = ['var(--cyan)', 'var(--green)', 'var(--orange)', 'var(--magenta)'];
+  return buckets.map((b, i) => {
+    const pct = (b / total * 100);
+    if (pct < 1) return '';
+    return `<div style="width:${pct}%;background:${colors[i]};display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:600">${b}</div>`;
+  }).join('');
+}
+
+// ======================== SETTINGS ========================
+async function renderSettings(el) {
+  el.innerHTML = `
+    <div class="card mb-16">
+      <div class="card-header"><h4>🔑 Şifre Değiştir</h4></div>
+      <div class="form-row" style="max-width:400px">
+        <input type="password" placeholder="Eski şifre" id="oldPw" />
+        <input type="password" placeholder="Yeni şifre (en az 4 karakter)" id="newPw" />
+        <button class="btn btn-primary" onclick="changePassword()">Kaydet</button>
+      </div>
+      <div id="pwResult" class="mt-16" style="display:none"></div>
+    </div>
+    <div class="card mb-16">
+      <div class="card-header"><h4>🧹 Veri Yönetimi</h4></div>
+      <div style="font-size:13px;color:var(--text);margin-bottom:12px">
+        <p class="text-muted">Veritabanındaki tüm kullanıcı ve ayar verileri.</p>
+      </div>
+      <div class="form-row">
+        <button class="btn btn-ghost" onclick="reloadPanel()">🔄 Paneli Yenile</button>
+      </div>
+    </div>
+    <div class="card mb-16">
+      <div class="card-header"><h4>ℹ️ Panel Bilgisi</h4></div>
+      <div style="font-size:13px;color:var(--text)">
+        <p>Electro Panel v2.0 — Karamsar Neon Tema</p>
+        <p class="text-muted">Güçlü yönetim paneli. Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  `;
+}
+
+async function changePassword() {
+  const old = document.getElementById('oldPw').value;
+  const nw = document.getElementById('newPw').value;
+  const result = document.getElementById('pwResult');
+  if (!old || !nw) { result.style.display = 'block'; result.innerHTML = '<span style="color:var(--red)">Tüm alanları doldurun.</span>'; return; }
+  if (nw.length < 4) { result.style.display = 'block'; result.innerHTML = '<span style="color:var(--red)">Şifre en az 4 karakter olmalı.</span>'; return; }
+  try {
+    const r = await apiPost('/api/change-password', { oldPassword: old, newPassword: nw });
+    result.style.display = 'block';
+    result.innerHTML = '<span style="color:var(--green)">✓ Şifre başarıyla değiştirildi.</span>';
+    document.getElementById('oldPw').value = '';
+    document.getElementById('newPw').value = '';
+  } catch(e) {
+    result.style.display = 'block';
+    result.innerHTML = '<span style="color:var(--red)">✕ ' + e.message + '</span>';
+  }
+}
+window.changePassword = changePassword;
+
+function reloadPanel() {
+  location.reload();
+}
+
+// ======================== MODAL ========================
+function showModal(html) {
+  let overlay = document.getElementById('modalOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'modalOverlay';
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<div class="modal" id="modalContent"></div>';
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  }
+  document.getElementById('modalContent').innerHTML = html;
+  overlay.classList.add('open');
+}
+window.showModal = showModal;
+
+function closeModal() {
+  document.getElementById('modalOverlay')?.classList.remove('open');
+}
+window.closeModal = closeModal;
+
+// ======================== TOAST ========================
+function showToast(msg, type = 'info') {
+  const el = document.createElement('div');
+  el.style.cssText = `
+    position:fixed;bottom:24px;right:24px;padding:10px 20px;border-radius:8px;
+    background:${type === 'error' ? 'var(--red)' : 'var(--purple)'};color:#fff;
+    font-size:13px;font-weight:600;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,.4);
+    animation:fadeIn .3s ease;max-width:360px;
+  `;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+window.showToast = showToast;
+
+// ======================== HELPERS ========================
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt(n) { return Number(n).toLocaleString('tr-TR'); }
+
+// ======================== ESC KEY CLOSE ========================
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "Elektro Lig",
+  "short_name": "Elekro",
+  "description": "Elektro Lig yönetim paneli",
+  "start_url": "/panel",
+  "display": "standalone",
+  "background_color": "#030305",
+  "theme_color": "#a855f7",
+  "orientation": "portrait",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "splash_pages": null
+}

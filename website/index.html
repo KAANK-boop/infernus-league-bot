@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cruel Plus — Discord Bot</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <span class="logo">✦ Cruel Plus</span>
+      <div class="nav-links">
+        <a href="#features">Özellikler</a>
+        <a href="#commands">Komutlar</a>
+        <a href="#stats">İstatistikler</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1507745188393783499&permissions=8&scope=bot" class="btn-primary" target="_blank">Davet Et</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>✦ Cruel Plus</h1>
+      <p>Cruel League sunucusu için geliştirilmiş<br>güçlü ve çok yönlü Discord botu.</p>
+      <div class="hero-buttons">
+        <a href="https://discord.com/oauth2/authorize?client_id=1507745188393783499&permissions=8&scope=bot" class="btn-primary" target="_blank">➕ Botu Ekle</a>
+        <a href="#" class="btn-secondary" onclick="alert('Destek sunucusu henüz eklenmedi.')">💬 Destek Sunucusu</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <h2>Özellikler</h2>
+    <p class="section-desc">Cruel Plus ile sunucunuzu bir üst seviyeye taşıyın.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚽</div>
+        <h3>Futbol Yönetimi</h3>
+        <p>Maç yönetimi, kadro oluşturma, turnuva düzenleme, puan durumu ve daha fazlası.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Ekonomi Sistemi</h3>
+        <p>Coin gönderme, banka, slot, blackjack, piyango ve diğer eğlenceli ekonomi komutları.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <h3>Ev & Araç Sistemi</h3>
+        <p>Sanal evler satın alın, araç koleksiyonu yapın, zenginlik seviyenizi gösterin.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>Eğlence Komutları</h3>
+        <p>Ship, kahve falı, burç yorumu, zeka sorusu, 8ball ve 50+ eğlence komutu.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Moderasyon</h3>
+        <p>Ban, mute, jail, uyarı, kilit, sohbet izni, küfür filtresi ve daha fazlası.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Kayıt Sistemi</h3>
+        <p>Gelişmiş kayıt sistemi, hoşgeldin mesajı, butonlu roller, otomatik rol dağıtımı.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="commands" class="commands">
+    <h2>Komut Kategorileri</h2>
+    <p class="section-desc"><code>.</code> prefix ile kullanılabilen 200+ komut.</p>
+    <div class="cmd-grid">
+      <div class="cmd-cat"><span>📁</span> Genel — 50+ komut</div>
+      <div class="cmd-cat"><span>🛡️</span> Moderasyon — 20+ komut</div>
+      <div class="cmd-cat"><span>🔧</span> Yetkili & Yönetim — 30+ komut</div>
+      <div class="cmd-cat"><span>🎭</span> Rol & Ayarlar — 20+ komut</div>
+      <div class="cmd-cat"><span>⚽</span> Futbol — 30+ komut</div>
+      <div class="cmd-cat"><span>📊</span> İstatistik & Değer — 15+ komut</div>
+      <div class="cmd-cat"><span>💳</span> Ekonomi — 15+ komut</div>
+      <div class="cmd-cat"><span>🎉</span> Eğlence & RPG — 40+ komut</div>
+    </div>
+    <p class="cmd-footer">Tüm komutları görmek için sunucuda <code>.yardım</code> yazın.</p>
+  </section>
+
+  <section id="stats" class="stats">
+    <h2>Bot Durumu</h2>
+    <p class="section-desc">Anlık bot durumu ve istatistikler.</p>
+    <div class="status-bar">
+      <div class="status-indicator" id="statusDot"></div>
+      <span id="statusText">Bağlanıyor...</span>
+      <span class="status-divider">|</span>
+      <span id="statusPing">— ms</span>
+    </div>
+    <div class="stat-grid" id="statGrid">
+      <div class="stat-card">
+        <span class="stat-number" id="statGuilds">—</span>
+        <span class="stat-label">Sunucu</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="statMembers">—</span>
+        <span class="stat-label">Üye</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="statCommands">—</span>
+        <span class="stat-label">Komut</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="statUptime">—</span>
+        <span class="stat-label">Çalışma Süresi</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>✦ Cruel Plus — Cruel League için özel olarak geliştirildi.</span>
+      <div class="footer-links">
+        <a href="https://discord.com/oauth2/authorize?client_id=1507745188393783499&permissions=8&scope=bot" target="_blank">Botu Ekle</a>
+        <a href="#">Gizlilik</a>
+        <a href="#">Şartlar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+(node:13128) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:13128) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Hata (ticketolustur): ValidationError > s.object(T)
+  Expected the value to be an object, but received undefined instead
+
+  Received:
+  | undefined
+
+    at _ObjectValidator.handle (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:2070:9)
+    at _ObjectValidator.parse (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:972:90)
+    at ButtonBuilder.setEmoji (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\@discordjs\builders\dist\index.js:725:38)
+    at ButtonBuilder.setEmoji (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\discord.js\src\structures\ButtonBuilder.js:26:18)
+    at Object.execute (C:\Users\lenovo\OneDrive\Documents\discord bot\commands\utility.js:311:116)
+    at Client.<anonymous> (C:\Users\lenovo\OneDrive\Documents\discord bot\index.js:898:19)
+    at Client.emit (node:events:508:28)
+    at MessageCreateAction.handle (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\discord.js\src\client\actions\MessageCreate.js:33:14)
+    at module.exports [as MESSAGE_CREATE] (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\lenovo\OneDrive\Documents\discord bot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:352:31)

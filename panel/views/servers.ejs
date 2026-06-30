@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunucular - Elektro Lig Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #07070d; color: #fff; min-height: 100vh; }
+    .sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0; width: 220px;
+      background: #0c0c14; border-right: 1px solid #16161f; padding: 24px 0;
+    }
+    .sidebar .logo { padding: 0 20px; margin-bottom: 32px; }
+    .sidebar .logo h2 { font-size: 17px; font-weight: 800; }
+    .sidebar .logo span { color: #818cf8; }
+    .sidebar .logo small { color: #6b7280; font-size: 10px; display: block; margin-top: 2px; text-transform: uppercase; letter-spacing: 1px; }
+    .sidebar a {
+      display: flex; align-items: center; gap: 10px; padding: 10px 20px; color: #9ca3af;
+      text-decoration: none; font-size: 13px; transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar a:hover, .sidebar a.active { color: #fff; background: #12121c; border-left-color: #818cf8; }
+    .sidebar .user-info {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+      padding: 12px; background: #12121c; border-radius: 10px; text-align: center;
+    }
+    .sidebar .user-info .name { font-size: 12px; color: #9ca3af; }
+    .sidebar .user-info .logout { display: block; margin-top: 6px; color: #ef4444; font-size: 11px; text-decoration: none; }
+
+    .main { margin-left: 220px; padding: 32px; }
+    .header { margin-bottom: 28px; }
+    .header h1 { font-size: 22px; font-weight: 700; }
+    .header p { color: #6b7280; font-size: 13px; margin-top: 4px; }
+
+    .server-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .server-card {
+      background: #0c0c14; border: 1px solid #16161f; border-radius: 12px;
+      padding: 18px; display: flex; align-items: center; gap: 14px; transition: border-color 0.2s;
+    }
+    .server-card:hover { border-color: #2a2a35; }
+    .server-card .icon {
+      width: 44px; height: 44px; border-radius: 10px; background: #16161f;
+      flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .server-card .icon img { width: 100%; height: 100%; object-fit: cover; }
+    .server-card .info { flex: 1; min-width: 0; }
+    .server-card .info .name { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .server-card .info .detail { color: #6b7280; font-size: 12px; margin-top: 2px; }
+    .server-card .info .id { color: #4b5563; font-size: 10px; font-family: monospace; margin-top: 1px; }
+    .empty { text-align: center; padding: 60px 20px; color: #4b5563; grid-column: 1 / -1; }
+    @media (max-width: 700px) { .sidebar { display: none; } .main { margin-left: 0; padding: 20px; } }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <h2>⚡ <span>Elektro</span></h2>
+      <small>Yönetim Paneli</small>
+    </div>
+    <a href="/panel">📊 Genel Bakış</a>
+    <a href="/panel/sunucular" class="active">🖥 Sunucular</a>
+    <div class="user-info">
+      <div class="name">🔑 Admin</div>
+      <a href="/logout" class="logout">Çıkış Yap</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>🖥 Sunucular</h1>
+      <p>Botun bulunduğu sunucular (<%= guilds.length %> adet)</p>
+    </div>
+    <div class="server-grid">
+      <% if (guilds.length === 0) { %>
+        <div class="empty">📡 Sunucu bilgisi alınamadı. Bot çevrimiçi değil.</div>
+      <% } %>
+      <% guilds.forEach(g => { %>
+        <div class="server-card">
+          <div class="icon">
+            <% if (g.icon) { %><img src="<%= g.icon %>" alt=""><% } else { %>🌐<% } %>
+          </div>
+          <div class="info">
+            <div class="name"><%= g.name %></div>
+            <div class="detail"><%= g.memberCount %> üye</div>
+            <div class="id"><%= g.id %></div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

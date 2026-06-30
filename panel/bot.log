@@ -1,0 +1,256 @@
+[16:20:14] Bot zaten çalışıyor, panele bağlanıldı.
+[16:21:24] Bot zaten çalışıyor, panele bağlanıldı.
+[16:21:57] Bot çalışmıyor, başlatılıyor...
+[16:21:57] Bot başlatılıyor...
+[16:21:59] ◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[16:21:59] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:21:59] [API] Status server running on port 3005
+[16:22:01] [HATA] (node:16960) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:22:07] Bot kapandi (kod: 4294967295)
+[16:24:47] Bot çalışmıyor, başlatılıyor...
+[16:24:47] Bot başlatılıyor...
+[16:24:50] ◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[16:24:50] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:24:50] [API] Status server running on port 3005
+[16:24:50] [HATA] (node:10000) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:24:54] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:24:54] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:24:54] [HATA] (node:10000) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:24:56] [INVITE] Invite cache ready.
+[16:29:19] Bot durduruluyor...
+[16:29:19] Bot kapandi (kod: null)
+[16:31:33] Bot başlatılıyor...
+[16:31:34] ◇ injected env (4) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[16:31:34] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:31:34] [API] Status server running on port 3005
+[16:31:36] [HATA] (node:15008) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:31:37] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:31:37] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:31:37] [HATA] (node:15008) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:31:38] [INVITE] Invite cache ready.
+[16:34:32] Bot zaten çalışıyor, panele bağlanıldı.
+[16:35:47] Bot çalışmıyor, başlatılıyor...
+[16:35:47] Bot başlatılıyor...
+[16:35:49] ◇ injected env (4) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[16:35:50] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:35:50] [API] Status server running on port 3005
+[16:35:52] [HATA] (node:7604) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:35:53] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:35:53] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:35:53] [HATA] (node:7604) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:35:54] [INVITE] Invite cache ready.
+[16:43:08] Bot çalışmıyor, başlatılıyor...
+[16:43:08] Bot başlatılıyor...
+[16:43:10] ◇ injected env (4) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[16:43:11] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:43:11] [API] Status server running on port 3005
+[16:43:11] [HATA] (node:9616) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:43:13] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:43:13] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:43:13] [HATA] (node:9616) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:43:14] [INVITE] Invite cache ready.
+[16:46:46] Bot kapandi (kod: 4294967295)
+[16:46:49] Bot çalışmıyor, başlatılıyor...
+[16:46:49] Bot başlatılıyor...
+[16:46:52] ◇ injected env (4) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[16:46:52] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:46:52] [API] Status server running on port 3005
+[16:46:53] [HATA] (node:17244) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:46:55] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:46:55] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:46:55] [HATA] (node:17244) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:46:56] [INVITE] Invite cache ready.
+[16:48:44] Bot çalışmıyor, başlatılıyor...
+[16:48:44] Bot başlatılıyor...
+[16:48:46] ◇ injected env (4) from .env // tip: ⌘ override existing { override: true }
+[16:48:46] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:48:46] [API] Status server running on port 3005
+[16:48:47] [HATA] (node:9528) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:48:48] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:48:48] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:48:48] [HATA] (node:9528) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:48:50] [INVITE] Invite cache ready.
+[16:58:18] Bot başlatılıyor...
+[16:58:18] Bot çalışmıyor, başlatılıyor...
+[16:58:21] ◇ injected env (4) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[16:58:21] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:58:21] [API] Status server running on port 3005
+[16:58:21] [HATA] (node:11636) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:58:23] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:58:23] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:58:23] [HATA] (node:11636) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:58:25] [INVITE] Invite cache ready.
+[16:58:34] Bot çalışmıyor, başlatılıyor...
+[16:58:34] Bot başlatılıyor...
+[16:58:37] ◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[16:58:37] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[16:58:37] [API] Status server running on port 3005
+[16:58:37] [HATA] (node:2928) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[16:58:40] [INVITE] Bot ready, caching invites for 2 guilds...
+[16:58:40] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[16:58:40] [HATA] (node:2928) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[16:58:41] [INVITE] Invite cache ready.
+[17:00:50] Bot zaten çalışıyor, panele bağlanıldı.
+[17:12:06] Bot çalışmıyor, başlatılıyor...
+[17:12:06] Bot başlatılıyor...
+[17:12:08] ◇ injected env (4) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[17:12:08] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:12:08] [API] Status server running on port 3005
+[17:12:09] [HATA] (node:7828) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:12:10] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:12:10] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:12:10] [HATA] (node:7828) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:12:12] [INVITE] Invite cache ready.
+[17:14:14] Bot zaten çalışıyor, panele bağlanıldı.
+[17:14:30] Bot zaten çalışıyor, panele bağlanıldı.
+[17:14:39] Bot zaten çalışıyor, panele bağlanıldı.
+[17:15:36] Bot durduruluyor...
+[17:15:36] Bot kapandi (kod: null)
+[17:15:38] Bot başlatılıyor...
+[17:15:40] ◇ injected env (4) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[17:15:40] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:15:40] [API] Status server running on port 3005
+[17:15:41] Bot kapandi (kod: null)
+[17:18:07] Bot çalışmıyor, başlatılıyor...
+[17:18:07] Bot başlatılıyor...
+[17:18:09] ◇ injected env (4) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[17:18:10] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:18:10] [API] Status server running on port 3005
+[17:18:10] [HATA] (node:8952) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:18:15] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:18:15] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:18:15] [HATA] (node:8952) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:18:16] [INVITE] Invite cache ready.
+[17:24:44] Bot zaten çalışıyor, panele bağlanıldı.
+[17:25:17] Bot çalışmıyor, başlatılıyor...
+[17:25:17] Bot başlatılıyor...
+[17:25:20] ◇ injected env (4) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[17:25:21] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:25:21] [API] Status server running on port 3005
+[17:25:23] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:25:23] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:25:23] [HATA] (node:11784) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:25:24] [INVITE] Invite cache ready.
+[17:25:30] [HATA] (node:11784) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+[17:37:21] Bot çalışmıyor, başlatılıyor...
+[17:37:21] Bot başlatılıyor...
+[17:37:22] ◇ injected env (4) from .env // tip: ⌘ override existing { override: true }
+[17:37:23] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:37:23] [API] Status server running on port 3005
+[17:37:24] [HATA] (node:16564) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:37:24] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:37:24] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:37:24] [HATA] (node:16564) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:37:26] [INVITE] Invite cache ready.
+[17:37:32] Bot kapandi (kod: 4294967295)
+[17:38:15] Bot çalışmıyor, başlatılıyor...
+[17:38:15] Bot başlatılıyor...
+[17:38:16] ◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[17:38:17] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:38:17] [API] Status server running on port 3005
+[17:38:18] [HATA] (node:10912) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:38:19] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:38:19] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:38:19] [HATA] (node:10912) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:38:21] [INVITE] Invite cache ready.
+[17:38:35] Bot zaten çalışıyor, panele bağlanıldı.
+[17:40:50] Bot çalışmıyor, başlatılıyor...
+[17:40:50] Bot başlatılıyor...
+[17:40:53] ◇ injected env (4) from .env // tip: ⌘ enable debugging { debug: true }
+[17:40:53] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:40:53] [API] Status server running on port 3005
+[17:40:53] [HATA] (node:10056) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:40:55] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:40:55] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:40:55] [HATA] (node:10056) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:40:57] [INVITE] Invite cache ready.
+[17:41:25] Bot çalışmıyor, başlatılıyor...
+[17:41:25] Bot başlatılıyor...
+[17:41:27] ◇ injected env (4) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[17:41:27] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:41:27] [API] Status server running on port 3005
+[17:41:28] [HATA] (node:1420) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:41:29] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:41:29] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:41:29] [HATA] (node:1420) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:41:31] [INVITE] Invite cache ready.
+[17:47:17] Bot çalışmıyor, başlatılıyor...
+[17:47:17] Bot başlatılıyor...
+[17:47:20] ◇ injected env (4) from .env // tip: ⌘ override existing { override: true }
+[17:47:21] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:47:21] [API] Status server running on port 3005
+[17:47:25] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:47:25] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:47:25] [HATA] (node:15240) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:47:27] [INVITE] Invite cache ready.
+[17:47:30] [HATA] (node:15240) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+[17:51:01] Bot çalışmıyor, başlatılıyor...
+[17:51:02] Bot başlatılıyor...
+[17:51:06] ◇ injected env (4) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[17:51:06] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:51:06] [API] Status server running on port 3005
+[17:51:09] [INVITE] Bot ready, caching invites for 2 guilds...
+[17:51:09] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:51:09] [HATA] (node:9820) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:51:10] [INVITE] Invite cache ready.
+[17:51:15] [HATA] (node:9820) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+[17:55:59] Bot çalışmıyor, başlatılıyor...
+[17:55:59] Bot başlatılıyor...
+[17:56:02] ◇ injected env (4) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[17:56:02] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[17:56:02] [API] Status server running on port 3005
+[17:56:03] [HATA] (node:10596) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[17:56:06] [INVITE] Bot ready, caching invites for 2 guilds...
+ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[17:56:06] [HATA] (node:10596) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+[17:56:08] [INVITE] Invite cache ready.
+[18:07:36] Bot kapandi (kod: 4294967295)
+[18:13:03] Bot zaten çalışıyor, panele bağlanıldı.
+[18:17:33] Bot zaten çalışıyor, panele bağlanıldı.
+[18:27:12] Bot zaten çalışıyor, panele bağlanıldı.
+[18:29:56] Bot zaten çalışıyor, panele bağlanıldı.
+[18:36:16] Bot zaten çalışıyor, panele bağlanıldı.
+[18:47:51] Bot zaten çalışıyor, panele bağlanıldı.
+[18:54:34] Bot zaten çalışıyor, panele bağlanıldı.
+[19:13:17] Bot zaten çalışıyor, panele bağlanıldı.
+[19:13:31] Bot zaten çalışıyor, panele bağlanıldı.
+[13:12:52] Bot zaten çalışıyor, panele bağlanıldı.
+[13:27:46] Bot çalışmıyor, başlatılıyor...
+[13:27:46] Bot başlatılıyor...
+[13:27:51] ◇ injected env (4) from .env // tip: ⌘ suppress logs { quiet: true }
+[13:27:52] Keep-alive sunucusu port 3000 üzerinde çalışıyor.
+[13:27:52] [API] Status server running on port 3005
+[13:27:57] [INVITE] Bot ready, caching invites for 2 guilds...
+[13:27:57] ELECTRO PLUS#5057 olarak giriş yapıldı! 2 sunucuda, 288 komut yüklü.
+[13:27:57] [HATA] (node:12460) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[13:27:59] [INVITE] Invite cache ready.
+[13:28:00] [HATA] (node:12460) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+[13:29:26] Bot kapandi (kod: 1)
+[13:32:12] Panel başlatıldı (bağımsız mod)
+[13:35:42] Panel başlatıldı (bağımsız mod)
+[13:51:43] Panel başlatıldı (bağımsız mod)
+[15:47:55] Panel başlatıldı (bağımsız mod)
+[15:49:40] Panel başlatıldı (bağımsız mod)
+[10:41:25] Panel başlatıldı (bağımsız mod)
+[10:41:54] Panel başlatıldı (bağımsız mod)
+[10:42:21] Panel başlatıldı (bağımsız mod)
