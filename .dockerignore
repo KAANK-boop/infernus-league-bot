@@ -1,0 +1,15 @@
+node_modules
+.git
+.env
+database/*.json
+*.log
+bot.err
+bot.log
+bot_errors.*
+bot_output.log
+panel_err.txt
+panel_out.txt
+error.log
+cookie.txt
+baslat.bat
+README.md

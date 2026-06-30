@@ -7,7 +7,18 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-COPY . .
+COPY config/ ./config/
+COPY utils/ ./utils/
+COPY commands/ ./commands/
+COPY database/ ./database/
+COPY engine/ ./engine/
+COPY panel/ ./panel/
+COPY dashboard/ ./dashboard/
+COPY scripts/ ./scripts/
+COPY website/ ./website/
+COPY index.js config.json server.js squads.js start.js vision.js ./
+
+RUN ls -la /app/config/
 
 EXPOSE 3000
 
